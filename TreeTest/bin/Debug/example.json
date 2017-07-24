@@ -1,0 +1,52 @@
+﻿{
+   "message_type" : "queue",
+   "sender_code" : "CN-RUILI-JICP1-L02",
+   "sender_name" : "L02",
+   "recipient_code" : "ALL",
+   "recipient_name" : "ALL",
+   "send_time" : "2017-01-01 10:00:00",
+   "message_content" : {
+      "queue_code" : "aa5ebd80-7d72-47ec-b437-69f8fc5f37a3",
+      "lane_code" : "CN-RUILI-JICP1-L02",
+      "action" : "create",
+      "create_time" : "2017-01-01 10:00:00",
+      "queue" : {
+         "queue_code" : "aa5ebd80-7d72-47ec-b437-69f8fc5f37a3",
+         "lane_code" : "CN-RUILI-JICP1-L01",
+         "lane_name" : "L01",
+         "direction" : "In",
+         "license_plate_number" : "云A.12345",
+         "license_plate_color" : "蓝牌",
+         "license_plate_nationality" : "中国",
+         "in_time" : "2017-01-01 10:00:00",
+         "out_time" : "2017-01-01 10:00:00",
+         "process" : {
+            "in_snapshot" : {
+               "step" : "1",
+               "display" : "入口采集",
+               "status" : true,
+               "in_snapshot_area" : "进口区",
+               "in_lane_name" : "G02",
+               "snapshot_point" : "2-1",
+               "crop_pic_url" : "车牌裁剪图片.jpg",
+               "Thumbnails_pic_url" : "缩略图.jpg",
+               "full_image_url" : "完整图片.jpg",
+               "snapshot_time" : "2017-01-01 10:00:00"
+            },
+            "out_snapshot" : {
+               "step" : "2",
+               "display" : "出口采集",
+               "status" : true,
+               "in_snapshot_area" : "出口区",
+               "in_lane_name" : "G03",
+               "snapshot_point" : "3-2",
+               "crop_pic_url" : "车牌裁剪图片.jpg",
+               "Thumbnails_pic_url" : "缩略图.jpg",
+               "full_image_url" : "完整图片.jpg",
+               "snapshot_time" : "2017-01-01 10:00:00"
+            }
+         },
+         "update_time" : "2017-01-01 10:00:00"
+      }
+   }
+}

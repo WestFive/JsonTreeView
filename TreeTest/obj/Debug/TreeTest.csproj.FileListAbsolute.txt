@@ -1,0 +1,13 @@
+c:\users\平方科技\documents\visual studio 2015\Projects\JsonTreeTest\TreeTest\bin\Debug\TreeTest.exe.config
+c:\users\平方科技\documents\visual studio 2015\Projects\JsonTreeTest\TreeTest\bin\Debug\TreeTest.exe
+c:\users\平方科技\documents\visual studio 2015\Projects\JsonTreeTest\TreeTest\bin\Debug\TreeTest.pdb
+c:\users\平方科技\documents\visual studio 2015\Projects\JsonTreeTest\TreeTest\obj\Debug\TreeTest.csprojResolveAssemblyReference.cache
+c:\users\平方科技\documents\visual studio 2015\Projects\JsonTreeTest\TreeTest\obj\Debug\TreeTest.Form1.resources
+c:\users\平方科技\documents\visual studio 2015\Projects\JsonTreeTest\TreeTest\obj\Debug\TreeTest.Properties.Resources.resources
+c:\users\平方科技\documents\visual studio 2015\Projects\JsonTreeTest\TreeTest\obj\Debug\TreeTest.csproj.GenerateResource.Cache
+c:\users\平方科技\documents\visual studio 2015\Projects\JsonTreeTest\TreeTest\obj\Debug\TreeTest.exe
+c:\users\平方科技\documents\visual studio 2015\Projects\JsonTreeTest\TreeTest\obj\Debug\TreeTest.pdb
+c:\users\平方科技\documents\visual studio 2015\Projects\JsonTreeTest\TreeTest\bin\Debug\JsonTree.dll
+c:\users\平方科技\documents\visual studio 2015\Projects\JsonTreeTest\TreeTest\bin\Debug\JsonTree.pdb
+c:\users\平方科技\documents\visual studio 2015\Projects\JsonTreeTest\TreeTest\bin\Debug\Newtonsoft.Json.dll
+c:\users\平方科技\documents\visual studio 2015\Projects\JsonTreeTest\TreeTest\bin\Debug\Newtonsoft.Json.xml

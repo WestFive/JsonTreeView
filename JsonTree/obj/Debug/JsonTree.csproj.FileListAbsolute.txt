@@ -1,0 +1,7 @@
+c:\users\平方科技\documents\visual studio 2015\Projects\JsonTreeTest\JsonTree\bin\Debug\JsonTree.dll
+c:\users\平方科技\documents\visual studio 2015\Projects\JsonTreeTest\JsonTree\bin\Debug\JsonTree.pdb
+c:\users\平方科技\documents\visual studio 2015\Projects\JsonTreeTest\JsonTree\obj\Debug\JsonTree.csprojResolveAssemblyReference.cache
+c:\users\平方科技\documents\visual studio 2015\Projects\JsonTreeTest\JsonTree\obj\Debug\JsonTree.dll
+c:\users\平方科技\documents\visual studio 2015\Projects\JsonTreeTest\JsonTree\obj\Debug\JsonTree.pdb
+c:\users\平方科技\documents\visual studio 2015\Projects\JsonTreeTest\JsonTree\bin\Debug\Newtonsoft.Json.dll
+c:\users\平方科技\documents\visual studio 2015\Projects\JsonTreeTest\JsonTree\bin\Debug\Newtonsoft.Json.xml
