@@ -19,6 +19,8 @@ namespace JsonTree
 
         public delegate void TreeNodeClick(string res);
         public event TreeNodeClick NodeClick;
+        public delegate void TreeNodeDoubleClick(Dictionary<string, object> dic);
+        public event TreeNodeDoubleClick NodeDoubleClick;
         public Dictionary<string, string> JasonKeyValue = new Dictionary<string, string>();
         /// <summary>
         /// 将关系数据列表 转化为 树状图
@@ -70,9 +72,10 @@ namespace JsonTree
             rootNode.Expand();
             TreeView = tw;
             TreeView.NodeMouseDoubleClick += TreeView_NodeMouseDoubleClick;
+            TreeView.NodeMouseClick += TreeView_NodeMouseClick;
         }
 
-        private void TreeView_NodeMouseDoubleClick(object sender, TreeNodeMouseClickEventArgs e)
+        private void TreeView_NodeMouseClick(object sender, TreeNodeMouseClickEventArgs e)
         {
             //MessageBox.Show(e.Node.Text);
             string para = e.Node.Text;
@@ -81,20 +84,21 @@ namespace JsonTree
             {
                 this.NodeClick?.Invoke(ConvertJsonString(JasonKeyValue[para].ToString()));
             }
-            else
+        }
+
+        private void TreeView_NodeMouseDoubleClick(object sender, TreeNodeMouseClickEventArgs e)
+        {
+            //MessageBox.Show(e.Node.Text);
+            string para = e.Node.Text;
+            JObject jobj = JsonConvert.DeserializeObject<dynamic>(File.ReadAllText(Application.StartupPath + "/example.json"));
+            //Dictionary<string, string> jobjDic = JsonConvert.DeserializeObject<Dictionary<string, string>>(JsonConvert.SerializeObject(jobj));
+            if (JasonKeyValue.Count(x => x.Key == para) > 0)
             {
-                //JToken record = jobj["message_content"];
-                //foreach (JProperty item in record)
-                //{
-                //    Dictionary<String, string> dic = new Dictionary<string, string>();
-                //    dic.Add(item.Name,item.Value.ToString());
-                //    if(item.Value.Type==JTokenType.Object)
-                //    {
-
-                //    }
-                //}
-
+                //this.NodeDoubleClick.Invoke(jobjDic);
+                Dictionary<string, object> dicc = JsonConvert.DeserializeObject<Dictionary<string,object>>(JasonKeyValue[para]);
+                this.NodeDoubleClick?.Invoke(dicc);
             }
+
         }
 
         public static string ConvertJsonString(string str)
