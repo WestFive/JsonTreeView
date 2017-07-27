@@ -22,6 +22,7 @@ namespace JsonTree
         public delegate void TreeNodeDoubleClick(Dictionary<string, object> dic);
         public event TreeNodeDoubleClick NodeDoubleClick;
         public Dictionary<string, string> JasonKeyValue = new Dictionary<string, string>();
+        public List<string> JsonRootList = new List<string>();
         /// <summary>
         /// 将关系数据列表 转化为 树状图
         /// </summary>
@@ -59,6 +60,56 @@ namespace JsonTree
         }
 
 
+        public void UpdateJasonObject(string key, string value)
+        {
+            if (JasonKeyValue.Count(x => x.Key == key) > 0)
+            {
+                JasonKeyValue[key] = value;
+            }
+
+            //dynamic dic =  JsonConvert.DeserializeObject<dynamic>(JsonConvert.SerializeObject(JasonKeyValue));
+
+            foreach (var item in JsonRootList)
+            {
+                if (key == item)
+                {
+                    JasonKeyValue[item] = value;
+                }
+                else
+                {
+                    Dictionary<string, object> tempdic = JsonConvert.DeserializeObject<Dictionary<string, object>>(JasonKeyValue[item]);
+                    if (tempdic.Count(x => x.Key == key) > 0)
+                    {
+                        tempdic[key] = value;//二层循环判断。
+                    }
+                    JasonKeyValue[item] = JsonConvert.SerializeObject(tempdic);
+                }
+
+            }
+            Dictionary<string, object> father = null;
+            for (int i = 0; i < JsonRootList.Count-1; i++)
+            {
+                 father = JsonConvert.DeserializeObject<Dictionary<string,object>>(JasonKeyValue[JsonRootList[i + 1]]);
+                dynamic child= JsonConvert.DeserializeObject<dynamic>(JasonKeyValue[JsonRootList[i]]);
+                 
+                father[JsonRootList[i]] = child;
+            }
+
+            File.WriteAllText(Application.StartupPath + "/Out.json", JsonConvert.SerializeObject(father));
+
+
+
+        }
+
+
+
+
+        /// <summary>
+        /// 从JSON字符串中获取TreeView节点数
+        /// </summary>
+        /// <param name="parentId"></param>
+        /// <param name="jsonstr"></param>
+        /// <param name="flag"></param>
         public void GetRootFromJsonStr(int parentId, string jsonstr, Flag flag)
         {
             JObject jobject = JObject.Parse(jsonstr);
@@ -95,7 +146,7 @@ namespace JsonTree
             if (JasonKeyValue.Count(x => x.Key == para) > 0)
             {
                 //this.NodeDoubleClick.Invoke(jobjDic);
-                Dictionary<string, object> dicc = JsonConvert.DeserializeObject<Dictionary<string,object>>(JasonKeyValue[para]);
+                Dictionary<string, object> dicc = JsonConvert.DeserializeObject<Dictionary<string, object>>(JasonKeyValue[para]);
                 this.NodeDoubleClick?.Invoke(dicc);
             }
 
@@ -141,6 +192,11 @@ namespace JsonTree
                 if (JasonKeyValue.Count(x => x.Key == item.Key) == 0)
                 {
                     JasonKeyValue.Add(item.Key, JsonConvert.SerializeObject(item.Value));
+                    if (item.Value.Type == JTokenType.Object)
+                    {
+                        JsonRootList.Add(item.Key);
+
+                    }
                 }
             }
 

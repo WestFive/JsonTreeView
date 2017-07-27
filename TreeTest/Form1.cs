@@ -23,9 +23,16 @@ namespace TreeTest
         }
         JsonTree.JsonTree tree;
         RichTextBox richTextBox1;
+        RichTextBox richlog;
         public Dictionary<Label, TextBox> ControllerDic = new Dictionary<Label, TextBox>();
         private void Form1_Load(object sender, EventArgs e)
         {
+            #region LogGrpupBox
+            richlog = new RichTextBox();
+            BindToFatherControler(logGroupBox, richlog);
+
+            #endregion
+
             string jsonstr = File.ReadAllText(Application.StartupPath + "/example.json");
             tree = new JsonTree.JsonTree();
             tree.GetRootFromJsonStr(0, jsonstr, JsonTree.JsonTree.Flag.OnlyObject);
@@ -38,6 +45,9 @@ namespace TreeTest
             ///注册鼠标点击事件
             tree.NodeClick += Tree_NodeClick;
             tree.NodeDoubleClick += Tree_NodeDoubleClick;
+
+
+            //tree.JsonRootList.Reverse();
         }
 
 
@@ -93,7 +103,13 @@ namespace TreeTest
 
         private void Child_TextChanged(object sender, EventArgs e)
         {
-            MessageBox.Show(((TextBox)sender).Tag.ToString());
+            string tag = (((TextBox)sender).Tag.ToString());
+            if (tree.JasonKeyValue.Count(x => x.Key == ((TextBox)sender).Tag.ToString()) > 0)
+            {
+                //MessageBox.Show(tree.JasonKeyValue[tag]);
+                tree.UpdateJasonObject(tag, ((TextBox)sender).Text);
+                
+            }
         }
 
         private void Form1_SizeChanged(object sender, EventArgs e)

@@ -21,7 +21,6 @@
          "in_time" : "2017-01-01 10:00:00",
          "out_time" : "2017-01-01 10:00:00",
          "process" : {
-            "in_snapshot" : {
                "step" : "1",
                "display" : "入口采集",
                "status" : true,
@@ -33,19 +32,6 @@
                "full_image_url" : "完整图片.jpg",
                "snapshot_time" : "2017-01-01 10:00:00"
             },
-            "out_snapshot" : {
-               "step" : "2",
-               "display" : "出口采集",
-               "status" : true,
-               "in_snapshot_area" : "出口区",
-               "in_lane_name" : "G03",
-               "snapshot_point" : "3-2",
-               "crop_pic_url" : "车牌裁剪图片.jpg",
-               "Thumbnails_pic_url" : "缩略图.jpg",
-               "full_image_url" : "完整图片.jpg",
-               "snapshot_time" : "2017-01-01 10:00:00"
-            }
-         },
          "update_time" : "2017-01-01 10:00:00"
       }
    }
