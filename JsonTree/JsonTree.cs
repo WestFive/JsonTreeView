@@ -13,10 +13,7 @@ namespace JsonTree
 {
     public class JsonTree
     {
-
-
         public TreeView TreeView = null;
-
         public delegate void TreeNodeClick(string res);
         public event TreeNodeClick NodeClick;
         public delegate void TreeNodeDoubleClick(Dictionary<string, object> dic);
@@ -59,21 +56,11 @@ namespace JsonTree
 
             return root;
         }
-
-
         public void UpdateJasonObject(string key, string value)
         {
-            //if (JasonKeyValue.Count(x => x.Key == key) > 0)
-            //{
-            //    JasonKeyValue[key] = value;
-            //}
-
-            //dynamic dic =  JsonConvert.DeserializeObject<dynamic>(JsonConvert.SerializeObject(JasonKeyValue));
             Dictionary<string, object> father = null;
             foreach (var item in JsonRootList)
             {
-                
-             
                 if (key == item)
                 {
                     JasonKeyValue[item] = value;
@@ -95,22 +82,15 @@ namespace JsonTree
 
                         father[JsonRootList[i]] = child;
                         JasonKeyValue[fatherName] = JsonConvert.SerializeObject(father);
-                         
+
                     }
                 }
-
             }
-          
-
             File.WriteAllText(Application.StartupPath + "/Out.json", JsonConvert.SerializeObject(father));
             nowJson = JsonConvert.SerializeObject(father);
 
             this.NodeClick?.Invoke(JsonConvert.SerializeObject(JasonKeyValue[key].ToString()));
         }
-
-
-
-
         /// <summary>
         /// 从JSON字符串中获取TreeView节点数
         /// </summary>
@@ -132,7 +112,6 @@ namespace JsonTree
             TreeView.NodeMouseDoubleClick += TreeView_NodeMouseDoubleClick;
             TreeView.NodeMouseClick += TreeView_NodeMouseClick;
         }
-
         private void TreeView_NodeMouseClick(object sender, TreeNodeMouseClickEventArgs e)
         {
             //MessageBox.Show(e.Node.Text);
@@ -143,7 +122,6 @@ namespace JsonTree
                 this.NodeClick?.Invoke(ConvertJsonString(JasonKeyValue[para].ToString()));
             }
         }
-
         private void TreeView_NodeMouseDoubleClick(object sender, TreeNodeMouseClickEventArgs e)
         {
             //MessageBox.Show(e.Node.Text);
@@ -158,7 +136,6 @@ namespace JsonTree
             }
 
         }
-
         public static string ConvertJsonString(string str)
         {
             //格式化json字符串  
@@ -183,7 +160,6 @@ namespace JsonTree
                 return str;
             }
         }
-
         public enum Flag
         {
             All,
@@ -208,7 +184,6 @@ namespace JsonTree
             }
 
         }
-
         private void AddNode(JsonTreeNode parentNode, string property, JToken item, Flag flag)
         {
             JsonTreeNode node = null;
@@ -235,7 +210,6 @@ namespace JsonTree
                 LoadObject(item as JObject, node, flag);
             }
         }
-
         private void LoadArray(JToken item, JsonTreeNode node, Flag flag)
         {
             foreach (var childitem in item)
@@ -243,7 +217,6 @@ namespace JsonTree
                 AddNode(node, null, childitem, flag);
             }
         }
-
         public void AddChild(Node child, IDictionary<int, List<Node>> mapping)
         {
             if (mapping != null && mapping.ContainsKey(child.Key))
@@ -255,7 +228,6 @@ namespace JsonTree
                 }
             }
         }
-
         public TreeView PrintTree(Node node, TreeView tview)
         {
             tview.Nodes.Add(node.Key.ToString());
@@ -270,8 +242,6 @@ namespace JsonTree
             }
             return tview;
         }
-
-
         public bool IsAContainB(int a, int b, IList<Mapping> mapping)
         {
             var result = IsAContainBTop(a, b, mapping);
@@ -289,7 +259,6 @@ namespace JsonTree
 
             return false;
         }
-
         /// <summary>
         /// A 是否包含 B
         /// </summary>
@@ -333,7 +302,6 @@ namespace JsonTree
 
             return result;
         }
-
         public bool IsAContainBBottom(int a, int b, IList<Mapping> mapping)
         {
             // 排除自循环
@@ -370,7 +338,6 @@ namespace JsonTree
             return result;
         }
     }
-
     /// <summary>
     /// 关系数据结构
     /// parent --{Node}--children
@@ -381,7 +348,6 @@ namespace JsonTree
 
         public int ChildID { get; set; }
     }
-
     /// <summary>
     /// 节点数据结构
     /// {p1,p2,p3,...} -- [Node] -- {c1,c2,c3,...}
