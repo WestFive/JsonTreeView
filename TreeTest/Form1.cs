@@ -108,13 +108,67 @@ namespace TreeTest
             {
                 //MessageBox.Show(tree.JasonKeyValue[tag]);
                 tree.UpdateJasonObject(tag, ((TextBox)sender).Text);
-                
+
             }
+
         }
 
         private void Form1_SizeChanged(object sender, EventArgs e)
         {
             tableLayoutPanel1.Dock = DockStyle.Left;
+        }
+        HubClient.HubClient hub;
+
+        public dynamic lane = File.ReadAllText(Application.StartupPath + "/lane.json");
+        /// <summary>
+        /// 连接消息服务
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void buttonConnect_Click(object sender, EventArgs e)
+        {
+            hub = new HubClient.HubClient(TextServerURL.Text, "messagehub", new Dictionary<string, string> { { "Type", "Client" }, { "Name", comboBoxLaneCode.SelectedItem.ToString() } });
+            hub.reciveStatus += Hub_reciveStatus;
+            hub.reciveHubError += Hub_reciveHubError;
+            hub.reciveMessage += Hub_reciveMessage;
+            hub.HubInit();
+            hub.Change(comboBoxLaneCode.SelectedItem.ToString(), lane.ToString());
+            tree.GetRootFromJsonStr(0, lane, JsonTree.JsonTree.Flag.OnlyObject);
+        }
+
+        #region 追加到日志
+
+        private void Hub_reciveMessage(string str)
+        {
+            AppendLogStatus(str);
+        }
+
+        private void Hub_reciveHubError(string str)
+        {
+            AppendLogStatus(str);
+        }
+
+        private void Hub_reciveStatus(string str)
+        {
+            AppendLogStatus(str);
+        }
+
+        private void AppendLogStatus(string text)
+        {
+            Invoke(new MethodInvoker(() =>
+            {
+                richlog.AppendText(text + "\r\n");
+            }));
+            
+        }
+        #endregion
+
+        private void button6_Click(object sender, EventArgs e)
+        {
+            if(hub!=null)
+            {
+                hub.Change(comboBoxLaneCode.SelectedItem.ToString(), tree.nowJson.ToString());
+            }
         }
     }
 }

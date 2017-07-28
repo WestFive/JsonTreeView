@@ -84,6 +84,10 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\HubClient\HubClient.csproj">
+      <Project>{2afc1651-6714-44ee-9b2c-32f0fb142ece}</Project>
+      <Name>HubClient</Name>
+    </ProjectReference>
     <ProjectReference Include="..\JsonTree\JsonTree.csproj">
       <Project>{E59B3001-8521-45E9-8F6D-B4258E56C1CC}</Project>
       <Name>JsonTree</Name>

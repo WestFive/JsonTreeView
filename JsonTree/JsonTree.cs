@@ -23,6 +23,7 @@ namespace JsonTree
         public event TreeNodeDoubleClick NodeDoubleClick;
         public Dictionary<string, string> JasonKeyValue = new Dictionary<string, string>();
         public List<string> JsonRootList = new List<string>();
+        public dynamic nowJson;
         /// <summary>
         /// 将关系数据列表 转化为 树状图
         /// </summary>
@@ -62,15 +63,17 @@ namespace JsonTree
 
         public void UpdateJasonObject(string key, string value)
         {
-            if (JasonKeyValue.Count(x => x.Key == key) > 0)
-            {
-                JasonKeyValue[key] = value;
-            }
+            //if (JasonKeyValue.Count(x => x.Key == key) > 0)
+            //{
+            //    JasonKeyValue[key] = value;
+            //}
 
             //dynamic dic =  JsonConvert.DeserializeObject<dynamic>(JsonConvert.SerializeObject(JasonKeyValue));
-
+            Dictionary<string, object> father = null;
             foreach (var item in JsonRootList)
             {
+                
+             
                 if (key == item)
                 {
                     JasonKeyValue[item] = value;
@@ -83,22 +86,26 @@ namespace JsonTree
                         tempdic[key] = value;//二层循环判断。
                     }
                     JasonKeyValue[item] = JsonConvert.SerializeObject(tempdic);
+
+                    for (int i = 0; i < JsonRootList.Count - 1; i++)
+                    {
+                        father = JsonConvert.DeserializeObject<Dictionary<string, object>>(JasonKeyValue[JsonRootList[i + 1]]);
+                        string fatherName = JsonRootList[i + 1];
+                        dynamic child = JsonConvert.DeserializeObject<dynamic>(JasonKeyValue[JsonRootList[i]]);
+
+                        father[JsonRootList[i]] = child;
+                        JasonKeyValue[fatherName] = JsonConvert.SerializeObject(father);
+                         
+                    }
                 }
 
             }
-            Dictionary<string, object> father = null;
-            for (int i = 0; i < JsonRootList.Count-1; i++)
-            {
-                 father = JsonConvert.DeserializeObject<Dictionary<string,object>>(JasonKeyValue[JsonRootList[i + 1]]);
-                dynamic child= JsonConvert.DeserializeObject<dynamic>(JasonKeyValue[JsonRootList[i]]);
-                 
-                father[JsonRootList[i]] = child;
-            }
+          
 
             File.WriteAllText(Application.StartupPath + "/Out.json", JsonConvert.SerializeObject(father));
+            nowJson = JsonConvert.SerializeObject(father);
 
-
-
+            this.NodeClick?.Invoke(JsonConvert.SerializeObject(JasonKeyValue[key].ToString()));
         }
 
 
