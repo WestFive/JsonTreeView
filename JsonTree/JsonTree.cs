@@ -19,6 +19,8 @@ namespace JsonTree
         public delegate void TreeNodeDoubleClick(Dictionary<string, object> dic);
         public event TreeNodeDoubleClick NodeDoubleClick;
         public Dictionary<string, string> JasonKeyValue = new Dictionary<string, string>();
+        public delegate void NodeJasonNeedBeEncode();
+        public event NodeJasonNeedBeEncode needbeencode;
         public List<string> JsonRootList = new List<string>();
         public dynamic nowJson;
         /// <summary>
@@ -89,6 +91,7 @@ namespace JsonTree
             File.WriteAllText(Application.StartupPath + "/Out.json", JsonConvert.SerializeObject(father));
             nowJson = JsonConvert.SerializeObject(father);
 
+            this.needbeencode?.Invoke();
             this.NodeClick?.Invoke(JsonConvert.SerializeObject(JasonKeyValue[key].ToString()));
         }
         /// <summary>
@@ -131,8 +134,31 @@ namespace JsonTree
             if (JasonKeyValue.Count(x => x.Key == para) > 0)
             {
                 //this.NodeDoubleClick.Invoke(jobjDic);
-                Dictionary<string, object> dicc = JsonConvert.DeserializeObject<Dictionary<string, object>>(JasonKeyValue[para]);
-                this.NodeDoubleClick?.Invoke(dicc);
+                dynamic obj = JsonConvert.DeserializeObject<dynamic>(JasonKeyValue[para]);
+                JToken jto = JToken.FromObject(obj);
+                if (jto.Type == JTokenType.Object)
+                {
+                    Dictionary<string, object> dicc = JsonConvert.DeserializeObject<Dictionary<string, object>>(JasonKeyValue[para]);
+                    this.NodeDoubleClick?.Invoke(dicc);
+                }
+                else if (jto.Type == JTokenType.Array)
+                {
+                    Dictionary<string, object>[] dicc = JsonConvert.DeserializeObject<Dictionary<string, object>[]>(JasonKeyValue[para]);
+                    Dictionary<string, object> newdicc = new Dictionary<string, object>();
+                    foreach (var item in dicc)
+                    {
+                        foreach (var items in item)
+                        {
+                            if (newdicc.Count(x => x.Key == items.Key) ==0)
+                            {
+                                newdicc.Add(items.Key, items.Value);
+                            }
+
+                        }
+
+                    }
+
+                }
             }
 
         }

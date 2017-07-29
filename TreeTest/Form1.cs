@@ -46,11 +46,15 @@ namespace TreeTest
             tree.NodeClick += Tree_NodeClick;
             tree.NodeDoubleClick += Tree_NodeDoubleClick;
 
+            tree.nowJson = jsonstr;
 
-            //tree.JsonRootList.Reverse();
+            tree.needbeencode += Tree_needbeencode;
         }
 
-
+        private void Tree_needbeencode()
+        {
+            tree.nowJson = HubClient.Common.MessageEncoder.EncodingLaneMessage(tree.nowJson.ToString(), HubClient.Common.MessageEncoder.RecipientType.ALL);
+        }
 
         static int pianyizhi = 0;
         private void Tree_NodeDoubleClick(Dictionary<string, object> dic)
@@ -110,7 +114,14 @@ namespace TreeTest
                 tree.UpdateJasonObject(tag, ((TextBox)sender).Text);
 
             }
+            try
+            {
+                richTextBox1.Text = JsonTree.JsonTree.ConvertJsonString(tree.JasonKeyValue[tree.TreeView.SelectedNode.Text]);
+            }
+            catch (Exception ex)
+            {
 
+            }
         }
 
         private void Form1_SizeChanged(object sender, EventArgs e)
@@ -120,6 +131,7 @@ namespace TreeTest
         HubClient.HubClient hub;
 
         public dynamic lane = File.ReadAllText(Application.StartupPath + "/lane.json");
+        
         /// <summary>
         /// 连接消息服务
         /// </summary>
@@ -131,9 +143,10 @@ namespace TreeTest
             hub.reciveStatus += Hub_reciveStatus;
             hub.reciveHubError += Hub_reciveHubError;
             hub.reciveMessage += Hub_reciveMessage;
-            hub.HubInit();
-            hub.Change(comboBoxLaneCode.SelectedItem.ToString(), lane.ToString());
+            hub.HubInit();          
             tree.GetRootFromJsonStr(0, lane, JsonTree.JsonTree.Flag.OnlyObject);
+
+            SendLaneMessge();
         }
 
         #region 追加到日志
@@ -159,15 +172,33 @@ namespace TreeTest
             {
                 richlog.AppendText(text + "\r\n");
             }));
-            
+
         }
         #endregion
 
+
+
+        private void SendLaneMessge()
+        {
+            JsonConvert.DeserializeObject<dynamic>(tree.nowJson).message_content.lane.lane_code = comboBoxLaneCode.SelectedItem.ToString();
+            JsonConvert.DeserializeObject<dynamic>(tree.nowJson).message_content.lane.lane_name = textLaneName.Text;
+            string besend = JsonConvert.SerializeObject(tree.nowJson);
+            hub.Change(comboBoxLaneCode.SelectedItem.ToString(), besend);
+        }
+
+  
         private void button6_Click(object sender, EventArgs e)
         {
-            if(hub!=null)
+            if (hub != null)
             {
-                hub.Change(comboBoxLaneCode.SelectedItem.ToString(), tree.nowJson.ToString());
+                if (tree.nowJson != null)
+                {
+                    SendLaneMessge();
+                }
+                else
+                {
+                    MessageBox.Show("请先修改再推送");
+                }
             }
         }
     }

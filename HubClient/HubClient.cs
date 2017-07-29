@@ -67,7 +67,6 @@ namespace HubClient
         {
             try
             {
-
                 connection = new HubConnection(HubAddress, HubConnectctParames);
                 hub = connection.CreateHubProxy(HubName);
                 connection.Start().Wait();
@@ -77,7 +76,6 @@ namespace HubClient
                     reciveMessage?.Invoke(data);
                 });
                 hub.Invoke("Ping");
-
 
             }
             catch (Exception ex)

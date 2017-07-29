@@ -29,7 +29,7 @@ namespace HubClient.Common
             //母版
             dynamic result = JsonConvert.DeserializeObject<dynamic>(File.ReadAllText(Application.StartupPath + "/lane.json"));
             //赋值
-            dynamic BeEncodeObj = JsonConvert.DeserializeObject<dynamic>(JsonStr);
+            dynamic BeEncodeObj = JsonConvert.DeserializeObject<Dictionary<string, dynamic>>(JsonStr)["lane"];
             //解析
             result.message_type = "lane";
             result.sender_code = BeEncodeObj.lane_code;

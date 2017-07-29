@@ -16,7 +16,6 @@ namespace JsonTree
             NodeType type;
             string text;
             string textWhenSelected = null;
-
             if (item.Type == JTokenType.Object || item.Type == JTokenType.Array)
             {
                 text = property;
