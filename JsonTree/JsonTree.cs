@@ -13,19 +13,24 @@ namespace JsonTree
 {
     public class JsonTree
     {
-        public TreeView TreeView = null;
-        public delegate void TreeNodeClick(string res);
-        public event TreeNodeClick NodeClick;
-        public delegate void TreeNodeDoubleClick(Dictionary<string, object> dic);
-        public event TreeNodeDoubleClick NodeDoubleClick;
-        public Dictionary<string, string> JasonKeyValue = new Dictionary<string, string>();
-        public delegate void NodeJasonNeedBeEncode();
-        public event NodeJasonNeedBeEncode needbeencode;
+        #region 废弃 
+        //public TreeView TreeView = null;
+        //public delegate void TreeNodeClick(string res);
+        //public event TreeNodeClick NodeClick;
+        //public delegate void TreeNodeDoubleClick(Dictionary<string, object> dic);
+        //public event TreeNodeDoubleClick NodeDoubleClick;
 
-        public delegate void TriggerRootNode(string str);
-        public event TriggerRootNode BindRichText;
-        public List<string> JsonRootList = new List<string>();
-        public dynamic nowJson;
+        //public delegate void NodeJasonNeedBeEncode();
+        //public event NodeJasonNeedBeEncode needbeencode;
+
+        //public delegate void TriggerRootNode(string str);
+        //public event TriggerRootNode BindRichText;
+        //public List<string> JsonRootList = new List<string>();
+        //public dynamic nowJson;
+        #endregion
+        public Dictionary<string, object> JasonKeyValue = new Dictionary<string, object>();
+        public JsonTreeNode TreeNode { get; set; }
+
         /// <summary>
         /// 将关系数据列表 转化为 树状图
         /// </summary>
@@ -61,135 +66,123 @@ namespace JsonTree
 
             return root;
         }
-        public void UpdateJasonObject(string key, string value)
-        {
-            Dictionary<string, object> father = null;
-            foreach (var item in JsonRootList)
-            {
-                if (key == item)
-                {
-                    JasonKeyValue[item] = value;
-                }
-                else
-                {
-                    Dictionary<string, object> tempdic = JsonConvert.DeserializeObject<Dictionary<string, object>>(JasonKeyValue[item]);
-                    if (tempdic.Count(x => x.Key == key) > 0)
-                    {
-                        tempdic[key] = value;//二层循环判断。
-                    }
-                    JasonKeyValue[item] = JsonConvert.SerializeObject(tempdic);
+        //public void UpdateJasonObject(string key, string value)
+        //{
+        //    Dictionary<string, object> father = null;
+        //    foreach (var item in JsonRootList)
+        //    {
+        //        if (key == item)
+        //        {
+        //            JasonKeyValue[item] = value;
+        //        }
+        //        else
+        //        {
+        //            Dictionary<string, object> tempdic = JsonConvert.DeserializeObject<Dictionary<string, object>>(JasonKeyValue[item]);
+        //            if (tempdic.Count(x => x.Key == key) > 0)
+        //            {
+        //                tempdic[key] = value;//二层循环判断。
+        //            }
+        //            JasonKeyValue[item] = JsonConvert.SerializeObject(tempdic);
 
-                    for (int i = 0; i < JsonRootList.Count - 1; i++)
-                    {
-                        father = JsonConvert.DeserializeObject<Dictionary<string, object>>(JasonKeyValue[JsonRootList[i + 1]]);
-                        string fatherName = JsonRootList[i + 1];
-                        dynamic child = JsonConvert.DeserializeObject<dynamic>(JasonKeyValue[JsonRootList[i]]);
+        //            for (int i = 0; i < JsonRootList.Count - 1; i++)
+        //            {
+        //                father = JsonConvert.DeserializeObject<Dictionary<string, object>>(JasonKeyValue[JsonRootList[i + 1]]);
+        //                string fatherName = JsonRootList[i + 1];
+        //                dynamic child = JsonConvert.DeserializeObject<dynamic>(JasonKeyValue[JsonRootList[i]]);
 
-                        father[JsonRootList[i]] = child;
-                        JasonKeyValue[fatherName] = JsonConvert.SerializeObject(father);
+        //                father[JsonRootList[i]] = child;
+        //                JasonKeyValue[fatherName] = JsonConvert.SerializeObject(father);
 
-                    }
-                }
-            }
-            File.WriteAllText(Application.StartupPath + "/Out.json", JsonConvert.SerializeObject(father));
-            nowJson = JsonConvert.SerializeObject(father);
-            this.needbeencode?.Invoke();
-            this.NodeClick?.Invoke(JsonConvert.SerializeObject(JasonKeyValue[key].ToString()));
-        }
+        //            }
+        //        }
+        //    }
+        //    File.WriteAllText(Application.StartupPath + "/Out.json", JsonConvert.SerializeObject(father));
+        //    nowJson = JsonConvert.SerializeObject(father);
+        //    this.needbeencode?.Invoke();
+        //    this.NodeClick?.Invoke(JsonConvert.SerializeObject(JasonKeyValue[key].ToString()));
+        //}
         /// <summary>
         /// 从JSON字符串中获取TreeView节点数
         /// </summary>
         /// <param name="parentId"></param>
         /// <param name="jsonstr"></param>
         /// <param name="flag"></param>
-        public void GetRootFromJsonStr(int parentId, string jsonstr, Flag flag)
+        public bool GetRootFromJsonStr(int parentId, string jsonstr, Flag flag)
         {
-             
-            JObject jobject = JObject.Parse(jsonstr);
-            var rootNode = new JsonTreeNode(NodeType.Object, "message");
-            TreeView tw = new TreeView();
-            tw.Nodes.Add(rootNode);
-            tw.SelectedNode = rootNode;
-            rootNode.ImageKey = rootNode.NodeType.ToString();
-            rootNode.SelectedImageKey = rootNode.ImageKey;
-            LoadObject(jobject, rootNode, flag);
-            rootNode.Expand();
-            TreeView = tw;
-            TreeView.NodeMouseDoubleClick += TreeView_NodeMouseDoubleClick;
-            TreeView.NodeMouseClick += TreeView_NodeMouseClick;
-        }
-        private void TreeView_NodeMouseClick(object sender, TreeNodeMouseClickEventArgs e)
-        {
-            //MessageBox.Show(e.Node.Text);
-            string para = e.Node.Text;
-            //JObject jobj = JsonConvert.DeserializeObject<dynamic>(File.ReadAllText(Application.StartupPath + "/example.json"));
-            if (JasonKeyValue.Count(x => x.Key == para) > 0)
+            try
             {
-                this.NodeClick?.Invoke(ConvertJsonString(JasonKeyValue[para].ToString()));
+
+                JObject jobject = JObject.Parse(jsonstr);
+                var rootNode = new JsonTreeNode(NodeType.Object, "message");
+                //TreeView tw = new TreeView();
+                //tw.Nodes.Add(rootNode);
+                //tw.SelectedNode = rootNode;
+                rootNode.ImageKey = rootNode.NodeType.ToString();
+                rootNode.SelectedImageKey = rootNode.ImageKey;
+                LoadObject(jobject, rootNode, flag);
+                rootNode.Expand();
+                TreeNode = rootNode;
+                return true;
             }
-        }
-        private void TreeView_NodeMouseDoubleClick(object sender, TreeNodeMouseClickEventArgs e)
-        {
-            //MessageBox.Show(e.Node.Text);
-            string para = e.Node.Text;
-            BindRichText?.Invoke(e.Node.Text);
-            JObject jobj = nowJson;
-            //Dictionary<string, string> jobjDic = JsonConvert.DeserializeObject<Dictionary<string, string>>(JsonConvert.SerializeObject(jobj));
-            if (JasonKeyValue.Count(x => x.Key == para) > 0)
+            catch (Exception ex)
             {
-                //this.NodeDoubleClick.Invoke(jobjDic);
-                dynamic obj = JsonConvert.DeserializeObject<dynamic>(JasonKeyValue[para]);
-                JToken jto = JToken.FromObject(obj);
-                if (jto.Type == JTokenType.Object)
-                {
-                    Dictionary<string, object> dicc = JsonConvert.DeserializeObject<Dictionary<string, object>>(JasonKeyValue[para]);
-                    this.NodeDoubleClick?.Invoke(dicc);
-                }
-                else if (jto.Type == JTokenType.Array)
-                {
-                    Dictionary<string, object>[] dicc = JsonConvert.DeserializeObject<Dictionary<string, object>[]>(JasonKeyValue[para]);
-                    Dictionary<string, object> newdicc = new Dictionary<string, object>();
-                    foreach (var item in dicc)
-                    {
-                        foreach (var items in item)
-                        {
-                            if (newdicc.Count(x => x.Key == items.Key) == 0)
-                            {
-                                newdicc.Add(items.Key, items.Value);
-                            }
-
-                        }
-
-                    }
-
-                }
+                return false;
             }
-
+            //TreeView = tw;
+            //TreeView.NodeMouseDoubleClick += TreeView_NodeMouseDoubleClick;
+            //TreeView.NodeMouseClick += TreeView_NodeMouseClick;
         }
-        public static string ConvertJsonString(string str)
-        {
-            //格式化json字符串  
-            JsonSerializer serializer = new JsonSerializer();
-            TextReader tr = new StringReader(str);
-            JsonTextReader jtr = new JsonTextReader(tr);
-            object obj = serializer.Deserialize(jtr);
-            if (obj != null)
-            {
-                StringWriter textWriter = new StringWriter();
-                JsonTextWriter jsonWriter = new JsonTextWriter(textWriter)
-                {
-                    Formatting = Formatting.Indented,
-                    Indentation = 4,
-                    IndentChar = ' '
-                };
-                serializer.Serialize(jsonWriter, obj);
-                return textWriter.ToString();
-            }
-            else
-            {
-                return str;
-            }
-        }
+        #region 废弃
+        //private void TreeView_NodeMouseClick(object sender, TreeNodeMouseClickEventArgs e)
+        //{
+        //    //MessageBox.Show(e.Node.Text);
+        //    string para = e.Node.Text;
+        //    //JObject jobj = JsonConvert.DeserializeObject<dynamic>(File.ReadAllText(Application.StartupPath + "/example.json"));
+        //    if (JasonKeyValue.Count(x => x.Key == para) > 0)
+        //    {
+        //        this.NodeClick?.Invoke(ConvertJsonString(JasonKeyValue[para].ToString()));
+        //    }
+        //}
+        //private void TreeView_NodeMouseDoubleClick(object sender, TreeNodeMouseClickEventArgs e)
+        //{
+        //    //MessageBox.Show(e.Node.Text);
+        //    string para = e.Node.Text;
+        //    BindRichText?.Invoke(e.Node.Text);
+        //    JObject jobj = nowJson;
+        //    //Dictionary<string, string> jobjDic = JsonConvert.DeserializeObject<Dictionary<string, string>>(JsonConvert.SerializeObject(jobj));
+        //    if (JasonKeyValue.Count(x => x.Key == para) > 0)
+        //    {
+        //        //this.NodeDoubleClick.Invoke(jobjDic);
+        //        dynamic obj = JsonConvert.DeserializeObject<dynamic>(JasonKeyValue[para]);
+        //        JToken jto = JToken.FromObject(obj);
+        //        if (jto.Type == JTokenType.Object)
+        //        {
+        //            Dictionary<string, object> dicc = JsonConvert.DeserializeObject<Dictionary<string, object>>(JasonKeyValue[para]);
+        //            this.NodeDoubleClick?.Invoke(dicc);
+        //        }
+        //        else if (jto.Type == JTokenType.Array)
+        //        {
+        //            Dictionary<string, object>[] dicc = JsonConvert.DeserializeObject<Dictionary<string, object>[]>(JasonKeyValue[para]);
+        //            Dictionary<string, object> newdicc = new Dictionary<string, object>();
+        //            foreach (var item in dicc)
+        //            {
+        //                foreach (var items in item)
+        //                {
+        //                    if (newdicc.Count(x => x.Key == items.Key) == 0)
+        //                    {
+        //                        newdicc.Add(items.Key, items.Value);
+        //                    }
+
+        //                }
+
+        //            }
+
+        //        }
+        //    }
+
+        //}
+        #endregion
+
         public enum Flag
         {
             All,
@@ -202,15 +195,27 @@ namespace JsonTree
             {
 
                 AddNode(rootNode, item.Key, item.Value, flag);
-                if (JasonKeyValue.Count(x => x.Key == item.Key) == 0)
+                switch (flag)
                 {
-                    JasonKeyValue.Add(item.Key, JsonConvert.SerializeObject(item.Value));
-                    if (item.Value.Type == JTokenType.Object)
-                    {
-                        JsonRootList.Add(item.Key);
+                    case Flag.OnlyObject:
+                        if (JasonKeyValue.Count(x => x.Key == item.Key) == 0)
+                        {
+                            if (JToken.FromObject((object)item.Value).Type == JTokenType.Object || JToken.FromObject((object)item.Value).Type == JTokenType.Array)
+                            {
+                                JasonKeyValue.Add(item.Key, item.Value);
+                            }
+                        }
+                        break;
+                    case Flag.All:
+                        if (JasonKeyValue.Count(x => x.Key == item.Key) == 0)
+                        {
+                            JasonKeyValue.Add(item.Key, item.Value);
+                        }
+                        break;
 
-                    }
+
                 }
+
             }
 
         }
@@ -228,6 +233,7 @@ namespace JsonTree
                 {
                     node = JsonTreeNodeCreator.CreateNode(property, item);
                     parentNode.Nodes.Add(node);
+
                 }
             }
             if (item.Type == JTokenType.Array)
@@ -242,9 +248,13 @@ namespace JsonTree
         }
         private void LoadArray(JToken item, JsonTreeNode node, Flag flag)
         {
+            int i = 0;
             foreach (var childitem in item)
             {
-                AddNode(node, null, childitem, flag);
+                
+                
+                AddNode(node, i++.ToString(), childitem, flag);
+                //JasonKeyValue.Add(seed, childitem);
             }
         }
         public void AddChild(Node child, IDictionary<int, List<Node>> mapping)

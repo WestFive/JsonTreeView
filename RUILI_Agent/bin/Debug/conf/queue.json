@@ -1,0 +1,35 @@
+{
+   "message_type" : "queue",
+   "sender_code" : "CN-RUILI-JICP1-L02",
+   "sender_name" : "L02",
+   "recipient_code" : "ALL",
+   "recipient_name" : "ALL",
+   "send_time" : "2017-01-01 10:00:00",
+   "message_content" : {
+      "queue_code" : "aa5ebd80-7d72-47ec-b437-69f8fc5f37a3",
+      "lane_code" : "CN-RUILI-JICP1-L02",
+      "action" : "create",
+      "create_time" : "2017-01-01 10:00:00",
+      "queue" : {
+         "queue_code" : "aa5ebd80-7d72-47ec-b437-69f8fc5f37a3",
+         "lane_code" : "CN-RUILI-JICP1-L01",
+         "terminal_name" : "瑞丽口岸联检中心",
+         "snapshot_area" : "进口区",
+         "lane_name" : "车道2",
+         "lane_type" : "小型轿车车道",
+         "snapshot_point" : "2-1",
+         "snapshot_code" : "2-1-170712163045",
+         "license_plate_number" : "云A.12345",
+         "license_plate_color" : "蓝牌",
+         "license_plate_nationality" : "中国",
+         "special_mark" : "黑名单",
+         "is_registered" : true,
+         "inspection_control" : "查验",
+         "crop_pic_url" : "车牌裁剪图片.jpg",
+         "Thumbnails_pic_url" : "缩略图.jpg",
+         "full_image_url" : "完整图片.jpg",
+         "snapshot_time" : "2017-01-01 10:00:00",
+         "update_time" : "2017-01-01 10:00:00"
+      }
+   }
+}

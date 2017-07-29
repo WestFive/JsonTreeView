@@ -31,4 +31,3 @@ C:\Users\平方科技\Documents\Visual Studio 2015\Projects\JsonTreeTest\HubClie
 C:\Users\平方科技\Documents\Visual Studio 2015\Projects\JsonTreeTest\HubClient\bin\Debug\Newtonsoft.Json.xml
 C:\Users\平方科技\Documents\Visual Studio 2015\Projects\JsonTreeTest\HubClient\obj\Debug\HubClient.dll
 C:\Users\平方科技\Documents\Visual Studio 2015\Projects\JsonTreeTest\HubClient\obj\Debug\HubClient.pdb
-C:\Users\平方科技\Documents\Visual Studio 2015\Projects\JsonTreeTest\HubClient\obj\Debug\HubClient.csprojResolveAssemblyReference.cache

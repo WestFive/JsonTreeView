@@ -1,0 +1,15 @@
+C:\Users\平方科技\documents\visual studio 2015\Projects\JsonTreeTest\RUILI_Agent\bin\Debug\RUILI_Agent.exe.config
+C:\Users\平方科技\documents\visual studio 2015\Projects\JsonTreeTest\RUILI_Agent\bin\Debug\RUILI_Agent.exe
+C:\Users\平方科技\documents\visual studio 2015\Projects\JsonTreeTest\RUILI_Agent\bin\Debug\RUILI_Agent.pdb
+C:\Users\平方科技\documents\visual studio 2015\Projects\JsonTreeTest\RUILI_Agent\obj\Debug\RUILI_Agent.csprojResolveAssemblyReference.cache
+C:\Users\平方科技\documents\visual studio 2015\Projects\JsonTreeTest\RUILI_Agent\obj\Debug\RUILI_Agent.Form1.resources
+C:\Users\平方科技\documents\visual studio 2015\Projects\JsonTreeTest\RUILI_Agent\obj\Debug\RUILI_Agent.Properties.Resources.resources
+C:\Users\平方科技\documents\visual studio 2015\Projects\JsonTreeTest\RUILI_Agent\obj\Debug\RUILI_Agent.csproj.GenerateResource.Cache
+C:\Users\平方科技\documents\visual studio 2015\Projects\JsonTreeTest\RUILI_Agent\obj\Debug\RUILI_Agent.exe
+C:\Users\平方科技\documents\visual studio 2015\Projects\JsonTreeTest\RUILI_Agent\obj\Debug\RUILI_Agent.pdb
+C:\Users\平方科技\documents\visual studio 2015\Projects\JsonTreeTest\RUILI_Agent\bin\Debug\JsonTree.dll
+C:\Users\平方科技\documents\visual studio 2015\Projects\JsonTreeTest\RUILI_Agent\bin\Debug\Newtonsoft.Json.dll
+C:\Users\平方科技\documents\visual studio 2015\Projects\JsonTreeTest\RUILI_Agent\bin\Debug\JsonTree.pdb
+C:\Users\平方科技\documents\visual studio 2015\Projects\JsonTreeTest\RUILI_Agent\bin\Debug\Newtonsoft.Json.xml
+C:\Users\平方科技\documents\visual studio 2015\Projects\JsonTreeTest\RUILI_Agent\bin\Debug\DataHanding.dll
+C:\Users\平方科技\documents\visual studio 2015\Projects\JsonTreeTest\RUILI_Agent\bin\Debug\DataHanding.pdb

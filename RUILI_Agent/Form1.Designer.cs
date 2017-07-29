@@ -59,6 +59,8 @@
             this.TextGroup = new System.Windows.Forms.GroupBox();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.TreeGroupBox = new System.Windows.Forms.GroupBox();
+            this.NodeView = new System.Windows.Forms.TreeView();
+            this.richTextBox1 = new System.Windows.Forms.RichTextBox();
             this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
             this.groupBox3.SuspendLayout();
             this.groupBox4.SuspendLayout();
@@ -69,7 +71,9 @@
             this.groupBox2.SuspendLayout();
             this.tabLane.SuspendLayout();
             this.tabControl1.SuspendLayout();
+            this.TextGroup.SuspendLayout();
             this.tableLayoutPanel1.SuspendLayout();
+            this.TreeGroupBox.SuspendLayout();
             this.SuspendLayout();
             // 
             // logGroupBox
@@ -360,6 +364,7 @@
             // 
             // TextGroup
             // 
+            this.TextGroup.Controls.Add(this.richTextBox1);
             this.TextGroup.Location = new System.Drawing.Point(707, 3);
             this.TextGroup.Name = "TextGroup";
             this.TextGroup.Size = new System.Drawing.Size(278, 485);
@@ -374,8 +379,8 @@
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 61.61473F));
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 285F));
             this.tableLayoutPanel1.Controls.Add(this.TreeGroupBox, 0, 0);
-            this.tableLayoutPanel1.Controls.Add(this.flowLayoutPanel1, 1, 0);
             this.tableLayoutPanel1.Controls.Add(this.TextGroup, 2, 0);
+            this.tableLayoutPanel1.Controls.Add(this.flowLayoutPanel1, 1, 0);
             this.tableLayoutPanel1.Location = new System.Drawing.Point(12, 12);
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
             this.tableLayoutPanel1.RowCount = 1;
@@ -385,12 +390,31 @@
             // 
             // TreeGroupBox
             // 
+            this.TreeGroupBox.Controls.Add(this.NodeView);
             this.TreeGroupBox.Location = new System.Drawing.Point(3, 3);
             this.TreeGroupBox.Name = "TreeGroupBox";
             this.TreeGroupBox.Size = new System.Drawing.Size(264, 485);
             this.TreeGroupBox.TabIndex = 0;
             this.TreeGroupBox.TabStop = false;
             this.TreeGroupBox.Text = "Tree";
+            // 
+            // NodeView
+            // 
+            this.NodeView.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.NodeView.Location = new System.Drawing.Point(3, 17);
+            this.NodeView.Name = "NodeView";
+            this.NodeView.Size = new System.Drawing.Size(258, 465);
+            this.NodeView.TabIndex = 0;
+            this.NodeView.NodeMouseDoubleClick += new System.Windows.Forms.TreeNodeMouseClickEventHandler(this.NodeView_NodeMouseDoubleClick);
+            // 
+            // richTextBox1
+            // 
+            this.richTextBox1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.richTextBox1.Location = new System.Drawing.Point(3, 17);
+            this.richTextBox1.Name = "richTextBox1";
+            this.richTextBox1.Size = new System.Drawing.Size(272, 465);
+            this.richTextBox1.TabIndex = 0;
+            this.richTextBox1.Text = "";
             // 
             // flowLayoutPanel1
             // 
@@ -410,6 +434,7 @@
             this.Controls.Add(this.tableLayoutPanel1);
             this.Name = "Form1";
             this.Text = "Form1";
+            this.Load += new System.EventHandler(this.Form1_Load);
             this.groupBox3.ResumeLayout(false);
             this.groupBox4.ResumeLayout(false);
             this.groupBox5.ResumeLayout(false);
@@ -423,7 +448,9 @@
             this.groupBox2.PerformLayout();
             this.tabLane.ResumeLayout(false);
             this.tabControl1.ResumeLayout(false);
+            this.TextGroup.ResumeLayout(false);
             this.tableLayoutPanel1.ResumeLayout(false);
+            this.TreeGroupBox.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -461,6 +488,8 @@
         private System.Windows.Forms.GroupBox TextGroup;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
         private System.Windows.Forms.GroupBox TreeGroupBox;
+        private System.Windows.Forms.TreeView NodeView;
+        private System.Windows.Forms.RichTextBox richTextBox1;
         private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel1;
     }
 }
