@@ -33,7 +33,7 @@ namespace TreeTest
 
             #endregion
 
-            string jsonstr = File.ReadAllText(Application.StartupPath + "/example.json");
+            string jsonstr = File.ReadAllText(Application.StartupPath + "/lane.json");
             tree = new JsonTree.JsonTree();
             tree.GetRootFromJsonStr(0, jsonstr, JsonTree.JsonTree.Flag.OnlyObject);
             TreeView tw = tree.TreeView;
@@ -45,15 +45,27 @@ namespace TreeTest
             ///注册鼠标点击事件
             tree.NodeClick += Tree_NodeClick;
             tree.NodeDoubleClick += Tree_NodeDoubleClick;
-
-            tree.nowJson = jsonstr;
-
+            tree.nowJson = lane;
             tree.needbeencode += Tree_needbeencode;
+            tree.BindRichText += Tree_BindRichText;
+            AppendLogStatus("初始化成功，示范数据加载完成");
+        }
+
+
+
+        /// <summary>
+        /// 当前选中root节点
+        /// </summary>
+        public string NowRootName = null;
+        private void Tree_BindRichText(string str)
+        {
+            NowRootName = str;
         }
 
         private void Tree_needbeencode()
         {
-            tree.nowJson = HubClient.Common.MessageEncoder.EncodingLaneMessage(tree.nowJson.ToString(), HubClient.Common.MessageEncoder.RecipientType.ALL);
+            tree.nowJson = JsonConvert.DeserializeObject<dynamic>(HubClient.Common.MessageEncoder.EncodingLaneMessage(tree.nowJson.ToString(), HubClient.Common.MessageEncoder.RecipientType.ALL));
+            tree.GetRootFromJsonStr(0, JsonConvert.SerializeObject(tree.nowJson), JsonTree.JsonTree.Flag.OnlyObject);
         }
 
         static int pianyizhi = 0;
@@ -116,7 +128,7 @@ namespace TreeTest
             }
             try
             {
-                richTextBox1.Text = JsonTree.JsonTree.ConvertJsonString(tree.JasonKeyValue[tree.TreeView.SelectedNode.Text]);
+                richTextBox1.Text = JsonTree.JsonTree.ConvertJsonString(tree.JasonKeyValue[NowRootName]);
             }
             catch (Exception ex)
             {
@@ -130,8 +142,8 @@ namespace TreeTest
         }
         HubClient.HubClient hub;
 
-        public dynamic lane = File.ReadAllText(Application.StartupPath + "/lane.json");
-        
+        public dynamic lane = JsonConvert.DeserializeObject<dynamic>(File.ReadAllText(Application.StartupPath + "/lane.json"));
+
         /// <summary>
         /// 连接消息服务
         /// </summary>
@@ -143,8 +155,8 @@ namespace TreeTest
             hub.reciveStatus += Hub_reciveStatus;
             hub.reciveHubError += Hub_reciveHubError;
             hub.reciveMessage += Hub_reciveMessage;
-            hub.HubInit();          
-            tree.GetRootFromJsonStr(0, lane, JsonTree.JsonTree.Flag.OnlyObject);
+            hub.HubInit();
+            tree.GetRootFromJsonStr(0,JsonConvert.SerializeObject(tree.nowJson), JsonTree.JsonTree.Flag.OnlyObject);
 
             SendLaneMessge();
         }
@@ -180,13 +192,13 @@ namespace TreeTest
 
         private void SendLaneMessge()
         {
-            JsonConvert.DeserializeObject<dynamic>(tree.nowJson).message_content.lane.lane_code = comboBoxLaneCode.SelectedItem.ToString();
-            JsonConvert.DeserializeObject<dynamic>(tree.nowJson).message_content.lane.lane_name = textLaneName.Text;
+            tree.nowJson.message_content.lane.lane_code = comboBoxLaneCode.SelectedItem.ToString();
+            tree.nowJson.message_content.lane.lane_name = textLaneName.Text;
             string besend = JsonConvert.SerializeObject(tree.nowJson);
             hub.Change(comboBoxLaneCode.SelectedItem.ToString(), besend);
         }
 
-  
+
         private void button6_Click(object sender, EventArgs e)
         {
             if (hub != null)

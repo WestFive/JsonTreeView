@@ -9,6 +9,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TreeTest", "TreeTest\TreeTe
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HubClient", "HubClient\HubClient.csproj", "{2AFC1651-6714-44EE-9B2C-32F0FB142ECE}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RUILI_Agent", "RUILI_Agent\RUILI_Agent.csproj", "{CE146D73-1A13-4037-AAD6-EE4C524F3EAB}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -27,6 +29,10 @@ Global
 		{2AFC1651-6714-44EE-9B2C-32F0FB142ECE}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{2AFC1651-6714-44EE-9B2C-32F0FB142ECE}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{2AFC1651-6714-44EE-9B2C-32F0FB142ECE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CE146D73-1A13-4037-AAD6-EE4C524F3EAB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CE146D73-1A13-4037-AAD6-EE4C524F3EAB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CE146D73-1A13-4037-AAD6-EE4C524F3EAB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CE146D73-1A13-4037-AAD6-EE4C524F3EAB}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

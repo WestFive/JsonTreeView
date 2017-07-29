@@ -21,6 +21,9 @@ namespace JsonTree
         public Dictionary<string, string> JasonKeyValue = new Dictionary<string, string>();
         public delegate void NodeJasonNeedBeEncode();
         public event NodeJasonNeedBeEncode needbeencode;
+
+        public delegate void TriggerRootNode(string str);
+        public event TriggerRootNode BindRichText;
         public List<string> JsonRootList = new List<string>();
         public dynamic nowJson;
         /// <summary>
@@ -90,7 +93,6 @@ namespace JsonTree
             }
             File.WriteAllText(Application.StartupPath + "/Out.json", JsonConvert.SerializeObject(father));
             nowJson = JsonConvert.SerializeObject(father);
-
             this.needbeencode?.Invoke();
             this.NodeClick?.Invoke(JsonConvert.SerializeObject(JasonKeyValue[key].ToString()));
         }
@@ -102,6 +104,7 @@ namespace JsonTree
         /// <param name="flag"></param>
         public void GetRootFromJsonStr(int parentId, string jsonstr, Flag flag)
         {
+             
             JObject jobject = JObject.Parse(jsonstr);
             var rootNode = new JsonTreeNode(NodeType.Object, "message");
             TreeView tw = new TreeView();
@@ -119,7 +122,7 @@ namespace JsonTree
         {
             //MessageBox.Show(e.Node.Text);
             string para = e.Node.Text;
-            JObject jobj = JsonConvert.DeserializeObject<dynamic>(File.ReadAllText(Application.StartupPath + "/example.json"));
+            //JObject jobj = JsonConvert.DeserializeObject<dynamic>(File.ReadAllText(Application.StartupPath + "/example.json"));
             if (JasonKeyValue.Count(x => x.Key == para) > 0)
             {
                 this.NodeClick?.Invoke(ConvertJsonString(JasonKeyValue[para].ToString()));
@@ -129,7 +132,8 @@ namespace JsonTree
         {
             //MessageBox.Show(e.Node.Text);
             string para = e.Node.Text;
-            JObject jobj = JsonConvert.DeserializeObject<dynamic>(File.ReadAllText(Application.StartupPath + "/example.json"));
+            BindRichText?.Invoke(e.Node.Text);
+            JObject jobj = nowJson;
             //Dictionary<string, string> jobjDic = JsonConvert.DeserializeObject<Dictionary<string, string>>(JsonConvert.SerializeObject(jobj));
             if (JasonKeyValue.Count(x => x.Key == para) > 0)
             {
@@ -149,7 +153,7 @@ namespace JsonTree
                     {
                         foreach (var items in item)
                         {
-                            if (newdicc.Count(x => x.Key == items.Key) ==0)
+                            if (newdicc.Count(x => x.Key == items.Key) == 0)
                             {
                                 newdicc.Add(items.Key, items.Value);
                             }

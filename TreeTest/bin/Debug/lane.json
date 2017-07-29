@@ -79,19 +79,22 @@
                         }
                   ]
             },
-            "apps": [{
-                        "app_name": "LaneAgent",
-                        "lane_server": "CN-XIAMEN-XHCT-LS1",
-                        "status": "正常",
-                        "update_time": "2017-01-01 10:00:00"
-                  },
-                  {
-                        "app_name": "OcrAgent",
-                        "lane_server": "CN-XIAMEN-XHCT-LS1",
-                        "status": "正常",
-                        "update_time": "2017-01-01 10:00:00"
-                  }
-            ],
-            "update_time": "2017-01-01 10:00:00"
+            "apps": {
+                  "winform": [{
+                              "app_name": "LaneAgent",
+                              "lane_server": "CN-XIAMEN-XHCT-LS1",
+                              "status": "正常",
+                              "update_time": "2017-01-01 10:00:00"
+                        },
+
+                        {
+                              "app_name": "OcrAgent",
+                              "lane_server": "CN-XIAMEN-XHCT-LS1",
+                              "status": "正常",
+                              "update_time": "2017-01-01 10:00:00"
+                        }
+                  ],
+                  "update_time": "2017-01-01 10:00:00"
+            }
       }
 }
