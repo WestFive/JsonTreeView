@@ -13,3 +13,7 @@ C:\Users\平方科技\documents\visual studio 2015\Projects\JsonTreeTest\RUILI_A
 C:\Users\平方科技\documents\visual studio 2015\Projects\JsonTreeTest\RUILI_Agent\bin\Debug\Newtonsoft.Json.xml
 C:\Users\平方科技\documents\visual studio 2015\Projects\JsonTreeTest\RUILI_Agent\bin\Debug\DataHanding.dll
 C:\Users\平方科技\documents\visual studio 2015\Projects\JsonTreeTest\RUILI_Agent\bin\Debug\DataHanding.pdb
+C:\Users\平方科技\Documents\Visual Studio 2015\Projects\JsonTreeTest\RUILI_Agent\bin\Debug\HubClient.dll
+C:\Users\平方科技\Documents\Visual Studio 2015\Projects\JsonTreeTest\RUILI_Agent\bin\Debug\Microsoft.AspNet.SignalR.Client.dll
+C:\Users\平方科技\Documents\Visual Studio 2015\Projects\JsonTreeTest\RUILI_Agent\bin\Debug\HubClient.pdb
+C:\Users\平方科技\Documents\Visual Studio 2015\Projects\JsonTreeTest\RUILI_Agent\bin\Debug\Microsoft.AspNet.SignalR.Client.xml

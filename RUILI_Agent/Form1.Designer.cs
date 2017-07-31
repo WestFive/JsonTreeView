@@ -57,11 +57,13 @@
             this.tabLane = new System.Windows.Forms.TabPage();
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.TextGroup = new System.Windows.Forms.GroupBox();
+            this.richTextBox1 = new System.Windows.Forms.RichTextBox();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.TreeGroupBox = new System.Windows.Forms.GroupBox();
             this.NodeView = new System.Windows.Forms.TreeView();
-            this.richTextBox1 = new System.Windows.Forms.RichTextBox();
             this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
+            this.richTextBox2 = new System.Windows.Forms.RichTextBox();
+            this.logGroupBox.SuspendLayout();
             this.groupBox3.SuspendLayout();
             this.groupBox4.SuspendLayout();
             this.groupBox5.SuspendLayout();
@@ -78,6 +80,7 @@
             // 
             // logGroupBox
             // 
+            this.logGroupBox.Controls.Add(this.richTextBox2);
             this.logGroupBox.Location = new System.Drawing.Point(12, 509);
             this.logGroupBox.Name = "logGroupBox";
             this.logGroupBox.Size = new System.Drawing.Size(268, 135);
@@ -200,7 +203,7 @@
             this.TextServerURL.Name = "TextServerURL";
             this.TextServerURL.Size = new System.Drawing.Size(172, 21);
             this.TextServerURL.TabIndex = 0;
-            this.TextServerURL.Text = "http://localhost:5000";
+            this.TextServerURL.Text = "http://cg.pingfang.net:5001";
             // 
             // label1
             // 
@@ -284,6 +287,7 @@
             this.button6.TabIndex = 4;
             this.button6.Text = "Push";
             this.button6.UseVisualStyleBackColor = true;
+            this.button6.Click += new System.EventHandler(this.button6_Click);
             // 
             // buttonDisConnect
             // 
@@ -302,6 +306,7 @@
             this.buttonConnect.TabIndex = 2;
             this.buttonConnect.Text = "Connect";
             this.buttonConnect.UseVisualStyleBackColor = true;
+            this.buttonConnect.Click += new System.EventHandler(this.buttonConnect_Click);
             // 
             // radioReal
             // 
@@ -310,13 +315,13 @@
             this.radioReal.Name = "radioReal";
             this.radioReal.Size = new System.Drawing.Size(71, 16);
             this.radioReal.TabIndex = 1;
-            this.radioReal.TabStop = true;
             this.radioReal.Text = "RealMode";
             this.radioReal.UseVisualStyleBackColor = true;
             // 
             // radioSimulation
             // 
             this.radioSimulation.AutoSize = true;
+            this.radioSimulation.Checked = true;
             this.radioSimulation.Location = new System.Drawing.Point(6, 24);
             this.radioSimulation.Name = "radioSimulation";
             this.radioSimulation.Size = new System.Drawing.Size(107, 16);
@@ -372,6 +377,15 @@
             this.TextGroup.TabStop = false;
             this.TextGroup.Text = "textGroup";
             // 
+            // richTextBox1
+            // 
+            this.richTextBox1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.richTextBox1.Location = new System.Drawing.Point(3, 17);
+            this.richTextBox1.Name = "richTextBox1";
+            this.richTextBox1.Size = new System.Drawing.Size(272, 465);
+            this.richTextBox1.TabIndex = 0;
+            this.richTextBox1.Text = "";
+            // 
             // tableLayoutPanel1
             // 
             this.tableLayoutPanel1.ColumnCount = 3;
@@ -407,15 +421,6 @@
             this.NodeView.TabIndex = 0;
             this.NodeView.NodeMouseDoubleClick += new System.Windows.Forms.TreeNodeMouseClickEventHandler(this.NodeView_NodeMouseDoubleClick);
             // 
-            // richTextBox1
-            // 
-            this.richTextBox1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.richTextBox1.Location = new System.Drawing.Point(3, 17);
-            this.richTextBox1.Name = "richTextBox1";
-            this.richTextBox1.Size = new System.Drawing.Size(272, 465);
-            this.richTextBox1.TabIndex = 0;
-            this.richTextBox1.Text = "";
-            // 
             // flowLayoutPanel1
             // 
             this.flowLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
@@ -423,6 +428,15 @@
             this.flowLayoutPanel1.Name = "flowLayoutPanel1";
             this.flowLayoutPanel1.Size = new System.Drawing.Size(428, 485);
             this.flowLayoutPanel1.TabIndex = 2;
+            // 
+            // richTextBox2
+            // 
+            this.richTextBox2.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.richTextBox2.Location = new System.Drawing.Point(3, 17);
+            this.richTextBox2.Name = "richTextBox2";
+            this.richTextBox2.Size = new System.Drawing.Size(262, 115);
+            this.richTextBox2.TabIndex = 0;
+            this.richTextBox2.Text = "";
             // 
             // Form1
             // 
@@ -435,6 +449,7 @@
             this.Name = "Form1";
             this.Text = "Form1";
             this.Load += new System.EventHandler(this.Form1_Load);
+            this.logGroupBox.ResumeLayout(false);
             this.groupBox3.ResumeLayout(false);
             this.groupBox4.ResumeLayout(false);
             this.groupBox5.ResumeLayout(false);
@@ -491,6 +506,7 @@
         private System.Windows.Forms.TreeView NodeView;
         private System.Windows.Forms.RichTextBox richTextBox1;
         private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel1;
+        private System.Windows.Forms.RichTextBox richTextBox2;
     }
 }
 

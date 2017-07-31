@@ -23,20 +23,18 @@ namespace DataHanding
         /// <param name="recitype">p2porall</param>
         /// <param name="recipient_name">AllorSb</param>
         /// <returns></returns>
-        public static string EncodingLaneMessage(string JsonStr, RecipientType recitype, string recipient_name = "ALL")
+        public static string EncodingLaneMessage(dynamic Lane, string lane_code, string lane_name, RecipientType recitype, string recipient_name = "ALL")
         {
             //母版
-            dynamic result = JsonConvert.DeserializeObject<dynamic>(File.ReadAllText(Application.StartupPath + "/lane.json"));
-            //赋值
-            dynamic BeEncodeObj = JsonConvert.DeserializeObject<Dictionary<string, dynamic>>(JsonStr)["lane"];
+            dynamic result = Lane;
             //解析
             result.message_type = "lane";
-            result.sender_code = BeEncodeObj.lane_code;
-            result.sender_name = BeEncodeObj.lane_name;
+            result.sender_code = lane_code;
+            result.sender_name = lane_name;
             result.recipient_code = recitype;
             result.recipient_name = recipient_name;
             result.send_time = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss.fff");
-            result.message_content.lane = BeEncodeObj;
+            result.message_content.lane = Lane.message_content.lane;
             return JsonConvert.SerializeObject(result);
         }
         /// <summary>
@@ -62,17 +60,19 @@ namespace DataHanding
         /// <param name="action"></param>
         /// <param name="recipient_name"></param>
         /// <returns></returns>
-        public static string EncodingQueueMessage(string JsonStr, QueueAction action, string recipient_name = "ALL")
+        public static string EncodingQueueMessage(dynamic Queue, string lanecode, string lanename, QueueAction action, string recipient_name = "ALL")
         {
             //母版
-            dynamic result = JsonConvert.DeserializeObject<dynamic>(File.ReadAllText(Application.StartupPath + "/queue.json"));
+            dynamic result = JsonConvert.DeserializeObject<dynamic>(File.ReadAllText(Application.StartupPath + "/conf/queue.json"));
             //赋值
-            dynamic BeEncodeObj = JsonConvert.DeserializeObject<dynamic>(JsonStr);
+            dynamic BeEncodeObj = Queue;
             //解析
             result.message_type = "queue";
-            result.sender_code = BeEncodeObj.lane_code;
-            result.sender_name = BeEncodeObj.lane_name;
-            result.message_content.lane_code = BeEncodeObj.lane_code;
+            result.sender_code = lanecode;
+            result.sender_name = lanename;
+            result.message_content.lane_code = lanecode;
+            BeEncodeObj.lane_code = lanecode;
+            BeEncodeObj.lane_name = lanename;
             result.recipient_code = recipient_name;
             result.recipient_name = recipient_name;
             result.send_time = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss.fff");
@@ -103,7 +103,7 @@ namespace DataHanding
         /// <returns></returns>
         public static string DecodingQueueMessage(string JsonStr)
         {
-            return JsonConvert.SerializeObject(JsonConvert.DeserializeObject<dynamic>(JsonStr).message_content.queue); 
+            return JsonConvert.SerializeObject(JsonConvert.DeserializeObject<dynamic>(JsonStr).message_content.queue);
         }
 
 

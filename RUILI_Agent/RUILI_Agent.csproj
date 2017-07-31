@@ -88,6 +88,10 @@
       <Project>{8ee3259a-91d2-4108-8e6f-ee53e0093ea9}</Project>
       <Name>DataHanding</Name>
     </ProjectReference>
+    <ProjectReference Include="..\HubClient\HubClient.csproj">
+      <Project>{2AFC1651-6714-44EE-9B2C-32F0FB142ECE}</Project>
+      <Name>HubClient</Name>
+    </ProjectReference>
     <ProjectReference Include="..\JsonTree\JsonTree.csproj">
       <Project>{E59B3001-8521-45E9-8F6D-B4258E56C1CC}</Project>
       <Name>JsonTree</Name>

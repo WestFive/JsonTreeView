@@ -1,4 +1,5 @@
-﻿using JsonTree;
+﻿using HubClient;
+using JsonTree;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using System;
@@ -21,12 +22,14 @@ namespace RUILI_Agent
         {
             InitializeComponent();
         }
-        JsonTree.JsonTree tree = new JsonTree.JsonTree();
-        List<string> NotAllow;
-        private dynamic NowWorkingJason;
+        static JsonTree.JsonTree tree = new JsonTree.JsonTree();
+
+        private static dynamic NowWorkingJason;
+        private static HubClient.HubClient hubclient;
+        private static List<string> NotAllow = new List<string> { "lane", "message_content", "ip_devices", "com_devices", "apps", "device", "queue" };
         private void Form1_Load(object sender, EventArgs e)
         {
-            string jasonstr = File.ReadAllText(Application.StartupPath + "/conf/queue.json");
+            string jasonstr = File.ReadAllText(Application.StartupPath + "/conf/lane.json");
             NowWorkingJason = JsonConvert.DeserializeObject<dynamic>(jasonstr);
             tree = new JsonTree.JsonTree();
             if (tree.GetRootFromJsonStr(0, jasonstr, JsonTree.JsonTree.Flag.OnlyObject))
@@ -34,14 +37,7 @@ namespace RUILI_Agent
                 NodeView.Nodes.Add(tree.TreeNode);
                 NodeView.SelectedNode = tree.TreeNode;
             }
-            NotAllow = new List<string>();
-            NotAllow.Add("lane");
-            NotAllow.Add("message_content");
-            NotAllow.Add("ip_devices");
-            NotAllow.Add("com_devices");
-            NotAllow.Add("apps");
-            NotAllow.Add("device");
-            NotAllow.Add("queue");
+
         }
 
         /// <summary>
@@ -62,7 +58,6 @@ namespace RUILI_Agent
             }
             richTextBox1.Text = DataHanding.MessageEncoder.ConvertJsonString(builder);
         }
-
         /// <summary>
         /// 鼠标双击事件
         /// </summary>
@@ -88,7 +83,7 @@ namespace RUILI_Agent
 
                     builder = tree.JasonKeyValue[e.Node.Text].ToString();
                 }
-                catch(KeyNotFoundException)
+                catch (KeyNotFoundException)
                 {
                     builder = tree.JasonKeyValue["message_content"].ToString();
                 }
@@ -133,7 +128,6 @@ namespace RUILI_Agent
 
 
         }
-
         /// <summary>
         /// B面TextChang事件
         /// </summary>
@@ -215,7 +209,7 @@ namespace RUILI_Agent
             string intseed = ((TextBox)sender).Name.ToString();
 
             string Type = NowWorkingJason.message_type.ToString();
-            switch(Type)
+            switch (Type)
             {
                 case "lane":
                     UpdateLane(key, value, intseed);
@@ -224,11 +218,9 @@ namespace RUILI_Agent
                     UpdateQueue(key, value, intseed);
                     break;
             }
-           
+
 
         }
-
-
         /// <summary>
         /// BC联动更新queue
         /// </summary>
@@ -247,36 +239,36 @@ namespace RUILI_Agent
                 case "message_content":
                     root[key] = value;
                     break;
-                //case "device"://ip_devices or comdevices    
-                //    root.lane.device[key] = value;
-                //    break;
-                //case "ip_devices":
-                //    root.lane.device.ip_devices[Convert.ToInt32(key.Substring(key.Length - 1, 1))] = value;
-                //    break;
-                //case "com_devices":
-                //    root.lane.device.com_devices[Convert.ToInt32(key.Substring(key.Length - 1, 1))] = value;
-                //    break;
-                //case "apps"://array
-                //    //root.lane.apps[Convert.ToInt32(key.Substring(key.Length - 1, 1))] = value;
-                //    MessageBox.Show("不允许修改集合");
-                //    break;
-                //default:
-                //    switch (this.NodeView.SelectedNode.Parent.Text.ToString())
-                //    {
-                //        case "ip_devices":
-                //            root.lane.device.ip_devices[Int32.Parse(intseed)][key] = value;
-                //            break;
-                //        case "com_devices":
-                //            root.lane.device.com_devices[Int32.Parse(intseed)][key] = value;
-                //            break;
-                //        case "apps":
-                //            root.lane.apps[Int32.Parse(intseed)][key] = value;
-                //            //MessageBox.Show("不允许修改集合");
-                //            break;
-                //        default:
-                //            break;
-                //    }
-                //    break;
+                    //case "device"://ip_devices or comdevices    
+                    //    root.lane.device[key] = value;
+                    //    break;
+                    //case "ip_devices":
+                    //    root.lane.device.ip_devices[Convert.ToInt32(key.Substring(key.Length - 1, 1))] = value;
+                    //    break;
+                    //case "com_devices":
+                    //    root.lane.device.com_devices[Convert.ToInt32(key.Substring(key.Length - 1, 1))] = value;
+                    //    break;
+                    //case "apps"://array
+                    //    //root.lane.apps[Convert.ToInt32(key.Substring(key.Length - 1, 1))] = value;
+                    //    MessageBox.Show("不允许修改集合");
+                    //    break;
+                    //default:
+                    //    switch (this.NodeView.SelectedNode.Parent.Text.ToString())
+                    //    {
+                    //        case "ip_devices":
+                    //            root.lane.device.ip_devices[Int32.Parse(intseed)][key] = value;
+                    //            break;
+                    //        case "com_devices":
+                    //            root.lane.device.com_devices[Int32.Parse(intseed)][key] = value;
+                    //            break;
+                    //        case "apps":
+                    //            root.lane.apps[Int32.Parse(intseed)][key] = value;
+                    //            //MessageBox.Show("不允许修改集合");
+                    //            break;
+                    //        default:
+                    //            break;
+                    //    }
+                    //    break;
 
             }
             tree.JasonKeyValue["queue"] = root.queue;
@@ -286,9 +278,8 @@ namespace RUILI_Agent
             //tree.JasonKeyValue["apps"] = root.lane.apps;
             //tree.JasonKeyValue["device"] = root.lane.device;
             messageAppendLog();
-            File.WriteAllText(Application.StartupPath + "/test.json", tree.JasonKeyValue["message_content"].ToString());
+            //File.WriteAllText(Application.StartupPath + "/test.json", tree.JasonKeyValue["message_content"].ToString());
         }
-
         /// <summary>
         /// BC联动更新lane
         /// </summary>
@@ -343,9 +334,67 @@ namespace RUILI_Agent
             tree.JasonKeyValue["apps"] = root.lane.apps;
             tree.JasonKeyValue["device"] = root.lane.device;
             messageAppendLog();
+            NowWorkingJason.message_content.lane = root.lane;
             File.WriteAllText(Application.StartupPath + "/test.json", tree.JasonKeyValue["message_content"].ToString());
         }
 
 
+        /// <summary>
+        /// 连接消息服务
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void buttonConnect_Click(object sender, EventArgs e)
+        {
+            if (radioSimulation.Checked == true)
+            {
+                hubclient = new HubClient.HubClient(TextServerURL.Text, "messagehub", new Dictionary<string, string> { { "Name", textLaneName.Text }, { "Type", "Lane" } });
+                hubclient.reciveStatus += Hubclient_reciveStatus;
+                hubclient.reciveMessage += Hubclient_reciveMessage;
+                hubclient.reciveHubError += Hubclient_reciveHubError;
+                hubclient.HubInit();
+                hubclient.Change(comboBoxLaneCode.SelectedItem.ToString(), DataHanding.MessageEncoder.EncodingLaneMessage(NowWorkingJason, comboBoxLaneCode.SelectedItem.ToString(), textLaneName.Text, DataHanding.MessageEncoder.RecipientType.ALL));
+
+
+
+            }
+            else if (radioReal.Checked == true)
+            {
+
+            }
+
+        }
+
+        /// <summary>
+        /// 追加到日志
+        /// </summary>
+        /// <param name="str"></param>
+        private void AppendLog(string str)
+        {
+            Invoke(new MethodInvoker(() =>
+            {
+                richTextBox2.AppendText(str + "\r\n");
+            }));
+        }
+
+        private void Hubclient_reciveHubError(string str)
+        {
+            AppendLog(str);
+        }
+
+        private void Hubclient_reciveMessage(string str)
+        {
+            AppendLog(str);
+        }
+
+        private void Hubclient_reciveStatus(string str)
+        {
+            AppendLog(str);
+        }
+
+        private void button6_Click(object sender, EventArgs e)
+        {
+            hubclient.Change(comboBoxLaneCode.SelectedItem.ToString(), DataHanding.MessageEncoder.EncodingLaneMessage(NowWorkingJason, comboBoxLaneCode.SelectedItem.ToString(), textLaneName.Text, DataHanding.MessageEncoder.RecipientType.ALL));
+        }
     }
 }

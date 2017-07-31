@@ -1,27 +1,92 @@
 {
-  "queue_code": "f8fc5f37a3456",
-  "lane_code": "CN-RUILI-JICP1-L02",
-  "action": "creat",
-  "create_time": "2017-01-01 10:00:00",
-  "queue": {
-    "queue_code": "437-69f8fc5f37a3",
-    "lane_code": "CN-RUILI-JICP1-L01",
-    "terminal_name": "瑞丽口岸联检中心",
-    "snapshot_area": "进口区",
+  "lane": {
+    "lane_code": "CN-RUILI-JICP1-L02",
     "lane_name": "车道2",
-    "lane_type": "小型轿车车道",
-    "snapshot_point": "2-1",
-    "snapshot_code": "2-1-170712163045",
-    "license_plate_number": "云A.12345",
-    "license_plate_color": "蓝牌",
-    "license_plate_nationality": "中国",
-    "special_mark": "黑名单",
-    "is_registered": true,
-    "inspection_control": "查验",
-    "crop_pic_url": "车牌裁剪图片.jpg",
-    "Thumbnails_pic_url": "缩略图.jpg",
-    "full_image_url": "完整图片.jpg",
-    "snapshot_time": "2017-01-01 10:00:00",
+    "country_code": "CN",
+    "city_code": "RUILI",
+    "terminal_code": "JIP1",
+    "direction": "In",
+    "enable": true,
+    "lane_type": "大型客车",
+    "led_display": "欢迎光",
+    "current_vehicle_counts": "4",
+    "today_vehicle_counts": "120",
+    "device": {
+      "ip_devices": [
+        {
+          "device_code": "truck_camera",
+          "device_name": "车牌识别相机",
+          "activated": true,
+          "ip_address": "10.1.1.50",
+          "status": "正常",
+          "update_time": "2017-01-01 10:00:00"
+        },
+        {
+          "device_code": "serial device server",
+          "device_name": "串口服务器",
+          "activated": true,
+          "ip_address": "10.1.1.51",
+          "status": "正常",
+          "update_time": "2017-01-01 10:00:00"
+        },
+        {
+          "device_code": "led_screen",
+          "device_name": "LED屏",
+          "activated": true,
+          "ip_address": "10.1.1.52",
+          "status": "正常",
+          "update_time": "2017-01-01 10:00:00"
+        }
+      ],
+      "com_devices": [
+        {
+          "device_code": "barrier",
+          "device_name": "电子栏杆",
+          "activated": true,
+          "com_number": "COM2",
+          "status": "正常",
+          "update_time": "2017-01-01 10:00:00"
+        },
+        {
+          "device_code": "infrared_plc",
+          "device_name": "红外PLC",
+          "activated": true,
+          "com_number": "COM3",
+          "status": "正常",
+          "update_time": "2017-01-01 10:00:00"
+        },
+        {
+          "device_code": "voice_broadcaster",
+          "device_name": "语音播报器",
+          "activated": true,
+          "com_number": "COM6",
+          "status": "正常",
+          "update_time": "2017-01-01 10:00:00"
+        },
+        {
+          "device_code": "led_small_screen",
+          "device_name": "LED小屏",
+          "activated": true,
+          "com_number": "COM7",
+          "status": "正常",
+          "update_time": "2017-01-01 10:00:00"
+        }
+      ]
+    },
+    "apps": [
+      {
+        "app_name": "LaneAgent",
+        "lane_server": "CN-XIAMEN-XHCT-LS1",
+        "status": "正常",
+        "update_time": "2017-01-01 10:00:00"
+      },
+      {
+        "app_name": "OcrAgent",
+        "lane_server": "CN-XIAMEN-XHCT-LS1",
+        "status": "正常",
+        "update_time": "2017-01-01 10:00:00"
+      }
+    ],
     "update_time": "2017-01-01 10:00:00"
   }
 }
