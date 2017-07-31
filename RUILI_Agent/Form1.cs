@@ -25,12 +25,14 @@ namespace RUILI_Agent
         static JsonTree.JsonTree tree = new JsonTree.JsonTree();
 
         private static dynamic NowWorkingJason;
+        private static dynamic Lane;
         private static HubClient.HubClient hubclient;
         private static List<string> NotAllow = new List<string> { "lane", "message_content", "ip_devices", "com_devices", "apps", "device", "queue" };
         private void Form1_Load(object sender, EventArgs e)
         {
             string jasonstr = File.ReadAllText(Application.StartupPath + "/conf/lane.json");
             NowWorkingJason = JsonConvert.DeserializeObject<dynamic>(jasonstr);
+            Lane = NowWorkingJason;
             tree = new JsonTree.JsonTree();
             if (tree.GetRootFromJsonStr(0, jasonstr, JsonTree.JsonTree.Flag.OnlyObject))
             {
@@ -335,6 +337,7 @@ namespace RUILI_Agent
             tree.JasonKeyValue["device"] = root.lane.device;
             messageAppendLog();
             NowWorkingJason.message_content.lane = root.lane;
+            Lane = NowWorkingJason;
             File.WriteAllText(Application.StartupPath + "/test.json", tree.JasonKeyValue["message_content"].ToString());
         }
 
@@ -354,8 +357,6 @@ namespace RUILI_Agent
                 hubclient.reciveHubError += Hubclient_reciveHubError;
                 hubclient.HubInit();
                 hubclient.Change(comboBoxLaneCode.SelectedItem.ToString(), DataHanding.MessageEncoder.EncodingLaneMessage(NowWorkingJason, comboBoxLaneCode.SelectedItem.ToString(), textLaneName.Text, DataHanding.MessageEncoder.RecipientType.ALL));
-
-
 
             }
             else if (radioReal.Checked == true)
@@ -395,6 +396,91 @@ namespace RUILI_Agent
         private void button6_Click(object sender, EventArgs e)
         {
             hubclient.Change(comboBoxLaneCode.SelectedItem.ToString(), DataHanding.MessageEncoder.EncodingLaneMessage(NowWorkingJason, comboBoxLaneCode.SelectedItem.ToString(), textLaneName.Text, DataHanding.MessageEncoder.RecipientType.ALL));
+        }
+
+
+        public static Dictionary<string, dynamic> QueueDic = new Dictionary<string, dynamic>();
+
+        /// <summary>
+        /// 增加一票作业
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void button1_Click(object sender, EventArgs e)
+        {
+            dynamic queue = JsonConvert.DeserializeObject<dynamic>(File.ReadAllText(Application.StartupPath + "/conf/queue.json"));
+            queue = JsonConvert.DeserializeObject<dynamic>(DataHanding.MessageEncoder.EncodingQueueMessage(queue, comboBoxLaneCode.SelectedItem.ToString(), textLaneName.Text, DataHanding.MessageEncoder.QueueAction.create));
+            if (hubclient != null)
+            {
+                hubclient.Change(comboBoxLaneCode.Text, JsonConvert.SerializeObject(queue));
+            }
+            QueueDic.Add((string)queue.message_content.queue_code, queue);
+            comboBox1.Items.Add((string)queue.message_content.queue_code);
+            comboBox1.SelectedItem = (string)queue.message_content.queue_code;
+
+
+        }
+
+        /// <summary>
+        /// 显示当前作业
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void button4_Click(object sender, EventArgs e)
+        {
+            NowWorkingJason = QueueDic[comboBox1.SelectedItem.ToString()];
+            NodeView.Nodes.Clear();
+            if (tree.GetRootFromJsonStr(0, NowWorkingJason.ToString(), JsonTree.JsonTree.Flag.OnlyObject))
+            {
+                NodeView.Nodes.Add(tree.TreeNode);
+                NodeView.SelectedNode = tree.TreeNode;
+            }
+            richTextBox1.Text = NowWorkingJason["message_content"].ToString();
+        }
+
+        private void tabControl1_Selected(object sender, TabControlEventArgs e)
+        {
+            if (tabControl1.SelectedTab.Name == "tabLane")
+            {
+                NowWorkingJason = Lane;
+                NodeView.Nodes.Clear();
+                if (tree.GetRootFromJsonStr(0, NowWorkingJason.ToString(), JsonTree.JsonTree.Flag.OnlyObject))
+                {
+                    NodeView.Nodes.Add(tree.TreeNode);
+                    NodeView.SelectedNode = tree.TreeNode;
+                }
+                richTextBox1.Text = Lane["message_content"].ToString();
+            }
+
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+
+            comboBox1.SelectedItem.ToString();
+
+            string send = DataHanding.MessageEncoder.EncodingQueueMessage(NowWorkingJason, comboBoxLaneCode.SelectedItem.ToString(), textLaneName.Text, DataHanding.MessageEncoder.QueueAction.delete);
+            if (hubclient != null)
+            {
+                hubclient.Change(comboBoxLaneCode.Text.ToString(), send);
+            }
+            comboBox1.Items.Remove(comboBox1.Items[comboBox1.SelectedIndex]);
+            QueueDic.Remove((string)NowWorkingJason.message_content.queue_code);
+            if (comboBox1.Items.Count != 0)
+            {
+                comboBox1.SelectedIndex = 0;
+            }
+            NowWorkingJason = QueueDic[comboBox1.SelectedItem.ToString()];
+
+        }
+
+        private void button5_Click(object sender, EventArgs e)
+        {
+            if (hubclient != null)
+            {
+                string send = DataHanding.MessageEncoder.EncodingQueueMessage(NowWorkingJason, comboBoxLaneCode.SelectedItem.ToString(), textLaneName.Text, DataHanding.MessageEncoder.QueueAction.update);
+                hubclient.Change(comboBoxLaneCode.Text.ToString(), send);
+            }
         }
     }
 }

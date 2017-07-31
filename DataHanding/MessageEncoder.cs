@@ -26,16 +26,18 @@ namespace DataHanding
         public static string EncodingLaneMessage(dynamic Lane, string lane_code, string lane_name, RecipientType recitype, string recipient_name = "ALL")
         {
             //母版
-            dynamic result = Lane;
+            //// dynamic result = Lane;
             //解析
-            result.message_type = "lane";
-            result.sender_code = lane_code;
-            result.sender_name = lane_name;
-            result.recipient_code = recitype;
-            result.recipient_name = recipient_name;
-            result.send_time = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss.fff");
-            result.message_content.lane = Lane.message_content.lane;
-            return JsonConvert.SerializeObject(result);
+            Lane.message_content.lane.lane_code = lane_code;
+            Lane.message_content.lane.lane_name = lane_name;
+            Lane.message_type = "lane";
+            Lane.sender_code = lane_code;
+            Lane.sender_name = lane_name;
+            Lane.recipient_code = recitype;
+            Lane.recipient_name = recipient_name;
+            Lane.send_time = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss.fff");
+            Lane.message_content.lane = Lane.message_content.lane;
+            return JsonConvert.SerializeObject(Lane);
         }
         /// <summary>
         /// Lane_Decode
@@ -62,39 +64,68 @@ namespace DataHanding
         /// <returns></returns>
         public static string EncodingQueueMessage(dynamic Queue, string lanecode, string lanename, QueueAction action, string recipient_name = "ALL")
         {
-            //母版
-            dynamic result = JsonConvert.DeserializeObject<dynamic>(File.ReadAllText(Application.StartupPath + "/conf/queue.json"));
-            //赋值
-            dynamic BeEncodeObj = Queue;
-            //解析
-            result.message_type = "queue";
-            result.sender_code = lanecode;
-            result.sender_name = lanename;
-            result.message_content.lane_code = lanecode;
-            BeEncodeObj.lane_code = lanecode;
-            BeEncodeObj.lane_name = lanename;
-            result.recipient_code = recipient_name;
-            result.recipient_name = recipient_name;
-            result.send_time = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss.fff");
+            #region 废弃
+            ////母版
+            //dynamic result = JsonConvert.DeserializeObject<dynamic>(File.ReadAllText(Application.StartupPath + "/conf/queue.json"));
+            ////赋值
+            //dynamic BeEncodeObj = Queue;
+            ////解析
+            //Queue.message_content.
+            //result.message_type = "queue";
+            //result.sender_code = lanecode;
+            //result.sender_name = lanename;
+            //result.message_content.lane_code = lanecode;
+            //BeEncodeObj.lane_code = lanecode;
+            //BeEncodeObj.lane_name = lanename;
+            //result.recipient_code = recipient_name;
+            //result.recipient_name = recipient_name;
+            //result.send_time = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss.fff");
+            //switch (action)
+            //{
+            //    case QueueAction.create:
+            //        result.message_content.queue_code = new Guid();
+            //        BeEncodeObj.quque_code = result.message_content.queue_code;
+            //        result.message_content.action = "create";
+            //        break;
+            //    case QueueAction.update:
+            //        result.message_content.action = "update";
+            //        break;
+            //    case QueueAction.delete:
+            //        result.message_content.action = "delete";
+            //        break;
+            //}
+
+            //BeEncodeObj.update_time = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss.fff");
+            //result.message_content.queue = BeEncodeObj;
+            //return JsonConvert.SerializeObject(result); 
+            #endregion
+            Queue.sender_code = lanecode;
+            Queue.sender_name = lanename;
+            Queue.recipient_code = recipient_name;
+            Queue.recipient_name = recipient_name;
+            Queue.send_time = DateTime.Now.ToString("yyyy - MM - dd HH: mm:ss.fff");
+            Queue.message_content.lane_code = lanecode;
+            Queue.message_content.create_time = DateTime.Now.ToString("yyyy - MM - dd HH: mm:ss.fff");
+            Queue.message_content.queue.lane_code = lanecode;
             switch (action)
             {
                 case QueueAction.create:
-                    result.message_content.queue_code = new Guid();
-                    BeEncodeObj.quque_code = result.message_content.queue_code;
-                    result.message_content.action = "create";
+                    var d = Guid.NewGuid().ToString();
+                    Queue.message_content.queue_code = d;
+                    Queue.message_content.queue.queue_code = d;
+                    Queue.message_content.action = "create";
                     break;
                 case QueueAction.update:
-                    result.message_content.action = "update";
+                    Queue.message_content.action = "update";
                     break;
                 case QueueAction.delete:
-                    result.message_content.action = "delete";
+                    Queue.message_content.action = "delete";
                     break;
             }
+            Queue.message_content.queue.snapshot_time = DateTime.Now.ToString();
+            Queue.message_content.queue.update_time = DateTime.Now.ToString();
 
-            BeEncodeObj.update_time = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss.fff");
-            result.message_content.queue = BeEncodeObj;
-            return JsonConvert.SerializeObject(result);
-
+            return JsonConvert.SerializeObject(Queue);
         }
         /// <summary>
         /// DecodeQueue

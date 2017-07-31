@@ -111,6 +111,7 @@ namespace JsonTree
         {
             try
             {
+                JasonKeyValue.Clear();
 
                 JObject jobject = JObject.Parse(jsonstr);
                 var rootNode = new JsonTreeNode(NodeType.Object, "message");
@@ -251,8 +252,8 @@ namespace JsonTree
             int i = 0;
             foreach (var childitem in item)
             {
-                
-                
+
+
                 AddNode(node, i++.ToString(), childitem, flag);
                 //JasonKeyValue.Add(seed, childitem);
             }
