@@ -1,4 +1,5 @@
-﻿using HubClient;
+﻿using DevExpress.XtraEditors;
+using HubClient;
 using JsonTree;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
@@ -38,6 +39,7 @@ namespace RUILI_Agent
             {
                 NodeView.Nodes.Add(tree.TreeNode);
                 NodeView.SelectedNode = tree.TreeNode;
+               // NodeView.DataSource = tree.TreeNode;
             }
 
         }
@@ -49,7 +51,7 @@ namespace RUILI_Agent
         {
             string builder = string.Empty;
             int result = -1;
-            if (int.TryParse(NodeView.SelectedNode.Text, out result))
+            if (int.TryParse(NodeView.SelectedNode.Text , out result))
             {
                 object[] obj = JsonConvert.DeserializeObject<object[]>(JsonConvert.SerializeObject(tree.JasonKeyValue[NodeView.SelectedNode.Parent.Text]));
                 builder = JsonConvert.SerializeObject(obj[result]);
@@ -91,7 +93,7 @@ namespace RUILI_Agent
                 }
             }
             richTextBox1.Text = DataHanding.MessageEncoder.ConvertJsonString(builder);
-            Dictionary<Label, TextBox> dic = new Dictionary<Label, TextBox>();
+            Dictionary<LabelControl,TextEdit> dic = new Dictionary<LabelControl,TextEdit>();
             JToken jtok = JToken.FromObject(JsonConvert.DeserializeObject<object>(builder));
             Dictionary<string, object> keyvalue;
             switch (jtok.Type)
@@ -105,13 +107,12 @@ namespace RUILI_Agent
                     }
                     break;
                 default:
-                    keyvalue = JsonConvert.DeserializeObject<Dictionary<string, object>>(JsonConvert.SerializeObject(jtok));
-
+                    keyvalue = JsonConvert.DeserializeObject<Dictionary<string, object>>(JsonConvert.SerializeObject(jtok)); 
                     break;
             }
             foreach (var item in keyvalue)
             {
-                dic.Add(new Label { Text = item.Key }, new TextBox { Text = item.Value.ToString(), Tag = item.Key, Name = result.ToString(), });
+                dic.Add(new LabelControl { Text = item.Key }, new TextEdit { Text = item.Value.ToString(), Tag = item.Key, Name = result.ToString(), Width = 400 });
             }
             flowLayoutPanel1.Controls.Clear();
             foreach (var item in dic)
@@ -125,7 +126,7 @@ namespace RUILI_Agent
                     item.Value.ReadOnly = true;
                 }
             }
-
+             
 
 
 
@@ -206,9 +207,9 @@ namespace RUILI_Agent
             //    MessageBox.Show("根元素和集合不允许被修改");
             //    return;
             //}
-            string key = ((TextBox)sender).Tag.ToString();
-            string value = ((TextBox)sender).Text.ToString();
-            string intseed = ((TextBox)sender).Name.ToString();
+            string key = ((TextEdit)sender).Tag.ToString();
+            string value = ((TextEdit)sender).Text.ToString();
+            string intseed = ((TextEdit)sender).Name.ToString();
 
             string Type = NowWorkingJason.message_type.ToString();
             switch (Type)
@@ -280,6 +281,7 @@ namespace RUILI_Agent
             //tree.JasonKeyValue["apps"] = root.lane.apps;
             //tree.JasonKeyValue["device"] = root.lane.device;
             messageAppendLog();
+            NowWorkingJason.message_content = root;
             //File.WriteAllText(Application.StartupPath + "/test.json", tree.JasonKeyValue["message_content"].ToString());
         }
         /// <summary>
@@ -469,8 +471,13 @@ namespace RUILI_Agent
             if (comboBox1.Items.Count != 0)
             {
                 comboBox1.SelectedIndex = 0;
+                NowWorkingJason = QueueDic[comboBox1.SelectedItem.ToString()];
             }
-            NowWorkingJason = QueueDic[comboBox1.SelectedItem.ToString()];
+            else
+            {
+                NowWorkingJason = Lane;
+            }
+
 
         }
 

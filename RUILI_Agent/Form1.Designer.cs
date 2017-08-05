@@ -28,7 +28,9 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.logGroupBox = new System.Windows.Forms.GroupBox();
+            this.richTextBox2 = new System.Windows.Forms.RichTextBox();
             this.button2 = new System.Windows.Forms.Button();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
             this.button1 = new System.Windows.Forms.Button();
@@ -56,13 +58,14 @@
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.tabLane = new System.Windows.Forms.TabPage();
             this.tabControl1 = new System.Windows.Forms.TabControl();
+            this.tabLog = new System.Windows.Forms.TabPage();
             this.TextGroup = new System.Windows.Forms.GroupBox();
             this.richTextBox1 = new System.Windows.Forms.RichTextBox();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.TreeGroupBox = new System.Windows.Forms.GroupBox();
-            this.NodeView = new System.Windows.Forms.TreeView();
             this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
-            this.richTextBox2 = new System.Windows.Forms.RichTextBox();
+            this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.NodeView = new System.Windows.Forms.TreeView();
             this.logGroupBox.SuspendLayout();
             this.groupBox3.SuspendLayout();
             this.groupBox4.SuspendLayout();
@@ -73,6 +76,7 @@
             this.groupBox2.SuspendLayout();
             this.tabLane.SuspendLayout();
             this.tabControl1.SuspendLayout();
+            this.tabLog.SuspendLayout();
             this.TextGroup.SuspendLayout();
             this.tableLayoutPanel1.SuspendLayout();
             this.TreeGroupBox.SuspendLayout();
@@ -81,12 +85,21 @@
             // logGroupBox
             // 
             this.logGroupBox.Controls.Add(this.richTextBox2);
-            this.logGroupBox.Location = new System.Drawing.Point(12, 509);
+            this.logGroupBox.Location = new System.Drawing.Point(3, 3);
             this.logGroupBox.Name = "logGroupBox";
-            this.logGroupBox.Size = new System.Drawing.Size(268, 135);
+            this.logGroupBox.Size = new System.Drawing.Size(972, 106);
             this.logGroupBox.TabIndex = 5;
             this.logGroupBox.TabStop = false;
             this.logGroupBox.Text = "log";
+            // 
+            // richTextBox2
+            // 
+            this.richTextBox2.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.richTextBox2.Location = new System.Drawing.Point(3, 17);
+            this.richTextBox2.Name = "richTextBox2";
+            this.richTextBox2.Size = new System.Drawing.Size(966, 86);
+            this.richTextBox2.TabIndex = 0;
+            this.richTextBox2.Text = "";
             // 
             // button2
             // 
@@ -196,7 +209,7 @@
             this.tabQueue.Location = new System.Drawing.Point(4, 22);
             this.tabQueue.Name = "tabQueue";
             this.tabQueue.Padding = new System.Windows.Forms.Padding(3);
-            this.tabQueue.Size = new System.Drawing.Size(705, 113);
+            this.tabQueue.Size = new System.Drawing.Size(979, 112);
             this.tabQueue.TabIndex = 1;
             this.tabQueue.Text = "Queue";
             this.tabQueue.UseVisualStyleBackColor = true;
@@ -221,7 +234,7 @@
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(79, 82);
+            this.label3.Location = new System.Drawing.Point(257, 47);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(53, 12);
             this.label3.TabIndex = 2;
@@ -229,7 +242,7 @@
             // 
             // textLaneName
             // 
-            this.textLaneName.Location = new System.Drawing.Point(15, 58);
+            this.textLaneName.Location = new System.Drawing.Point(210, 19);
             this.textLaneName.Name = "textLaneName";
             this.textLaneName.Size = new System.Drawing.Size(172, 21);
             this.textLaneName.TabIndex = 2;
@@ -241,7 +254,7 @@
             this.MessageHubBox.Controls.Add(this.label1);
             this.MessageHubBox.Location = new System.Drawing.Point(6, 6);
             this.MessageHubBox.Name = "MessageHubBox";
-            this.MessageHubBox.Size = new System.Drawing.Size(203, 101);
+            this.MessageHubBox.Size = new System.Drawing.Size(203, 104);
             this.MessageHubBox.TabIndex = 2;
             this.MessageHubBox.TabStop = false;
             this.MessageHubBox.Text = "MessageHub";
@@ -263,7 +276,7 @@
             this.groupBox1.Controls.Add(this.comboBoxLaneCode);
             this.groupBox1.Location = new System.Drawing.Point(215, 6);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(210, 101);
+            this.groupBox1.Size = new System.Drawing.Size(484, 101);
             this.groupBox1.TabIndex = 3;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Lane";
@@ -341,7 +354,7 @@
             this.groupBox2.Controls.Add(this.buttonConnect);
             this.groupBox2.Controls.Add(this.radioReal);
             this.groupBox2.Controls.Add(this.radioSimulation);
-            this.groupBox2.Location = new System.Drawing.Point(431, 6);
+            this.groupBox2.Location = new System.Drawing.Point(705, 5);
             this.groupBox2.Name = "groupBox2";
             this.groupBox2.Size = new System.Drawing.Size(268, 104);
             this.groupBox2.TabIndex = 4;
@@ -356,7 +369,7 @@
             this.tabLane.Location = new System.Drawing.Point(4, 22);
             this.tabLane.Name = "tabLane";
             this.tabLane.Padding = new System.Windows.Forms.Padding(3);
-            this.tabLane.Size = new System.Drawing.Size(705, 113);
+            this.tabLane.Size = new System.Drawing.Size(979, 112);
             this.tabLane.TabIndex = 0;
             this.tabLane.Text = "Lane";
             this.tabLane.UseVisualStyleBackColor = true;
@@ -365,19 +378,30 @@
             // 
             this.tabControl1.Controls.Add(this.tabLane);
             this.tabControl1.Controls.Add(this.tabQueue);
-            this.tabControl1.Location = new System.Drawing.Point(286, 509);
+            this.tabControl1.Controls.Add(this.tabLog);
+            this.tabControl1.Location = new System.Drawing.Point(9, 6);
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 0;
-            this.tabControl1.Size = new System.Drawing.Size(713, 139);
+            this.tabControl1.Size = new System.Drawing.Size(987, 138);
             this.tabControl1.TabIndex = 4;
             this.tabControl1.Selected += new System.Windows.Forms.TabControlEventHandler(this.tabControl1_Selected);
+            // 
+            // tabLog
+            // 
+            this.tabLog.Controls.Add(this.logGroupBox);
+            this.tabLog.Location = new System.Drawing.Point(4, 22);
+            this.tabLog.Name = "tabLog";
+            this.tabLog.Size = new System.Drawing.Size(979, 112);
+            this.tabLog.TabIndex = 2;
+            this.tabLog.Text = "Log";
+            this.tabLog.UseVisualStyleBackColor = true;
             // 
             // TextGroup
             // 
             this.TextGroup.Controls.Add(this.richTextBox1);
-            this.TextGroup.Location = new System.Drawing.Point(707, 3);
+            this.TextGroup.Location = new System.Drawing.Point(706, 3);
             this.TextGroup.Name = "TextGroup";
-            this.TextGroup.Size = new System.Drawing.Size(278, 485);
+            this.TextGroup.Size = new System.Drawing.Size(278, 570);
             this.TextGroup.TabIndex = 1;
             this.TextGroup.TabStop = false;
             this.TextGroup.Text = "textGroup";
@@ -387,7 +411,7 @@
             this.richTextBox1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.richTextBox1.Location = new System.Drawing.Point(3, 17);
             this.richTextBox1.Name = "richTextBox1";
-            this.richTextBox1.Size = new System.Drawing.Size(272, 465);
+            this.richTextBox1.Size = new System.Drawing.Size(272, 550);
             this.richTextBox1.TabIndex = 0;
             this.richTextBox1.Text = "";
             // 
@@ -396,15 +420,15 @@
             this.tableLayoutPanel1.ColumnCount = 3;
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 38.38527F));
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 61.61473F));
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 285F));
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 286F));
             this.tableLayoutPanel1.Controls.Add(this.TreeGroupBox, 0, 0);
             this.tableLayoutPanel1.Controls.Add(this.TextGroup, 2, 0);
             this.tableLayoutPanel1.Controls.Add(this.flowLayoutPanel1, 1, 0);
-            this.tableLayoutPanel1.Location = new System.Drawing.Point(12, 12);
+            this.tableLayoutPanel1.Location = new System.Drawing.Point(6, 150);
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
             this.tableLayoutPanel1.RowCount = 1;
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tableLayoutPanel1.Size = new System.Drawing.Size(990, 491);
+            this.tableLayoutPanel1.Size = new System.Drawing.Size(990, 576);
             this.tableLayoutPanel1.TabIndex = 3;
             // 
             // TreeGroupBox
@@ -412,43 +436,39 @@
             this.TreeGroupBox.Controls.Add(this.NodeView);
             this.TreeGroupBox.Location = new System.Drawing.Point(3, 3);
             this.TreeGroupBox.Name = "TreeGroupBox";
-            this.TreeGroupBox.Size = new System.Drawing.Size(264, 485);
+            this.TreeGroupBox.Size = new System.Drawing.Size(264, 570);
             this.TreeGroupBox.TabIndex = 0;
             this.TreeGroupBox.TabStop = false;
             this.TreeGroupBox.Text = "Tree";
+            // 
+            // flowLayoutPanel1
+            // 
+            this.flowLayoutPanel1.AutoScroll = true;
+            this.flowLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.flowLayoutPanel1.Location = new System.Drawing.Point(273, 3);
+            this.flowLayoutPanel1.Name = "flowLayoutPanel1";
+            this.flowLayoutPanel1.Size = new System.Drawing.Size(427, 570);
+            this.flowLayoutPanel1.TabIndex = 2;
+            // 
+            // contextMenuStrip1
+            // 
+            this.contextMenuStrip1.Name = "contextMenuStrip1";
+            this.contextMenuStrip1.Size = new System.Drawing.Size(61, 4);
             // 
             // NodeView
             // 
             this.NodeView.Dock = System.Windows.Forms.DockStyle.Fill;
             this.NodeView.Location = new System.Drawing.Point(3, 17);
             this.NodeView.Name = "NodeView";
-            this.NodeView.Size = new System.Drawing.Size(258, 465);
+            this.NodeView.Size = new System.Drawing.Size(258, 550);
             this.NodeView.TabIndex = 0;
             this.NodeView.NodeMouseDoubleClick += new System.Windows.Forms.TreeNodeMouseClickEventHandler(this.NodeView_NodeMouseDoubleClick);
-            // 
-            // flowLayoutPanel1
-            // 
-            this.flowLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.flowLayoutPanel1.Location = new System.Drawing.Point(273, 3);
-            this.flowLayoutPanel1.Name = "flowLayoutPanel1";
-            this.flowLayoutPanel1.Size = new System.Drawing.Size(428, 485);
-            this.flowLayoutPanel1.TabIndex = 2;
-            // 
-            // richTextBox2
-            // 
-            this.richTextBox2.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.richTextBox2.Location = new System.Drawing.Point(3, 17);
-            this.richTextBox2.Name = "richTextBox2";
-            this.richTextBox2.Size = new System.Drawing.Size(262, 115);
-            this.richTextBox2.TabIndex = 0;
-            this.richTextBox2.Text = "";
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1007, 651);
-            this.Controls.Add(this.logGroupBox);
+            this.ClientSize = new System.Drawing.Size(1008, 729);
             this.Controls.Add(this.tabControl1);
             this.Controls.Add(this.tableLayoutPanel1);
             this.Name = "Form1";
@@ -468,6 +488,7 @@
             this.groupBox2.PerformLayout();
             this.tabLane.ResumeLayout(false);
             this.tabControl1.ResumeLayout(false);
+            this.tabLog.ResumeLayout(false);
             this.TextGroup.ResumeLayout(false);
             this.tableLayoutPanel1.ResumeLayout(false);
             this.TreeGroupBox.ResumeLayout(false);
@@ -508,10 +529,12 @@
         private System.Windows.Forms.GroupBox TextGroup;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
         private System.Windows.Forms.GroupBox TreeGroupBox;
-        private System.Windows.Forms.TreeView NodeView;
         private System.Windows.Forms.RichTextBox richTextBox1;
         private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel1;
         private System.Windows.Forms.RichTextBox richTextBox2;
+        private System.Windows.Forms.TabPage tabLog;
+        private System.Windows.Forms.ContextMenuStrip contextMenuStrip1;
+        private System.Windows.Forms.TreeView NodeView;
     }
 }
 
