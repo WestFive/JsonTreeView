@@ -5,13 +5,13 @@ VisualStudioVersion = 14.0.25420.1
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "JsonTree", "JsonTree\JsonTree.csproj", "{E59B3001-8521-45E9-8F6D-B4258E56C1CC}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TreeTest", "TreeTest\TreeTest.csproj", "{141E3446-E156-4946-B013-FA01B9D883AA}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HubClient", "HubClient\HubClient.csproj", "{2AFC1651-6714-44EE-9B2C-32F0FB142ECE}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RUILI_Agent", "RUILI_Agent\RUILI_Agent.csproj", "{CE146D73-1A13-4037-AAD6-EE4C524F3EAB}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DataHanding", "DataHanding\DataHanding.csproj", "{8EE3259A-91D2-4108-8E6F-EE53E0093EA9}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Simulator", "Simulator\Simulator.csproj", "{6431C29A-F433-4DBF-887C-9DCA5915CF76}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -23,10 +23,6 @@ Global
 		{E59B3001-8521-45E9-8F6D-B4258E56C1CC}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{E59B3001-8521-45E9-8F6D-B4258E56C1CC}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{E59B3001-8521-45E9-8F6D-B4258E56C1CC}.Release|Any CPU.Build.0 = Release|Any CPU
-		{141E3446-E156-4946-B013-FA01B9D883AA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{141E3446-E156-4946-B013-FA01B9D883AA}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{141E3446-E156-4946-B013-FA01B9D883AA}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{141E3446-E156-4946-B013-FA01B9D883AA}.Release|Any CPU.Build.0 = Release|Any CPU
 		{2AFC1651-6714-44EE-9B2C-32F0FB142ECE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{2AFC1651-6714-44EE-9B2C-32F0FB142ECE}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{2AFC1651-6714-44EE-9B2C-32F0FB142ECE}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -39,6 +35,10 @@ Global
 		{8EE3259A-91D2-4108-8E6F-EE53E0093EA9}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{8EE3259A-91D2-4108-8E6F-EE53E0093EA9}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{8EE3259A-91D2-4108-8E6F-EE53E0093EA9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6431C29A-F433-4DBF-887C-9DCA5915CF76}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6431C29A-F433-4DBF-887C-9DCA5915CF76}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6431C29A-F433-4DBF-887C-9DCA5915CF76}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6431C29A-F433-4DBF-887C-9DCA5915CF76}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
