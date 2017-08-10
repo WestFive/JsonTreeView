@@ -104,11 +104,29 @@
             this.LaneCodeItem = new DevExpress.XtraBars.BarEditItem();
             this.repositoryItemTextEdit3 = new DevExpress.XtraEditors.Repository.RepositoryItemTextEdit();
             this.barHeaderItem2 = new DevExpress.XtraBars.BarHeaderItem();
+            this.barEditLog = new DevExpress.XtraBars.BarEditItem();
+            this.repositoryItemRichTextEdit1 = new DevExpress.XtraEditors.Repository.RepositoryItemRichTextEdit();
+            this.barButtonPush = new DevExpress.XtraBars.BarButtonItem();
+            this.barButtonAddQueue = new DevExpress.XtraBars.BarButtonItem();
+            this.barButtonRemoveQueue = new DevExpress.XtraBars.BarButtonItem();
+            this.barButtonClearQueue = new DevExpress.XtraBars.BarButtonItem();
+            this.barButtonActive = new DevExpress.XtraBars.BarButtonItem();
+            this.barEditQueues = new DevExpress.XtraBars.BarSubItem();
+            this.barStaticItem3 = new DevExpress.XtraBars.BarStaticItem();
+            this.barButtonItem5 = new DevExpress.XtraBars.BarButtonItem();
             this.ribbonPage1 = new DevExpress.XtraBars.Ribbon.RibbonPage();
             this.ribbonPageGroup1 = new DevExpress.XtraBars.Ribbon.RibbonPageGroup();
             this.ribbonPageGroup2 = new DevExpress.XtraBars.Ribbon.RibbonPageGroup();
             this.ribbonPageGroup5 = new DevExpress.XtraBars.Ribbon.RibbonPageGroup();
             this.ribbonPageGroup4 = new DevExpress.XtraBars.Ribbon.RibbonPageGroup();
+            this.WorkGroup = new DevExpress.XtraBars.Ribbon.RibbonPageGroup();
+            this.PageQueue = new DevExpress.XtraBars.Ribbon.RibbonPage();
+            this.ribbonPageLocalCache = new DevExpress.XtraBars.Ribbon.RibbonPageGroup();
+            this.ribbonPageGroup6 = new DevExpress.XtraBars.Ribbon.RibbonPageGroup();
+            this.ribbonPageGroup7 = new DevExpress.XtraBars.Ribbon.RibbonPageGroup();
+            this.ribbonPageGroup8 = new DevExpress.XtraBars.Ribbon.RibbonPageGroup();
+            this.ribbonPageLog = new DevExpress.XtraBars.Ribbon.RibbonPage();
+            this.ribbonPageLogGroup = new DevExpress.XtraBars.Ribbon.RibbonPageGroup();
             this.ribbonPage = new DevExpress.XtraBars.Ribbon.RibbonPage();
             this.ribbonPageGroup = new DevExpress.XtraBars.Ribbon.RibbonPageGroup();
             this.repositoryItemToggleSwitch1 = new DevExpress.XtraEditors.Repository.RepositoryItemToggleSwitch();
@@ -119,6 +137,9 @@
             this.repositoryItemLookUpEdit2 = new DevExpress.XtraEditors.Repository.RepositoryItemLookUpEdit();
             this.repositoryItemMemoExEdit1 = new DevExpress.XtraEditors.Repository.RepositoryItemMemoExEdit();
             this.repositoryItemTextEdit4 = new DevExpress.XtraEditors.Repository.RepositoryItemTextEdit();
+            this.repositoryItemButtonEdit2 = new DevExpress.XtraEditors.Repository.RepositoryItemButtonEdit();
+            this.repositoryItemCheckedComboBoxEdit3 = new DevExpress.XtraEditors.Repository.RepositoryItemCheckedComboBoxEdit();
+            this.repositoryItemImageComboBox1 = new DevExpress.XtraEditors.Repository.RepositoryItemImageComboBox();
             this.ribbonStatusBar = new DevExpress.XtraBars.Ribbon.RibbonStatusBar();
             this.officeNavigationBar = new DevExpress.XtraBars.Navigation.OfficeNavigationBar();
             this.navigationBarItem1 = new DevExpress.XtraBars.Navigation.NavigationBarItem();
@@ -132,24 +153,7 @@
             this.richTextBox1 = new System.Windows.Forms.RichTextBox();
             this.panelControl3 = new DevExpress.XtraEditors.PanelControl();
             this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
-            this.ribbonPageLog = new DevExpress.XtraBars.Ribbon.RibbonPage();
-            this.ribbonPageLogGroup = new DevExpress.XtraBars.Ribbon.RibbonPageGroup();
-            this.barEditLog = new DevExpress.XtraBars.BarEditItem();
-            this.repositoryItemRichTextEdit1 = new DevExpress.XtraEditors.Repository.RepositoryItemRichTextEdit();
-            this.WorkGroup = new DevExpress.XtraBars.Ribbon.RibbonPageGroup();
-            this.barButtonPush = new DevExpress.XtraBars.BarButtonItem();
-            this.PageQueue = new DevExpress.XtraBars.Ribbon.RibbonPage();
-            this.ribbonPageLocalCache = new DevExpress.XtraBars.Ribbon.RibbonPageGroup();
-            this.repositoryItemButtonEdit2 = new DevExpress.XtraEditors.Repository.RepositoryItemButtonEdit();
-            this.barButtonAddQueue = new DevExpress.XtraBars.BarButtonItem();
-            this.barButtonRemoveQueue = new DevExpress.XtraBars.BarButtonItem();
-            this.ribbonPageGroup6 = new DevExpress.XtraBars.Ribbon.RibbonPageGroup();
-            this.barButtonClearQueue = new DevExpress.XtraBars.BarButtonItem();
-            this.ribbonPageGroup7 = new DevExpress.XtraBars.Ribbon.RibbonPageGroup();
-            this.barButtonActive = new DevExpress.XtraBars.BarButtonItem();
-            this.repositoryItemCheckedComboBoxEdit3 = new DevExpress.XtraEditors.Repository.RepositoryItemCheckedComboBoxEdit();
-            this.barEditQueues = new DevExpress.XtraBars.BarEditItem();
-            this.repositoryItemImageComboBox1 = new DevExpress.XtraEditors.Repository.RepositoryItemImageComboBox();
+            this.repositoryItemLookUpEdit3 = new DevExpress.XtraEditors.Repository.RepositoryItemLookUpEdit();
             ((System.ComponentModel.ISupportInitialize)(this.repositoryItemComboBox1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.tabbedView)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.ribbonControl)).BeginInit();
@@ -175,6 +179,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.repositoryItemLookUpEdit1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.repositoryItemCheckEdit9)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.repositoryItemTextEdit3)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.repositoryItemRichTextEdit1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.repositoryItemToggleSwitch1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.repositoryItemCheckEdit7)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.repositoryItemCheckEdit8)).BeginInit();
@@ -183,6 +188,9 @@
             ((System.ComponentModel.ISupportInitialize)(this.repositoryItemLookUpEdit2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.repositoryItemMemoExEdit1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.repositoryItemTextEdit4)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.repositoryItemButtonEdit2)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.repositoryItemCheckedComboBoxEdit3)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.repositoryItemImageComboBox1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.officeNavigationBar)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.panelControl1)).BeginInit();
             this.panelControl1.SuspendLayout();
@@ -190,10 +198,7 @@
             this.panelControl2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.panelControl3)).BeginInit();
             this.panelControl3.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.repositoryItemRichTextEdit1)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.repositoryItemButtonEdit2)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.repositoryItemCheckedComboBoxEdit3)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.repositoryItemImageComboBox1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.repositoryItemLookUpEdit3)).BeginInit();
             this.SuspendLayout();
             // 
             // repositoryItemComboBox1
@@ -266,9 +271,11 @@
             this.barButtonRemoveQueue,
             this.barButtonClearQueue,
             this.barButtonActive,
-            this.barEditQueues});
+            this.barEditQueues,
+            this.barStaticItem3,
+            this.barButtonItem5});
             this.ribbonControl.Location = new System.Drawing.Point(0, 0);
-            this.ribbonControl.MaxItemId = 117;
+            this.ribbonControl.MaxItemId = 122;
             this.ribbonControl.MdiMergeStyle = DevExpress.XtraBars.Ribbon.RibbonMdiMergeStyle.Always;
             this.ribbonControl.Name = "ribbonControl";
             this.ribbonControl.Pages.AddRange(new DevExpress.XtraBars.Ribbon.RibbonPage[] {
@@ -310,7 +317,8 @@
             this.repositoryItemRichTextEdit1,
             this.repositoryItemButtonEdit2,
             this.repositoryItemCheckedComboBoxEdit3,
-            this.repositoryItemImageComboBox1});
+            this.repositoryItemImageComboBox1,
+            this.repositoryItemLookUpEdit3});
             this.ribbonControl.RibbonStyle = DevExpress.XtraBars.Ribbon.RibbonControlStyle.Office2013;
             this.ribbonControl.ShowApplicationButton = DevExpress.Utils.DefaultBoolean.False;
             this.ribbonControl.Size = new System.Drawing.Size(928, 147);
@@ -772,6 +780,84 @@
             this.barHeaderItem2.Id = 104;
             this.barHeaderItem2.Name = "barHeaderItem2";
             // 
+            // barEditLog
+            // 
+            this.barEditLog.Caption = "Log";
+            this.barEditLog.Edit = this.repositoryItemRichTextEdit1;
+            this.barEditLog.EditWidth = 700;
+            this.barEditLog.Id = 105;
+            this.barEditLog.Name = "barEditLog";
+            // 
+            // repositoryItemRichTextEdit1
+            // 
+            this.repositoryItemRichTextEdit1.Name = "repositoryItemRichTextEdit1";
+            this.repositoryItemRichTextEdit1.OptionsExport.Rtf.ExportTheme = true;
+            this.repositoryItemRichTextEdit1.ShowCaretInReadOnly = false;
+            // 
+            // barButtonPush
+            // 
+            this.barButtonPush.Caption = "Push";
+            this.barButtonPush.Id = 107;
+            this.barButtonPush.Name = "barButtonPush";
+            this.barButtonPush.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.barButtonPush_ItemClick);
+            // 
+            // barButtonAddQueue
+            // 
+            this.barButtonAddQueue.Caption = "AddQueue";
+            this.barButtonAddQueue.Id = 110;
+            this.barButtonAddQueue.Name = "barButtonAddQueue";
+            this.barButtonAddQueue.RibbonStyle = ((DevExpress.XtraBars.Ribbon.RibbonItemStyles)(((DevExpress.XtraBars.Ribbon.RibbonItemStyles.Large | DevExpress.XtraBars.Ribbon.RibbonItemStyles.SmallWithText) 
+            | DevExpress.XtraBars.Ribbon.RibbonItemStyles.SmallWithoutText)));
+            this.barButtonAddQueue.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.barButtonAddQueue_ItemClick);
+            // 
+            // barButtonRemoveQueue
+            // 
+            this.barButtonRemoveQueue.Caption = "RemoveQueue";
+            this.barButtonRemoveQueue.Id = 111;
+            this.barButtonRemoveQueue.Name = "barButtonRemoveQueue";
+            this.barButtonRemoveQueue.RibbonStyle = ((DevExpress.XtraBars.Ribbon.RibbonItemStyles)(((DevExpress.XtraBars.Ribbon.RibbonItemStyles.Large | DevExpress.XtraBars.Ribbon.RibbonItemStyles.SmallWithText) 
+            | DevExpress.XtraBars.Ribbon.RibbonItemStyles.SmallWithoutText)));
+            this.barButtonRemoveQueue.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.barButtonRemoveQueue_ItemClick);
+            // 
+            // barButtonClearQueue
+            // 
+            this.barButtonClearQueue.Caption = "ClearQueue";
+            this.barButtonClearQueue.Id = 112;
+            this.barButtonClearQueue.Name = "barButtonClearQueue";
+            this.barButtonClearQueue.RibbonStyle = ((DevExpress.XtraBars.Ribbon.RibbonItemStyles)(((DevExpress.XtraBars.Ribbon.RibbonItemStyles.Large | DevExpress.XtraBars.Ribbon.RibbonItemStyles.SmallWithText) 
+            | DevExpress.XtraBars.Ribbon.RibbonItemStyles.SmallWithoutText)));
+            this.barButtonClearQueue.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.barButtonClearQueue_ItemClick);
+            // 
+            // barButtonActive
+            // 
+            this.barButtonActive.Caption = "Active";
+            this.barButtonActive.Id = 113;
+            this.barButtonActive.Name = "barButtonActive";
+            this.barButtonActive.RibbonStyle = ((DevExpress.XtraBars.Ribbon.RibbonItemStyles)(((DevExpress.XtraBars.Ribbon.RibbonItemStyles.Large | DevExpress.XtraBars.Ribbon.RibbonItemStyles.SmallWithText) 
+            | DevExpress.XtraBars.Ribbon.RibbonItemStyles.SmallWithoutText)));
+            this.barButtonActive.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.barButtonActive_ItemClick);
+            // 
+            // barEditQueues
+            // 
+            this.barEditQueues.Caption = "000000000000000000000";
+            this.barEditQueues.Id = 117;
+            this.barEditQueues.Name = "barEditQueues";
+            // 
+            // barStaticItem3
+            // 
+            this.barStaticItem3.Id = 119;
+            this.barStaticItem3.Name = "barStaticItem3";
+            this.barStaticItem3.TextAlignment = System.Drawing.StringAlignment.Near;
+            // 
+            // barButtonItem5
+            // 
+            this.barButtonItem5.Caption = "Push";
+            this.barButtonItem5.Id = 120;
+            this.barButtonItem5.Name = "barButtonItem5";
+            this.barButtonItem5.RibbonStyle = ((DevExpress.XtraBars.Ribbon.RibbonItemStyles)(((DevExpress.XtraBars.Ribbon.RibbonItemStyles.Large | DevExpress.XtraBars.Ribbon.RibbonItemStyles.SmallWithText) 
+            | DevExpress.XtraBars.Ribbon.RibbonItemStyles.SmallWithoutText)));
+            this.barButtonItem5.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.barButtonItem5_ItemClick);
+            // 
             // ribbonPage1
             // 
             this.ribbonPage1.Groups.AddRange(new DevExpress.XtraBars.Ribbon.RibbonPageGroup[] {
@@ -808,6 +894,61 @@
             this.ribbonPageGroup4.ItemLinks.Add(this.BtnConnect);
             this.ribbonPageGroup4.Name = "ribbonPageGroup4";
             this.ribbonPageGroup4.Text = "Connection";
+            // 
+            // WorkGroup
+            // 
+            this.WorkGroup.ItemLinks.Add(this.barButtonPush);
+            this.WorkGroup.Name = "WorkGroup";
+            this.WorkGroup.Text = "Push";
+            // 
+            // PageQueue
+            // 
+            this.PageQueue.Groups.AddRange(new DevExpress.XtraBars.Ribbon.RibbonPageGroup[] {
+            this.ribbonPageLocalCache,
+            this.ribbonPageGroup6,
+            this.ribbonPageGroup7,
+            this.ribbonPageGroup8});
+            this.PageQueue.Name = "PageQueue";
+            this.PageQueue.Text = "Queue";
+            // 
+            // ribbonPageLocalCache
+            // 
+            this.ribbonPageLocalCache.ItemLinks.Add(this.barButtonAddQueue);
+            this.ribbonPageLocalCache.ItemLinks.Add(this.barButtonRemoveQueue);
+            this.ribbonPageLocalCache.Name = "ribbonPageLocalCache";
+            this.ribbonPageLocalCache.Text = "LocalCache";
+            // 
+            // ribbonPageGroup6
+            // 
+            this.ribbonPageGroup6.ItemLinks.Add(this.barButtonClearQueue);
+            this.ribbonPageGroup6.Name = "ribbonPageGroup6";
+            this.ribbonPageGroup6.Text = "ServerCache";
+            // 
+            // ribbonPageGroup7
+            // 
+            this.ribbonPageGroup7.ItemLinks.Add(this.barButtonActive);
+            this.ribbonPageGroup7.ItemLinks.Add(this.barEditQueues);
+            this.ribbonPageGroup7.Name = "ribbonPageGroup7";
+            this.ribbonPageGroup7.Text = "SelectQueue";
+            // 
+            // ribbonPageGroup8
+            // 
+            this.ribbonPageGroup8.ItemLinks.Add(this.barButtonItem5);
+            this.ribbonPageGroup8.Name = "ribbonPageGroup8";
+            this.ribbonPageGroup8.Text = "Push";
+            // 
+            // ribbonPageLog
+            // 
+            this.ribbonPageLog.Groups.AddRange(new DevExpress.XtraBars.Ribbon.RibbonPageGroup[] {
+            this.ribbonPageLogGroup});
+            this.ribbonPageLog.Name = "ribbonPageLog";
+            this.ribbonPageLog.Text = "Log";
+            // 
+            // ribbonPageLogGroup
+            // 
+            this.ribbonPageLogGroup.ItemLinks.Add(this.barEditLog);
+            this.ribbonPageLogGroup.Name = "ribbonPageLogGroup";
+            this.ribbonPageLogGroup.Text = "Log";
             // 
             // ribbonPage
             // 
@@ -873,6 +1014,27 @@
             // 
             this.repositoryItemTextEdit4.AutoHeight = false;
             this.repositoryItemTextEdit4.Name = "repositoryItemTextEdit4";
+            // 
+            // repositoryItemButtonEdit2
+            // 
+            this.repositoryItemButtonEdit2.AutoHeight = false;
+            this.repositoryItemButtonEdit2.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
+            new DevExpress.XtraEditors.Controls.EditorButton()});
+            this.repositoryItemButtonEdit2.Name = "repositoryItemButtonEdit2";
+            // 
+            // repositoryItemCheckedComboBoxEdit3
+            // 
+            this.repositoryItemCheckedComboBoxEdit3.AutoHeight = false;
+            this.repositoryItemCheckedComboBoxEdit3.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
+            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
+            this.repositoryItemCheckedComboBoxEdit3.Name = "repositoryItemCheckedComboBoxEdit3";
+            // 
+            // repositoryItemImageComboBox1
+            // 
+            this.repositoryItemImageComboBox1.AutoHeight = false;
+            this.repositoryItemImageComboBox1.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
+            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
+            this.repositoryItemImageComboBox1.Name = "repositoryItemImageComboBox1";
             // 
             // ribbonStatusBar
             // 
@@ -975,136 +1137,12 @@
             this.flowLayoutPanel1.Size = new System.Drawing.Size(301, 417);
             this.flowLayoutPanel1.TabIndex = 0;
             // 
-            // ribbonPageLog
+            // repositoryItemLookUpEdit3
             // 
-            this.ribbonPageLog.Groups.AddRange(new DevExpress.XtraBars.Ribbon.RibbonPageGroup[] {
-            this.ribbonPageLogGroup});
-            this.ribbonPageLog.Name = "ribbonPageLog";
-            this.ribbonPageLog.Text = "Log";
-            // 
-            // ribbonPageLogGroup
-            // 
-            this.ribbonPageLogGroup.ItemLinks.Add(this.barEditLog);
-            this.ribbonPageLogGroup.Name = "ribbonPageLogGroup";
-            this.ribbonPageLogGroup.Text = "Log";
-            // 
-            // barEditLog
-            // 
-            this.barEditLog.Caption = "Log";
-            this.barEditLog.Edit = this.repositoryItemRichTextEdit1;
-            this.barEditLog.EditWidth = 700;
-            this.barEditLog.Id = 105;
-            this.barEditLog.Name = "barEditLog";
-            // 
-            // repositoryItemRichTextEdit1
-            // 
-            this.repositoryItemRichTextEdit1.Name = "repositoryItemRichTextEdit1";
-            this.repositoryItemRichTextEdit1.OptionsExport.Rtf.ExportTheme = true;
-            this.repositoryItemRichTextEdit1.ShowCaretInReadOnly = false;
-            // 
-            // WorkGroup
-            // 
-            this.WorkGroup.ItemLinks.Add(this.barButtonPush);
-            this.WorkGroup.Name = "WorkGroup";
-            this.WorkGroup.Text = "Push";
-            // 
-            // barButtonPush
-            // 
-            this.barButtonPush.Caption = "Push";
-            this.barButtonPush.Id = 107;
-            this.barButtonPush.Name = "barButtonPush";
-            this.barButtonPush.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.barButtonPush_ItemClick);
-            // 
-            // PageQueue
-            // 
-            this.PageQueue.Groups.AddRange(new DevExpress.XtraBars.Ribbon.RibbonPageGroup[] {
-            this.ribbonPageLocalCache,
-            this.ribbonPageGroup6,
-            this.ribbonPageGroup7});
-            this.PageQueue.Name = "PageQueue";
-            this.PageQueue.Text = "Queue";
-            // 
-            // ribbonPageLocalCache
-            // 
-            this.ribbonPageLocalCache.ItemLinks.Add(this.barButtonAddQueue);
-            this.ribbonPageLocalCache.ItemLinks.Add(this.barButtonRemoveQueue);
-            this.ribbonPageLocalCache.Name = "ribbonPageLocalCache";
-            this.ribbonPageLocalCache.Text = "LocalCache";
-            // 
-            // repositoryItemButtonEdit2
-            // 
-            this.repositoryItemButtonEdit2.AutoHeight = false;
-            this.repositoryItemButtonEdit2.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
-            new DevExpress.XtraEditors.Controls.EditorButton()});
-            this.repositoryItemButtonEdit2.Name = "repositoryItemButtonEdit2";
-            // 
-            // barButtonAddQueue
-            // 
-            this.barButtonAddQueue.Caption = "AddQueue";
-            this.barButtonAddQueue.Id = 110;
-            this.barButtonAddQueue.Name = "barButtonAddQueue";
-            this.barButtonAddQueue.RibbonStyle = ((DevExpress.XtraBars.Ribbon.RibbonItemStyles)(((DevExpress.XtraBars.Ribbon.RibbonItemStyles.Large | DevExpress.XtraBars.Ribbon.RibbonItemStyles.SmallWithText) 
-            | DevExpress.XtraBars.Ribbon.RibbonItemStyles.SmallWithoutText)));
-            // 
-            // barButtonRemoveQueue
-            // 
-            this.barButtonRemoveQueue.Caption = "RemoveQueue";
-            this.barButtonRemoveQueue.Id = 111;
-            this.barButtonRemoveQueue.Name = "barButtonRemoveQueue";
-            this.barButtonRemoveQueue.RibbonStyle = ((DevExpress.XtraBars.Ribbon.RibbonItemStyles)(((DevExpress.XtraBars.Ribbon.RibbonItemStyles.Large | DevExpress.XtraBars.Ribbon.RibbonItemStyles.SmallWithText) 
-            | DevExpress.XtraBars.Ribbon.RibbonItemStyles.SmallWithoutText)));
-            // 
-            // ribbonPageGroup6
-            // 
-            this.ribbonPageGroup6.ItemLinks.Add(this.barButtonClearQueue);
-            this.ribbonPageGroup6.Name = "ribbonPageGroup6";
-            this.ribbonPageGroup6.Text = "ServerCache";
-            // 
-            // barButtonClearQueue
-            // 
-            this.barButtonClearQueue.Caption = "ClearQueue";
-            this.barButtonClearQueue.Id = 112;
-            this.barButtonClearQueue.Name = "barButtonClearQueue";
-            this.barButtonClearQueue.RibbonStyle = ((DevExpress.XtraBars.Ribbon.RibbonItemStyles)(((DevExpress.XtraBars.Ribbon.RibbonItemStyles.Large | DevExpress.XtraBars.Ribbon.RibbonItemStyles.SmallWithText) 
-            | DevExpress.XtraBars.Ribbon.RibbonItemStyles.SmallWithoutText)));
-            // 
-            // ribbonPageGroup7
-            // 
-            this.ribbonPageGroup7.ItemLinks.Add(this.barButtonActive);
-            this.ribbonPageGroup7.ItemLinks.Add(this.barEditQueues);
-            this.ribbonPageGroup7.Name = "ribbonPageGroup7";
-            this.ribbonPageGroup7.Text = "SelectQueue";
-            // 
-            // barButtonActive
-            // 
-            this.barButtonActive.Caption = "Active";
-            this.barButtonActive.Id = 113;
-            this.barButtonActive.Name = "barButtonActive";
-            this.barButtonActive.RibbonStyle = ((DevExpress.XtraBars.Ribbon.RibbonItemStyles)(((DevExpress.XtraBars.Ribbon.RibbonItemStyles.Large | DevExpress.XtraBars.Ribbon.RibbonItemStyles.SmallWithText) 
-            | DevExpress.XtraBars.Ribbon.RibbonItemStyles.SmallWithoutText)));
-            // 
-            // repositoryItemCheckedComboBoxEdit3
-            // 
-            this.repositoryItemCheckedComboBoxEdit3.AutoHeight = false;
-            this.repositoryItemCheckedComboBoxEdit3.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
+            this.repositoryItemLookUpEdit3.AutoHeight = false;
+            this.repositoryItemLookUpEdit3.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
-            this.repositoryItemCheckedComboBoxEdit3.Name = "repositoryItemCheckedComboBoxEdit3";
-            // 
-            // barEditQueues
-            // 
-            this.barEditQueues.Caption = "QueueList";
-            this.barEditQueues.Edit = this.repositoryItemImageComboBox1;
-            this.barEditQueues.EditWidth = 200;
-            this.barEditQueues.Id = 116;
-            this.barEditQueues.Name = "barEditQueues";
-            this.barEditQueues.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.barEditQueues_ItemClick);
-            // 
-            // repositoryItemImageComboBox1
-            // 
-            this.repositoryItemImageComboBox1.AutoHeight = false;
-            this.repositoryItemImageComboBox1.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
-            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
-            this.repositoryItemImageComboBox1.Name = "repositoryItemImageComboBox1";
+            this.repositoryItemLookUpEdit3.Name = "repositoryItemLookUpEdit3";
             // 
             // Form1
             // 
@@ -1146,6 +1184,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.repositoryItemLookUpEdit1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.repositoryItemCheckEdit9)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.repositoryItemTextEdit3)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.repositoryItemRichTextEdit1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.repositoryItemToggleSwitch1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.repositoryItemCheckEdit7)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.repositoryItemCheckEdit8)).EndInit();
@@ -1154,6 +1193,9 @@
             ((System.ComponentModel.ISupportInitialize)(this.repositoryItemLookUpEdit2)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.repositoryItemMemoExEdit1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.repositoryItemTextEdit4)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.repositoryItemButtonEdit2)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.repositoryItemCheckedComboBoxEdit3)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.repositoryItemImageComboBox1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.officeNavigationBar)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.panelControl1)).EndInit();
             this.panelControl1.ResumeLayout(false);
@@ -1161,10 +1203,7 @@
             this.panelControl2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.panelControl3)).EndInit();
             this.panelControl3.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.repositoryItemRichTextEdit1)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.repositoryItemButtonEdit2)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.repositoryItemCheckedComboBoxEdit3)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.repositoryItemImageComboBox1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.repositoryItemLookUpEdit3)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -1288,7 +1327,11 @@
         private DevExpress.XtraEditors.Repository.RepositoryItemCheckedComboBoxEdit repositoryItemCheckedComboBoxEdit3;
         private DevExpress.XtraBars.Ribbon.RibbonPageGroup ribbonPageGroup6;
         private DevExpress.XtraBars.Ribbon.RibbonPageGroup ribbonPageGroup7;
-        private DevExpress.XtraBars.BarEditItem barEditQueues;
         private DevExpress.XtraEditors.Repository.RepositoryItemImageComboBox repositoryItemImageComboBox1;
+        private DevExpress.XtraBars.BarSubItem barEditQueues;
+        private DevExpress.XtraBars.BarStaticItem barStaticItem3;
+        private DevExpress.XtraBars.BarButtonItem barButtonItem5;
+        private DevExpress.XtraBars.Ribbon.RibbonPageGroup ribbonPageGroup8;
+        private DevExpress.XtraEditors.Repository.RepositoryItemLookUpEdit repositoryItemLookUpEdit3;
     }
 }

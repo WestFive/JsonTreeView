@@ -54,6 +54,61 @@ namespace Simulator
         }
 
 
+
+
+
+
+        /// <summary>
+        /// 追加在quque控件上
+        /// </summary>
+        /// <param name="list"></param>
+        private void AppendToQueueMenu(string value)
+        {
+
+            BarStaticItem st = new BarStaticItem();
+            st.Caption = value.ToString();
+            barEditQueues.LinksPersistInfo.Add(
+            new DevExpress.XtraBars.LinkPersistInfo(st));
+            barEditQueues.ItemLinks.Add(st);
+            BarWorkItems.Add(st);
+            st.ItemClick += St_ItemClick;
+            barEditQueues.Caption = st.Caption;
+
+        }
+        List<BarStaticItem> BarWorkItems = new List<BarStaticItem>();
+
+        private void RemoveFormQueueMenu(string value)
+        {
+            #region 弃用
+            ////BarStaticItem st = BarWorkItems.FirstOrDefault(x => x.Caption == value);
+            ////barEditQueues.LinksPersistInfo.Remove(
+            ////new DevExpress.XtraBars.LinkPersistInfo(st));
+            //barEditQueues.LinksPersistInfo.RemoveAt(0);
+            ////BarWorkItems.Remove(st); 
+            #endregion
+            BarWorkItems.Remove(BarWorkItems.FirstOrDefault(x => x.Caption == value));
+            barEditQueues.ItemLinks.Clear();
+            barEditQueues.LinksPersistInfo.Clear();
+            foreach (var item in BarWorkItems)
+            {
+
+                barEditQueues.LinksPersistInfo.Add(new LinkPersistInfo(item));
+
+                item.ItemClick += St_ItemClick;
+                barEditQueues.Caption = item.Caption;
+            }
+        }
+
+        private void St_ItemClick(object sender, ItemClickEventArgs e)
+        {
+            Invoke(new MethodInvoker(() =>
+            {
+                barEditQueues.Caption = e.Item.Caption;
+            }));
+
+        }
+
+
         /// <summary>
         /// 追加C面
         /// </summary>
@@ -276,13 +331,93 @@ namespace Simulator
             }
         }
 
-        
+
 
         private void barEditQueues_ItemClick(object sender, ItemClickEventArgs e)
         {
-          
 
 
+
+        }
+        public static Dictionary<string, dynamic> QueueDic = new Dictionary<string, dynamic>();
+        /// <summary>
+        /// 增加一票作业
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void barButtonAddQueue_ItemClick(object sender, ItemClickEventArgs e)
+        {
+            dynamic queue = JsonConvert.DeserializeObject<dynamic>(File.ReadAllText(Application.StartupPath + "/conf/queue.json"));
+            queue = JsonConvert.DeserializeObject<dynamic>(DataHanding.MessageEncoder.EncodingQueueMessage(queue, LaneCodeItem.EditValue.ToString(), editLane_Name.EditValue.ToString(), DataHanding.MessageEncoder.QueueAction.create));
+            if (hubclient != null)
+            {
+                hubclient.Change(LaneCodeItem.EditValue.ToString(), JsonConvert.SerializeObject(queue));
+            }
+            QueueDic.Add((string)queue.message_content.queue_code, queue);
+            AppendToQueueMenu((string)queue.message_content.queue_code);
+
+
+        }
+
+        private void barButtonRemoveQueue_ItemClick(object sender, ItemClickEventArgs e)
+        {
+            //comboBox1.SelectedItem.ToString();
+
+            string send = DataHanding.MessageEncoder.EncodingQueueMessage(NowWorkingJason, LaneCodeItem.EditValue.ToString(), editLane_Name.EditValue.ToString(), DataHanding.MessageEncoder.QueueAction.delete);
+            if (hubclient != null)
+            {
+                hubclient.Change(LaneCodeItem.EditValue.ToString(), send);
+            }
+            //comboBox1.Items.Remove(comboBox1.Items[comboBox1.SelectedIndex]);
+            RemoveFormQueueMenu(barEditQueues.Caption);
+            QueueDic.Remove((string)NowWorkingJason.message_content.queue_code);
+            if (barEditQueues.LinksPersistInfo.Count != 0)
+            {
+
+                NowWorkingJason = QueueDic[barEditQueues.Caption];
+            }
+            else
+            {
+                NowWorkingJason = Lane;
+            }
+        }
+
+        private void barButtonClearQueue_ItemClick(object sender, ItemClickEventArgs e)
+        {
+
+        }
+
+        private void barButtonActive_ItemClick(object sender, ItemClickEventArgs e)
+        {
+            try
+            {
+                NowWorkingJason = QueueDic[barEditQueues.Caption];
+                NodeView.Nodes.Clear();
+                if (tree.GetRootFromJsonStr(0, NowWorkingJason.ToString(), JsonTree.JsonTree.Flag.OnlyObject))
+                {
+                    NodeView.Nodes.Add(tree.TreeNode);
+                    NodeView.SelectedNode = tree.TreeNode;
+                }
+                richTextBox1.Text = NowWorkingJason["message_content"].ToString();
+            }
+            catch (KeyNotFoundException ex)
+            {
+                MessageBox.Show("作业数据已空" + ex.ToString());
+            }
+        }
+
+        /// <summary>
+        /// QueuePush
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void barButtonItem5_ItemClick(object sender, ItemClickEventArgs e)
+        {
+            if (hubclient != null)
+            {
+                string send = DataHanding.MessageEncoder.EncodingQueueMessage(NowWorkingJason, LaneCodeItem.EditValue.ToString(), editLane_Name.EditValue.ToString(), DataHanding.MessageEncoder.QueueAction.update);
+                hubclient.Change(LaneCodeItem.EditValue.ToString(), send);
+            }
         }
 
 

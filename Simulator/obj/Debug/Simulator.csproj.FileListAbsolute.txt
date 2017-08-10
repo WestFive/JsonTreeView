@@ -118,7 +118,6 @@ E:\车道模拟器\JsonTreeTest\Simulator\bin\Debug\de\DevExpress.Pdf.v16.2.Core
 E:\车道模拟器\JsonTreeTest\Simulator\bin\Debug\es\DevExpress.Pdf.v16.2.Core.resources.dll
 E:\车道模拟器\JsonTreeTest\Simulator\bin\Debug\ja\DevExpress.Pdf.v16.2.Core.resources.dll
 E:\车道模拟器\JsonTreeTest\Simulator\bin\Debug\ru\DevExpress.Pdf.v16.2.Core.resources.dll
-E:\车道模拟器\JsonTreeTest\Simulator\obj\Debug\Simulator.csprojResolveAssemblyReference.cache
 E:\车道模拟器\JsonTreeTest\Simulator\obj\Debug\Simulator.Form1.resources
 E:\车道模拟器\JsonTreeTest\Simulator\obj\Debug\Simulator.Properties.Resources.resources
 E:\车道模拟器\JsonTreeTest\Simulator\obj\Debug\Simulator.csproj.GenerateResource.Cache
@@ -182,3 +181,4 @@ E:\车道模拟器\JsonTreeTest\Simulator\bin\Debug\de\DevExpress.XtraRichEdit.v
 E:\车道模拟器\JsonTreeTest\Simulator\bin\Debug\es\DevExpress.XtraRichEdit.v16.2.resources.dll
 E:\车道模拟器\JsonTreeTest\Simulator\bin\Debug\ja\DevExpress.XtraRichEdit.v16.2.resources.dll
 E:\车道模拟器\JsonTreeTest\Simulator\bin\Debug\ru\DevExpress.XtraRichEdit.v16.2.resources.dll
+E:\车道模拟器\JsonTreeTest\Simulator\obj\Debug\Simulator.csprojResolveAssemblyReference.cache
