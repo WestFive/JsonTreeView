@@ -140,6 +140,7 @@
             this.repositoryItemButtonEdit2 = new DevExpress.XtraEditors.Repository.RepositoryItemButtonEdit();
             this.repositoryItemCheckedComboBoxEdit3 = new DevExpress.XtraEditors.Repository.RepositoryItemCheckedComboBoxEdit();
             this.repositoryItemImageComboBox1 = new DevExpress.XtraEditors.Repository.RepositoryItemImageComboBox();
+            this.repositoryItemLookUpEdit3 = new DevExpress.XtraEditors.Repository.RepositoryItemLookUpEdit();
             this.ribbonStatusBar = new DevExpress.XtraBars.Ribbon.RibbonStatusBar();
             this.officeNavigationBar = new DevExpress.XtraBars.Navigation.OfficeNavigationBar();
             this.navigationBarItem1 = new DevExpress.XtraBars.Navigation.NavigationBarItem();
@@ -148,12 +149,13 @@
             this.barEditItem13 = new DevExpress.XtraBars.BarEditItem();
             this.queueNavBarGroup = new DevExpress.XtraNavBar.NavBarGroup();
             this.panelControl1 = new DevExpress.XtraEditors.PanelControl();
-            this.NodeView = new System.Windows.Forms.TreeView();
-            this.panelControl2 = new DevExpress.XtraEditors.PanelControl();
-            this.richTextBox1 = new System.Windows.Forms.RichTextBox();
-            this.panelControl3 = new DevExpress.XtraEditors.PanelControl();
-            this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
-            this.repositoryItemLookUpEdit3 = new DevExpress.XtraEditors.Repository.RepositoryItemLookUpEdit();
+            this.LanePanel = new System.Windows.Forms.FlowLayoutPanel();
+            this.panel1 = new System.Windows.Forms.Panel();
+            this.LaneNodeView = new System.Windows.Forms.TreeView();
+            this.panel2 = new System.Windows.Forms.Panel();
+            this.panel3 = new System.Windows.Forms.Panel();
+            this.LaneflowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
+            this.LanerichTextBox = new System.Windows.Forms.RichTextBox();
             ((System.ComponentModel.ISupportInitialize)(this.repositoryItemComboBox1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.tabbedView)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.ribbonControl)).BeginInit();
@@ -191,14 +193,14 @@
             ((System.ComponentModel.ISupportInitialize)(this.repositoryItemButtonEdit2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.repositoryItemCheckedComboBoxEdit3)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.repositoryItemImageComboBox1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.repositoryItemLookUpEdit3)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.officeNavigationBar)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.panelControl1)).BeginInit();
             this.panelControl1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.panelControl2)).BeginInit();
-            this.panelControl2.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.panelControl3)).BeginInit();
-            this.panelControl3.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.repositoryItemLookUpEdit3)).BeginInit();
+            this.LanePanel.SuspendLayout();
+            this.panel1.SuspendLayout();
+            this.panel2.SuspendLayout();
+            this.panel3.SuspendLayout();
             this.SuspendLayout();
             // 
             // repositoryItemComboBox1
@@ -1036,6 +1038,13 @@
             new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
             this.repositoryItemImageComboBox1.Name = "repositoryItemImageComboBox1";
             // 
+            // repositoryItemLookUpEdit3
+            // 
+            this.repositoryItemLookUpEdit3.AutoHeight = false;
+            this.repositoryItemLookUpEdit3.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
+            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
+            this.repositoryItemLookUpEdit3.Name = "repositoryItemLookUpEdit3";
+            // 
             // ribbonStatusBar
             // 
             this.ribbonStatusBar.Location = new System.Drawing.Point(0, 614);
@@ -1054,6 +1063,7 @@
             this.officeNavigationBar.Size = new System.Drawing.Size(928, 46);
             this.officeNavigationBar.TabIndex = 1;
             this.officeNavigationBar.Text = "officeNavigationBar";
+            this.officeNavigationBar.ItemClick += new DevExpress.XtraBars.Navigation.NavigationBarItemClickEventHandler(this.officeNavigationBar_ItemClick_1);
             // 
             // navigationBarItem1
             // 
@@ -1086,71 +1096,78 @@
             // 
             // panelControl1
             // 
-            this.panelControl1.Controls.Add(this.NodeView);
-            this.panelControl1.Dock = System.Windows.Forms.DockStyle.Left;
+            this.panelControl1.Controls.Add(this.LanePanel);
+            this.panelControl1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panelControl1.Location = new System.Drawing.Point(0, 147);
             this.panelControl1.Name = "panelControl1";
-            this.panelControl1.Size = new System.Drawing.Size(260, 421);
-            this.panelControl1.TabIndex = 8;
+            this.panelControl1.Size = new System.Drawing.Size(928, 421);
+            this.panelControl1.TabIndex = 13;
             // 
-            // NodeView
+            // LanePanel
             // 
-            this.NodeView.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.NodeView.Location = new System.Drawing.Point(2, 2);
-            this.NodeView.Name = "NodeView";
-            this.NodeView.Size = new System.Drawing.Size(256, 417);
-            this.NodeView.TabIndex = 0;
-            this.NodeView.NodeMouseDoubleClick += new System.Windows.Forms.TreeNodeMouseClickEventHandler(this.NodeView_NodeMouseDoubleClick);
+            this.LanePanel.Controls.Add(this.panel1);
+            this.LanePanel.Controls.Add(this.panel2);
+            this.LanePanel.Controls.Add(this.panel3);
+            this.LanePanel.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.LanePanel.Location = new System.Drawing.Point(2, 2);
+            this.LanePanel.Name = "LanePanel";
+            this.LanePanel.Size = new System.Drawing.Size(924, 417);
+            this.LanePanel.TabIndex = 0;
             // 
-            // panelControl2
+            // panel1
             // 
-            this.panelControl2.Controls.Add(this.richTextBox1);
-            this.panelControl2.Dock = System.Windows.Forms.DockStyle.Right;
-            this.panelControl2.Location = new System.Drawing.Point(565, 147);
-            this.panelControl2.Name = "panelControl2";
-            this.panelControl2.Size = new System.Drawing.Size(363, 421);
-            this.panelControl2.TabIndex = 9;
+            this.panel1.Controls.Add(this.LaneNodeView);
+            this.panel1.Location = new System.Drawing.Point(3, 3);
+            this.panel1.Name = "panel1";
+            this.panel1.Size = new System.Drawing.Size(209, 410);
+            this.panel1.TabIndex = 0;
             // 
-            // richTextBox1
+            // LaneNodeView
             // 
-            this.richTextBox1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.richTextBox1.Location = new System.Drawing.Point(2, 2);
-            this.richTextBox1.Name = "richTextBox1";
-            this.richTextBox1.Size = new System.Drawing.Size(359, 417);
-            this.richTextBox1.TabIndex = 0;
-            this.richTextBox1.Text = "";
+            this.LaneNodeView.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.LaneNodeView.Location = new System.Drawing.Point(0, 0);
+            this.LaneNodeView.Name = "LaneNodeView";
+            this.LaneNodeView.Size = new System.Drawing.Size(209, 410);
+            this.LaneNodeView.TabIndex = 0;
             // 
-            // panelControl3
+            // panel2
             // 
-            this.panelControl3.Controls.Add(this.flowLayoutPanel1);
-            this.panelControl3.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panelControl3.Location = new System.Drawing.Point(260, 147);
-            this.panelControl3.Name = "panelControl3";
-            this.panelControl3.Size = new System.Drawing.Size(305, 421);
-            this.panelControl3.TabIndex = 10;
+            this.panel2.Controls.Add(this.LaneflowLayoutPanel1);
+            this.panel2.Location = new System.Drawing.Point(218, 3);
+            this.panel2.Name = "panel2";
+            this.panel2.Size = new System.Drawing.Size(333, 410);
+            this.panel2.TabIndex = 1;
             // 
-            // flowLayoutPanel1
+            // panel3
             // 
-            this.flowLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.flowLayoutPanel1.Location = new System.Drawing.Point(2, 2);
-            this.flowLayoutPanel1.Name = "flowLayoutPanel1";
-            this.flowLayoutPanel1.Size = new System.Drawing.Size(301, 417);
-            this.flowLayoutPanel1.TabIndex = 0;
+            this.panel3.Controls.Add(this.LanerichTextBox);
+            this.panel3.Location = new System.Drawing.Point(557, 3);
+            this.panel3.Name = "panel3";
+            this.panel3.Size = new System.Drawing.Size(364, 410);
+            this.panel3.TabIndex = 2;
             // 
-            // repositoryItemLookUpEdit3
+            // LaneflowLayoutPanel1
             // 
-            this.repositoryItemLookUpEdit3.AutoHeight = false;
-            this.repositoryItemLookUpEdit3.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
-            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
-            this.repositoryItemLookUpEdit3.Name = "repositoryItemLookUpEdit3";
+            this.LaneflowLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.LaneflowLayoutPanel1.Location = new System.Drawing.Point(0, 0);
+            this.LaneflowLayoutPanel1.Name = "LaneflowLayoutPanel1";
+            this.LaneflowLayoutPanel1.Size = new System.Drawing.Size(333, 410);
+            this.LaneflowLayoutPanel1.TabIndex = 0;
+            // 
+            // LanerichTextBox
+            // 
+            this.LanerichTextBox.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.LanerichTextBox.Location = new System.Drawing.Point(0, 0);
+            this.LanerichTextBox.Name = "LanerichTextBox";
+            this.LanerichTextBox.Size = new System.Drawing.Size(364, 410);
+            this.LanerichTextBox.TabIndex = 0;
+            this.LanerichTextBox.Text = "";
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 14F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(928, 645);
-            this.Controls.Add(this.panelControl3);
-            this.Controls.Add(this.panelControl2);
             this.Controls.Add(this.panelControl1);
             this.Controls.Add(this.officeNavigationBar);
             this.Controls.Add(this.ribbonStatusBar);
@@ -1196,14 +1213,14 @@
             ((System.ComponentModel.ISupportInitialize)(this.repositoryItemButtonEdit2)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.repositoryItemCheckedComboBoxEdit3)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.repositoryItemImageComboBox1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.repositoryItemLookUpEdit3)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.officeNavigationBar)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.panelControl1)).EndInit();
             this.panelControl1.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.panelControl2)).EndInit();
-            this.panelControl2.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.panelControl3)).EndInit();
-            this.panelControl3.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.repositoryItemLookUpEdit3)).EndInit();
+            this.LanePanel.ResumeLayout(false);
+            this.panel1.ResumeLayout(false);
+            this.panel2.ResumeLayout(false);
+            this.panel3.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -1277,12 +1294,6 @@
         private DevExpress.XtraNavBar.NavBarGroup queueNavBarGroup;
         private DevExpress.XtraBars.Navigation.NavigationBarItem navigationBarItem1;
         private DevExpress.XtraBars.Navigation.NavigationBarItem navigationBarItem2;
-        private DevExpress.XtraEditors.PanelControl panelControl1;
-        private System.Windows.Forms.TreeView NodeView;
-        private DevExpress.XtraEditors.PanelControl panelControl2;
-        private DevExpress.XtraEditors.PanelControl panelControl3;
-        private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel1;
-        private System.Windows.Forms.RichTextBox richTextBox1;
         private DevExpress.XtraBars.BarEditItem barEditItem19;
         private DevExpress.XtraEditors.Repository.RepositoryItemRadioGroup repositoryItemRadioGroup3;
         private DevExpress.XtraBars.BarEditItem barEditItem20;
@@ -1333,5 +1344,13 @@
         private DevExpress.XtraBars.BarButtonItem barButtonItem5;
         private DevExpress.XtraBars.Ribbon.RibbonPageGroup ribbonPageGroup8;
         private DevExpress.XtraEditors.Repository.RepositoryItemLookUpEdit repositoryItemLookUpEdit3;
+        private DevExpress.XtraEditors.PanelControl panelControl1;
+        private System.Windows.Forms.FlowLayoutPanel LanePanel;
+        private System.Windows.Forms.Panel panel1;
+        private System.Windows.Forms.TreeView LaneNodeView;
+        private System.Windows.Forms.Panel panel2;
+        private System.Windows.Forms.FlowLayoutPanel LaneflowLayoutPanel1;
+        private System.Windows.Forms.Panel panel3;
+        private System.Windows.Forms.RichTextBox LanerichTextBox;
     }
 }

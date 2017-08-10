@@ -133,3 +133,4 @@ E:\车道模拟器\JsonTreeTest\RUILI_Agent\obj\Debug\RUILI_Agent.csproj.Generat
 E:\车道模拟器\JsonTreeTest\RUILI_Agent\obj\Debug\RUILI_Agent.exe.licenses
 E:\车道模拟器\JsonTreeTest\RUILI_Agent\obj\Debug\RUILI_Agent.exe
 E:\车道模拟器\JsonTreeTest\RUILI_Agent\obj\Debug\RUILI_Agent.pdb
+E:\车道模拟器\JsonTreeTest\RUILI_Agent\obj\Debug\RUILI_Agent.csprojResolveAssemblyReference.cache
