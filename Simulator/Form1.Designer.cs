@@ -29,8 +29,8 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            DevExpress.Utils.SuperToolTip superToolTip2 = new DevExpress.Utils.SuperToolTip();
-            DevExpress.Utils.ToolTipTitleItem toolTipTitleItem2 = new DevExpress.Utils.ToolTipTitleItem();
+            DevExpress.Utils.SuperToolTip superToolTip1 = new DevExpress.Utils.SuperToolTip();
+            DevExpress.Utils.ToolTipTitleItem toolTipTitleItem1 = new DevExpress.Utils.ToolTipTitleItem();
             this.repositoryItemComboBox1 = new DevExpress.XtraEditors.Repository.RepositoryItemComboBox();
             this.tabbedView = new DevExpress.XtraBars.Docking2010.Views.Tabbed.TabbedView(this.components);
             this.ribbonControl = new DevExpress.XtraBars.Ribbon.RibbonControl();
@@ -110,8 +110,6 @@
             this.barButtonAddQueue = new DevExpress.XtraBars.BarButtonItem();
             this.barButtonRemoveQueue = new DevExpress.XtraBars.BarButtonItem();
             this.barButtonClearQueue = new DevExpress.XtraBars.BarButtonItem();
-            this.barButtonActive = new DevExpress.XtraBars.BarButtonItem();
-            this.barEditQueues = new DevExpress.XtraBars.BarSubItem();
             this.barStaticItem3 = new DevExpress.XtraBars.BarStaticItem();
             this.barButtonItem5 = new DevExpress.XtraBars.BarButtonItem();
             this.ribbonPage1 = new DevExpress.XtraBars.Ribbon.RibbonPage();
@@ -123,7 +121,6 @@
             this.PageQueue = new DevExpress.XtraBars.Ribbon.RibbonPage();
             this.ribbonPageLocalCache = new DevExpress.XtraBars.Ribbon.RibbonPageGroup();
             this.ribbonPageGroup6 = new DevExpress.XtraBars.Ribbon.RibbonPageGroup();
-            this.ribbonPageGroup7 = new DevExpress.XtraBars.Ribbon.RibbonPageGroup();
             this.ribbonPageGroup8 = new DevExpress.XtraBars.Ribbon.RibbonPageGroup();
             this.ribbonPageLog = new DevExpress.XtraBars.Ribbon.RibbonPage();
             this.ribbonPageLogGroup = new DevExpress.XtraBars.Ribbon.RibbonPageGroup();
@@ -153,8 +150,8 @@
             this.panel1 = new System.Windows.Forms.Panel();
             this.LaneNodeView = new System.Windows.Forms.TreeView();
             this.panel2 = new System.Windows.Forms.Panel();
-            this.panel3 = new System.Windows.Forms.Panel();
             this.LaneflowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
+            this.panel3 = new System.Windows.Forms.Panel();
             this.LanerichTextBox = new System.Windows.Forms.RichTextBox();
             ((System.ComponentModel.ISupportInitialize)(this.repositoryItemComboBox1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.tabbedView)).BeginInit();
@@ -272,8 +269,6 @@
             this.barButtonAddQueue,
             this.barButtonRemoveQueue,
             this.barButtonClearQueue,
-            this.barButtonActive,
-            this.barEditQueues,
             this.barStaticItem3,
             this.barButtonItem5});
             this.ribbonControl.Location = new System.Drawing.Point(0, 0);
@@ -323,7 +318,7 @@
             this.repositoryItemLookUpEdit3});
             this.ribbonControl.RibbonStyle = DevExpress.XtraBars.Ribbon.RibbonControlStyle.Office2013;
             this.ribbonControl.ShowApplicationButton = DevExpress.Utils.DefaultBoolean.False;
-            this.ribbonControl.Size = new System.Drawing.Size(928, 147);
+            this.ribbonControl.Size = new System.Drawing.Size(1014, 147);
             this.ribbonControl.StatusBar = this.ribbonStatusBar;
             this.ribbonControl.ToolbarLocation = DevExpress.XtraBars.Ribbon.RibbonQuickAccessToolbarLocation.Hidden;
             // 
@@ -371,7 +366,7 @@
             // 
             this.EditMessageAddress.Caption = "服务地址";
             this.EditMessageAddress.Edit = this.repositoryItemTextEdit1;
-            this.EditMessageAddress.EditValue = "http://cg.pingfang.net:5000";
+            this.EditMessageAddress.EditValue = "http://cg.pingfang.net:5001";
             this.EditMessageAddress.EditWidth = 150;
             this.EditMessageAddress.Id = 48;
             this.EditMessageAddress.Name = "EditMessageAddress";
@@ -614,9 +609,9 @@
             this.barEditItem16.Edit = this.repositoryItemComboBox1;
             this.barEditItem16.Id = 76;
             this.barEditItem16.Name = "barEditItem16";
-            toolTipTitleItem2.Text = "SimulatorMode\r\nRealMode";
-            superToolTip2.Items.Add(toolTipTitleItem2);
-            this.barEditItem16.SuperTip = superToolTip2;
+            toolTipTitleItem1.Text = "SimulatorMode\r\nRealMode";
+            superToolTip1.Items.Add(toolTipTitleItem1);
+            this.barEditItem16.SuperTip = superToolTip1;
             // 
             // barEditItem17
             // 
@@ -766,7 +761,7 @@
             // 
             this.LaneCodeItem.Caption = "Lane_Code  ";
             this.LaneCodeItem.Edit = this.repositoryItemTextEdit3;
-            this.LaneCodeItem.EditValue = "CN-XIAMEN-XHCT-0001";
+            this.LaneCodeItem.EditValue = "CN-RUILI-JICP1-L01";
             this.LaneCodeItem.EditWidth = 150;
             this.LaneCodeItem.Id = 91;
             this.LaneCodeItem.Name = "LaneCodeItem";
@@ -829,21 +824,6 @@
             this.barButtonClearQueue.RibbonStyle = ((DevExpress.XtraBars.Ribbon.RibbonItemStyles)(((DevExpress.XtraBars.Ribbon.RibbonItemStyles.Large | DevExpress.XtraBars.Ribbon.RibbonItemStyles.SmallWithText) 
             | DevExpress.XtraBars.Ribbon.RibbonItemStyles.SmallWithoutText)));
             this.barButtonClearQueue.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.barButtonClearQueue_ItemClick);
-            // 
-            // barButtonActive
-            // 
-            this.barButtonActive.Caption = "Active";
-            this.barButtonActive.Id = 113;
-            this.barButtonActive.Name = "barButtonActive";
-            this.barButtonActive.RibbonStyle = ((DevExpress.XtraBars.Ribbon.RibbonItemStyles)(((DevExpress.XtraBars.Ribbon.RibbonItemStyles.Large | DevExpress.XtraBars.Ribbon.RibbonItemStyles.SmallWithText) 
-            | DevExpress.XtraBars.Ribbon.RibbonItemStyles.SmallWithoutText)));
-            this.barButtonActive.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.barButtonActive_ItemClick);
-            // 
-            // barEditQueues
-            // 
-            this.barEditQueues.Caption = "000000000000000000000";
-            this.barEditQueues.Id = 117;
-            this.barEditQueues.Name = "barEditQueues";
             // 
             // barStaticItem3
             // 
@@ -908,7 +888,6 @@
             this.PageQueue.Groups.AddRange(new DevExpress.XtraBars.Ribbon.RibbonPageGroup[] {
             this.ribbonPageLocalCache,
             this.ribbonPageGroup6,
-            this.ribbonPageGroup7,
             this.ribbonPageGroup8});
             this.PageQueue.Name = "PageQueue";
             this.PageQueue.Text = "Queue";
@@ -925,13 +904,6 @@
             this.ribbonPageGroup6.ItemLinks.Add(this.barButtonClearQueue);
             this.ribbonPageGroup6.Name = "ribbonPageGroup6";
             this.ribbonPageGroup6.Text = "ServerCache";
-            // 
-            // ribbonPageGroup7
-            // 
-            this.ribbonPageGroup7.ItemLinks.Add(this.barButtonActive);
-            this.ribbonPageGroup7.ItemLinks.Add(this.barEditQueues);
-            this.ribbonPageGroup7.Name = "ribbonPageGroup7";
-            this.ribbonPageGroup7.Text = "SelectQueue";
             // 
             // ribbonPageGroup8
             // 
@@ -1047,10 +1019,10 @@
             // 
             // ribbonStatusBar
             // 
-            this.ribbonStatusBar.Location = new System.Drawing.Point(0, 614);
+            this.ribbonStatusBar.Location = new System.Drawing.Point(0, 736);
             this.ribbonStatusBar.Name = "ribbonStatusBar";
             this.ribbonStatusBar.Ribbon = this.ribbonControl;
-            this.ribbonStatusBar.Size = new System.Drawing.Size(928, 31);
+            this.ribbonStatusBar.Size = new System.Drawing.Size(1014, 31);
             // 
             // officeNavigationBar
             // 
@@ -1058,9 +1030,9 @@
             this.officeNavigationBar.Items.AddRange(new DevExpress.XtraBars.Navigation.NavigationBarItem[] {
             this.navigationBarItem1,
             this.navigationBarItem2});
-            this.officeNavigationBar.Location = new System.Drawing.Point(0, 568);
+            this.officeNavigationBar.Location = new System.Drawing.Point(0, 690);
             this.officeNavigationBar.Name = "officeNavigationBar";
-            this.officeNavigationBar.Size = new System.Drawing.Size(928, 46);
+            this.officeNavigationBar.Size = new System.Drawing.Size(1014, 46);
             this.officeNavigationBar.TabIndex = 1;
             this.officeNavigationBar.Text = "officeNavigationBar";
             this.officeNavigationBar.ItemClick += new DevExpress.XtraBars.Navigation.NavigationBarItemClickEventHandler(this.officeNavigationBar_ItemClick_1);
@@ -1100,7 +1072,7 @@
             this.panelControl1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panelControl1.Location = new System.Drawing.Point(0, 147);
             this.panelControl1.Name = "panelControl1";
-            this.panelControl1.Size = new System.Drawing.Size(928, 421);
+            this.panelControl1.Size = new System.Drawing.Size(1014, 543);
             this.panelControl1.TabIndex = 13;
             // 
             // LanePanel
@@ -1111,7 +1083,7 @@
             this.LanePanel.Dock = System.Windows.Forms.DockStyle.Fill;
             this.LanePanel.Location = new System.Drawing.Point(2, 2);
             this.LanePanel.Name = "LanePanel";
-            this.LanePanel.Size = new System.Drawing.Size(924, 417);
+            this.LanePanel.Size = new System.Drawing.Size(1010, 539);
             this.LanePanel.TabIndex = 0;
             // 
             // panel1
@@ -1119,7 +1091,7 @@
             this.panel1.Controls.Add(this.LaneNodeView);
             this.panel1.Location = new System.Drawing.Point(3, 3);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(209, 410);
+            this.panel1.Size = new System.Drawing.Size(209, 532);
             this.panel1.TabIndex = 0;
             // 
             // LaneNodeView
@@ -1127,7 +1099,7 @@
             this.LaneNodeView.Dock = System.Windows.Forms.DockStyle.Fill;
             this.LaneNodeView.Location = new System.Drawing.Point(0, 0);
             this.LaneNodeView.Name = "LaneNodeView";
-            this.LaneNodeView.Size = new System.Drawing.Size(209, 410);
+            this.LaneNodeView.Size = new System.Drawing.Size(209, 532);
             this.LaneNodeView.TabIndex = 0;
             // 
             // panel2
@@ -1135,31 +1107,29 @@
             this.panel2.Controls.Add(this.LaneflowLayoutPanel1);
             this.panel2.Location = new System.Drawing.Point(218, 3);
             this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(333, 410);
+            this.panel2.Size = new System.Drawing.Size(333, 533);
             this.panel2.TabIndex = 1;
+            // 
+            // LaneflowLayoutPanel1
+            // 
+            this.LaneflowLayoutPanel1.Location = new System.Drawing.Point(0, 0);
+            this.LaneflowLayoutPanel1.Name = "LaneflowLayoutPanel1";
+            this.LaneflowLayoutPanel1.Size = new System.Drawing.Size(333, 529);
+            this.LaneflowLayoutPanel1.TabIndex = 0;
             // 
             // panel3
             // 
             this.panel3.Controls.Add(this.LanerichTextBox);
             this.panel3.Location = new System.Drawing.Point(557, 3);
             this.panel3.Name = "panel3";
-            this.panel3.Size = new System.Drawing.Size(364, 410);
+            this.panel3.Size = new System.Drawing.Size(450, 532);
             this.panel3.TabIndex = 2;
-            // 
-            // LaneflowLayoutPanel1
-            // 
-            this.LaneflowLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.LaneflowLayoutPanel1.Location = new System.Drawing.Point(0, 0);
-            this.LaneflowLayoutPanel1.Name = "LaneflowLayoutPanel1";
-            this.LaneflowLayoutPanel1.Size = new System.Drawing.Size(333, 410);
-            this.LaneflowLayoutPanel1.TabIndex = 0;
             // 
             // LanerichTextBox
             // 
-            this.LanerichTextBox.Dock = System.Windows.Forms.DockStyle.Fill;
             this.LanerichTextBox.Location = new System.Drawing.Point(0, 0);
             this.LanerichTextBox.Name = "LanerichTextBox";
-            this.LanerichTextBox.Size = new System.Drawing.Size(364, 410);
+            this.LanerichTextBox.Size = new System.Drawing.Size(443, 529);
             this.LanerichTextBox.TabIndex = 0;
             this.LanerichTextBox.Text = "";
             // 
@@ -1167,7 +1137,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 14F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(928, 645);
+            this.ClientSize = new System.Drawing.Size(1014, 767);
             this.Controls.Add(this.panelControl1);
             this.Controls.Add(this.officeNavigationBar);
             this.Controls.Add(this.ribbonStatusBar);
@@ -1292,8 +1262,6 @@
         private DevExpress.XtraEditors.Repository.RepositoryItemCheckEdit repositoryItemCheckEdit6;
         private DevExpress.XtraEditors.Repository.RepositoryItemComboBox repositoryItemComboBox1;
         private DevExpress.XtraNavBar.NavBarGroup queueNavBarGroup;
-        private DevExpress.XtraBars.Navigation.NavigationBarItem navigationBarItem1;
-        private DevExpress.XtraBars.Navigation.NavigationBarItem navigationBarItem2;
         private DevExpress.XtraBars.BarEditItem barEditItem19;
         private DevExpress.XtraEditors.Repository.RepositoryItemRadioGroup repositoryItemRadioGroup3;
         private DevExpress.XtraBars.BarEditItem barEditItem20;
@@ -1334,12 +1302,9 @@
         private DevExpress.XtraBars.BarButtonItem barButtonRemoveQueue;
         private DevExpress.XtraEditors.Repository.RepositoryItemButtonEdit repositoryItemButtonEdit2;
         private DevExpress.XtraBars.BarButtonItem barButtonClearQueue;
-        private DevExpress.XtraBars.BarButtonItem barButtonActive;
         private DevExpress.XtraEditors.Repository.RepositoryItemCheckedComboBoxEdit repositoryItemCheckedComboBoxEdit3;
         private DevExpress.XtraBars.Ribbon.RibbonPageGroup ribbonPageGroup6;
-        private DevExpress.XtraBars.Ribbon.RibbonPageGroup ribbonPageGroup7;
         private DevExpress.XtraEditors.Repository.RepositoryItemImageComboBox repositoryItemImageComboBox1;
-        private DevExpress.XtraBars.BarSubItem barEditQueues;
         private DevExpress.XtraBars.BarStaticItem barStaticItem3;
         private DevExpress.XtraBars.BarButtonItem barButtonItem5;
         private DevExpress.XtraBars.Ribbon.RibbonPageGroup ribbonPageGroup8;
@@ -1352,5 +1317,7 @@
         private System.Windows.Forms.FlowLayoutPanel LaneflowLayoutPanel1;
         private System.Windows.Forms.Panel panel3;
         private System.Windows.Forms.RichTextBox LanerichTextBox;
+        public DevExpress.XtraBars.Navigation.NavigationBarItem navigationBarItem1;
+        public DevExpress.XtraBars.Navigation.NavigationBarItem navigationBarItem2;
     }
 }

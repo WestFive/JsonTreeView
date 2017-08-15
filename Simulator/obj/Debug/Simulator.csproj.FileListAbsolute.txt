@@ -127,7 +127,6 @@ E:\车道模拟器\JsonTreeTest\Simulator\bin\Debug\DataHanding.dll
 E:\车道模拟器\JsonTreeTest\Simulator\bin\Debug\HubClient.dll
 E:\车道模拟器\JsonTreeTest\Simulator\bin\Debug\JsonTree.dll
 E:\车道模拟器\JsonTreeTest\Simulator\bin\Debug\Newtonsoft.Json.dll
-E:\车道模拟器\JsonTreeTest\Simulator\bin\Debug\Microsoft.AspNet.SignalR.Client.dll
 E:\车道模拟器\JsonTreeTest\Simulator\bin\Debug\DataHanding.pdb
 E:\车道模拟器\JsonTreeTest\Simulator\bin\Debug\HubClient.pdb
 E:\车道模拟器\JsonTreeTest\Simulator\bin\Debug\JsonTree.pdb

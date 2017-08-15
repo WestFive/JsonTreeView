@@ -25,30 +25,25 @@ namespace Simulator
         }
 
         static JsonTree.JsonTree tree = new JsonTree.JsonTree();
-        private static dynamic NowWorkingJason;
+        private static dynamic WorkingQueue;
         private static dynamic Lane;
         private static HubClient.HubClient hubclient;
         private static List<string> NotAllow = new List<string> { "lane", "message_content", "ip_devices", "com_devices", "apps", "device", "queue" };
-
+        #region 弃用
         //private static TreeView NodeView = new TreeView();
-
-
-
-
         //FlowLayoutPanel QueuePanel = new FlowLayoutPanel { Dock = DockStyle.Fill };
         //Panel QueueNodePanel = new Panel { Dock = DockStyle.Fill };
         //FlowLayoutPanel QueueLayoutPanel = new FlowLayoutPanel { Dock = DockStyle.Fill };
         //Panel QueueRichPanel = new Panel { Dock = DockStyle.Fill };
         //TreeView QueueNodeView = new TreeView { Dock = DockStyle.Fill };
         //RichTextBox QueueRich = new RichTextBox { Dock = DockStyle.Fill };
-
-
+        #endregion
         private void Form1_Load(object sender, EventArgs e)
         {
             //DataInit();
             string jasonstr = File.ReadAllText(Application.StartupPath + "/conf/lane.json");
-            NowWorkingJason = JsonConvert.DeserializeObject<dynamic>(jasonstr);
-            Lane = NowWorkingJason;
+            Lane = JsonConvert.DeserializeObject<dynamic>(jasonstr);
+            //Lane = WorkingQueue;
             tree = new JsonTree.JsonTree();
             if (tree.GetRootFromJsonStr(0, jasonstr, JsonTree.JsonTree.Flag.OnlyObject))
             {
@@ -66,12 +61,29 @@ namespace Simulator
             //LanePanel.Visible = false;
 
             QueueNodeView.NodeMouseDoubleClick += QueueNodeView_NodeMouseDoubleClick;
+            navigationBarItem1.Select();
+            QueueCombox.SelectedValueChanged += QueueCombox_SelectedValueChanged;
+            
+             
+        }
 
+        private void QueueCombox_SelectedValueChanged(object sender, EventArgs e)
+        {
+            if (QueueCombox.Items.Count != 0)
+            {
+                //QueueCombox.SelectedItem = QueueCombox.Items[0];
+                WorkingQueue = QueueDic[QueueCombox.SelectedItem.ToString()];
+                ActiveQueue();
+            }
+            else
+            {
+                MessageBox.Show("请勿选择空项");
+            }
         }
 
         private void QueueNodeView_NodeMouseDoubleClick(object sender, TreeNodeMouseClickEventArgs e)
         {
-            NodeView_NodeMouseDoubleClick(sender, e, QueueRichTextBox, QueueFlowLayoutPanel1);
+            NodeView_NodeMouseDoubleClick(sender, e, QueueRichTextBox, QueueFlowLayoutPanel2);
         }
 
 
@@ -84,7 +96,9 @@ namespace Simulator
         Panel queuepanel2 = new Panel();
         Panel queuepanel3 = new Panel();
         TreeView QueueNodeView = new TreeView();
-        FlowLayoutPanel QueueFlowLayoutPanel1 = new FlowLayoutPanel();
+        System.Windows.Forms.ComboBox QueueCombox = new System.Windows.Forms.ComboBox();
+        FlowLayoutPanel QueueFlowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
+        FlowLayoutPanel QueueFlowLayoutPanel2 = new FlowLayoutPanel();
         RichTextBox QueueRichTextBox = new RichTextBox();
         private void QueueFormInit()
         {
@@ -92,7 +106,7 @@ namespace Simulator
             this.panelControl1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panelControl1.Location = new System.Drawing.Point(0, 147);
             this.panelControl1.Name = "panelControl1";
-            this.panelControl1.Size = new System.Drawing.Size(928, 421);
+            this.panelControl1.Size = new System.Drawing.Size(1014, 543);
             this.panelControl1.TabIndex = 13;
             // 
             // LanePanel
@@ -103,31 +117,70 @@ namespace Simulator
             this.QueuePanel.Dock = System.Windows.Forms.DockStyle.Fill;
             this.QueuePanel.Location = new System.Drawing.Point(2, 2);
             this.QueuePanel.Name = "queuePanel";
-            this.QueuePanel.Size = new System.Drawing.Size(924, 417);
+            this.QueuePanel.Size = new System.Drawing.Size(1010, 539);
             this.QueuePanel.TabIndex = 0;
             // 
             // panel1
             // 
-            this.queuapanel1.Controls.Add(this.QueueNodeView);
+            this.queuapanel1.Controls.Add(this.QueueFlowLayoutPanel1);
             this.queuapanel1.Location = new System.Drawing.Point(3, 3);
-            this.queuapanel1.Name = "queuepanel1";
-            this.queuapanel1.Size = new System.Drawing.Size(209, 410);
+            this.queuapanel1.Name = "panel1";
+            this.queuapanel1.Size = new System.Drawing.Size(209, 532);
             this.queuapanel1.TabIndex = 0;
+            // 
+            // flowLayoutPanel1
+            // 
+            this.QueueFlowLayoutPanel1.Controls.Add(this.QueueCombox);
+            this.QueueFlowLayoutPanel1.Controls.Add(this.QueueNodeView);
+            this.QueueFlowLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.QueueFlowLayoutPanel1.Location = new System.Drawing.Point(0, 0);
+            this.QueueFlowLayoutPanel1.Name = "QueueFlowLayoutPanel1";
+            this.QueueFlowLayoutPanel1.Size = new System.Drawing.Size(209, 532);
+            this.QueueFlowLayoutPanel1.TabIndex = 0;
+            // 
+            // comboBox1
+            // 
+            this.QueueCombox.FormattingEnabled = true;
+            this.QueueCombox.Location = new System.Drawing.Point(3, 3);
+            this.QueueCombox.Name = "comboBox1";
+            this.QueueCombox.Size = new System.Drawing.Size(203, 22);
+            this.QueueCombox.TabIndex = 0;
             // 
             // LaneNodeView
             // 
-            this.QueueNodeView.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.QueueNodeView.Location = new System.Drawing.Point(0, 0);
-            this.QueueNodeView.Name = "QueueNodeView";
-            this.QueueNodeView.Size = new System.Drawing.Size(209, 410);
+            this.QueueNodeView.Location = new System.Drawing.Point(3, 31);
+            this.QueueNodeView.Name = "LaneNodeView";
+            this.QueueNodeView.Size = new System.Drawing.Size(203, 532);
             this.QueueNodeView.TabIndex = 0;
+            // 
+
+
+
+
+            #region Cancel
+            //// panel1
+            //// 
+            //this.queuapanel1.Controls.Add(this.QueueNodeView);
+            //this.queuapanel1.Location = new System.Drawing.Point(3, 3);
+            //this.queuapanel1.Name = "queuepanel1";
+            //this.queuapanel1.Size = new System.Drawing.Size(209, 410);
+            //this.queuapanel1.TabIndex = 0;
+            //// 
+            //// LaneNodeView
+            //// 
+            //this.QueueNodeView.Dock = System.Windows.Forms.DockStyle.Fill;
+            //this.QueueNodeView.Location = new System.Drawing.Point(0, 0);
+            //this.QueueNodeView.Name = "QueueNodeView";
+            //this.QueueNodeView.Size = new System.Drawing.Size(209, 410);
+            //this.QueueNodeView.TabIndex = 0; 
+            #endregion
             // 
             // panel2
             // 
-            this.queuepanel2.Controls.Add(this.QueueFlowLayoutPanel1);
+            this.queuepanel2.Controls.Add(this.QueueFlowLayoutPanel2);
             this.queuepanel2.Location = new System.Drawing.Point(218, 3);
             this.queuepanel2.Name = "queuepanel2";
-            this.queuepanel2.Size = new System.Drawing.Size(333, 410);
+            this.queuepanel2.Size = new System.Drawing.Size(333, 533);
             this.queuepanel2.TabIndex = 1;
             // 
             // panel3
@@ -135,27 +188,30 @@ namespace Simulator
             this.queuepanel3.Controls.Add(this.QueueRichTextBox);
             this.queuepanel3.Location = new System.Drawing.Point(557, 3);
             this.queuepanel3.Name = "queuepanel3";
-            this.queuepanel3.Size = new System.Drawing.Size(364, 410);
+            this.queuepanel3.Size = new System.Drawing.Size(450, 532);
             this.queuepanel3.TabIndex = 2;
             // 
             // LaneflowLayoutPanel1
             // 
-            this.QueueFlowLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.QueueFlowLayoutPanel1.Location = new System.Drawing.Point(0, 0);
-            this.QueueFlowLayoutPanel1.Name = "QueueFlowLayoutPanel1";
-            this.QueueFlowLayoutPanel1.Size = new System.Drawing.Size(333, 410);
-            this.QueueFlowLayoutPanel1.TabIndex = 0;
+            this.QueueFlowLayoutPanel2.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.QueueFlowLayoutPanel2.Location = new System.Drawing.Point(0, 0);
+            this.QueueFlowLayoutPanel2.Name = "QueueFlowLayoutPanel1";
+            this.QueueFlowLayoutPanel2.Size = new System.Drawing.Size(333, 529);
+            this.QueueFlowLayoutPanel2.TabIndex = 0;
+            this.QueueFlowLayoutPanel2.AutoScroll = true;
             // 
             // LanerichTextBox
             // 
             this.QueueRichTextBox.Dock = System.Windows.Forms.DockStyle.Fill;
             this.QueueRichTextBox.Location = new System.Drawing.Point(0, 0);
             this.QueueRichTextBox.Name = "QueuerichTextBox";
-            this.QueueRichTextBox.Size = new System.Drawing.Size(364, 410);
+            this.QueueRichTextBox.Size = new System.Drawing.Size(443, 529);
             this.QueueRichTextBox.TabIndex = 0;
             this.QueueRichTextBox.Text = "";
         }
         #endregion
+
+        #region  弃用
         //private void QueueFormInit()
         //{
         //    panelControl1.Controls.Add(QueuePanel);
@@ -172,7 +228,7 @@ namespace Simulator
         //    QueueNodeView.Show();
         //    QueuePanel.Show();
         //}
-
+        #endregion
         private void PanelControl1_Click(object sender, EventArgs e)
         {
             MessageBox.Show("HEHE");
@@ -201,55 +257,62 @@ namespace Simulator
 
             BarStaticItem st = new BarStaticItem();
             st.Caption = value.ToString();
-            barEditQueues.LinksPersistInfo.Add(
-            new DevExpress.XtraBars.LinkPersistInfo(st));
-            barEditQueues.ItemLinks.Add(st);
-            BarWorkItems.Add(st);
-            st.ItemClick += St_ItemClick;
-            barEditQueues.Caption = st.Caption;
 
-        }
-        List<BarStaticItem> BarWorkItems = new List<BarStaticItem>();
-
-        private void RemoveFormQueueMenu(string value)
-        {
+            QueueCombox.Items.Add((object)value);
             #region 弃用
-            ////BarStaticItem st = BarWorkItems.FirstOrDefault(x => x.Caption == value);
-            ////barEditQueues.LinksPersistInfo.Remove(
-            ////new DevExpress.XtraBars.LinkPersistInfo(st));
-            //barEditQueues.LinksPersistInfo.RemoveAt(0);
-            ////BarWorkItems.Remove(st); 
+            //barEditQueues.LinksPersistInfo.Add(
+            //new DevExpress.XtraBars.LinkPersistInfo(st));
+            //barEditQueues.ItemLinks.Add(st);
+            //BarWorkItems.Add(st);
+            //st.ItemClick += St_ItemClick;
+            //barEditQueues.Caption = QueueCombox.SelectedItem.ToString();
             #endregion
-            BarWorkItems.Remove(BarWorkItems.FirstOrDefault(x => x.Caption == value));
-            barEditQueues.ItemLinks.Clear();
-            barEditQueues.LinksPersistInfo.Clear();
-
-
-            foreach (var item in BarWorkItems)
-            {
-
-                barEditQueues.LinksPersistInfo.Add(new LinkPersistInfo(item));
-
-                item.ItemClick += St_ItemClick;
-                barEditQueues.Caption = item.Caption;
-            }
-        }
-
-        private void St_ItemClick(object sender, ItemClickEventArgs e)
-        {
-            Invoke(new MethodInvoker(() =>
-            {
-                barEditQueues.Caption = e.Item.Caption;
-            }));
+            QueueCombox.SelectedItem = value;
 
         }
+        #region 弃用
+        //List<BarStaticItem> BarWorkItems = new List<BarStaticItem>();
+        //#region 弃用
+        ////private void RemoveFormQueueMenu(string value)
+        ////{
+        ////    #region 弃用
+        ////    ////BarStaticItem st = BarWorkItems.FirstOrDefault(x => x.Caption == value);
+        ////    ////barEditQueues.LinksPersistInfo.Remove(
+        ////    ////new DevExpress.XtraBars.LinkPersistInfo(st));
+        ////    //barEditQueues.LinksPersistInfo.RemoveAt(0);
+        ////    ////BarWorkItems.Remove(st); 
+        ////    #endregion
+        ////    BarWorkItems.Remove(BarWorkItems.FirstOrDefault(x => x.Caption == value));
+        ////    barEditQueues.ItemLinks.Clear();
+        ////    barEditQueues.LinksPersistInfo.Clear();
 
 
+        ////    foreach (var item in BarWorkItems)
+        ////    {
+
+        ////        barEditQueues.LinksPersistInfo.Add(new LinkPersistInfo(item));
+
+        ////        item.ItemClick += St_ItemClick;
+        ////        barEditQueues.Caption = item.Caption;
+        ////    }
+        ////}
+        //#endregion
+        //private void St_ItemClick(object sender, ItemClickEventArgs e)
+        //{
+        //    Invoke(new MethodInvoker(() =>
+        //    {
+        //        barEditQueues.Caption = e.Item.Caption;
+        //    }));
+
+        //}
+
+        #endregion
         /// <summary>
         /// 追加C面
         /// </summary>
-        private void messageAppendLog()
+        private void LanemessageAppendLog()
         {
+            // if (tree.JasonKeyValue[LaneNodeView.SelectedNode.Text].ToString() == "message") return;
             string builder = string.Empty;
             int result = -1;
             if (int.TryParse(LaneNodeView.SelectedNode.Text, out result))
@@ -262,6 +325,25 @@ namespace Simulator
                 builder = tree.JasonKeyValue[LaneNodeView.SelectedNode.Text].ToString();
             }
             LanerichTextBox.Text = DataHanding.MessageEncoder.ConvertJsonString(builder);
+        }
+
+        /// <summary>
+        /// Queue綁定到queuerichC
+        /// </summary>
+        private void QueuemessageAppendLog()
+        {
+            string builder = string.Empty;
+            int result = -1;
+            if (int.TryParse(QueueNodeView.SelectedNode.Text, out result))
+            {
+                object[] obj = JsonConvert.DeserializeObject<object[]>(JsonConvert.SerializeObject(tree.JasonKeyValue[LaneNodeView.SelectedNode.Parent.Text]));
+                builder = JsonConvert.SerializeObject(obj[result]);
+            }
+            else
+            {
+                builder = tree.JasonKeyValue[QueueNodeView.SelectedNode.Text].ToString();
+            }
+            QueueRichTextBox.Text= DataHanding.MessageEncoder.ConvertJsonString(builder);
         }
 
         private void NodeView_NodeMouseDoubleClick(object sender, TreeNodeMouseClickEventArgs e, RichTextBox richTextBox, FlowLayoutPanel panel)
@@ -305,9 +387,20 @@ namespace Simulator
             }
             foreach (var item in keyvalue)
             {
-                dic.Add(new LabelControl { Text = item.Key }, new TextEdit { Text = item.Value.ToString(), Tag = item.Key, Name = result.ToString(), Width = 400 });
+                dic.Add(new LabelControl { Text = item.Key }, new TextEdit { Text = item.Value.ToString(), Tag = item.Key, Name = result.ToString(), Width = 300 });
             }
-            LaneflowLayoutPanel1.Controls.Clear();
+            switch(LanePanel.Visible)
+            {
+                case true:
+                    LaneflowLayoutPanel1.Controls.Clear();
+                    LaneflowLayoutPanel1.AutoScroll = true;
+                    break;
+                case false:
+                    QueueFlowLayoutPanel2.Controls.Clear();
+                    QueueFlowLayoutPanel2.AutoScroll = true;
+                    break;
+            }
+            
             foreach (var item in dic)
             {
                 panel.Controls.Add(item.Key); item.Key.Show();
@@ -326,24 +419,32 @@ namespace Simulator
             string key = ((TextEdit)sender).Tag.ToString();
             string value = ((TextEdit)sender).Text.ToString();
             string intseed = ((TextEdit)sender).Name.ToString();
-
-            string Type = NowWorkingJason.message_type.ToString();
-            switch (Type)
+            if (LaneNodeView.Visible == true)
             {
-                case "lane":
-                    UpdateLane(key, value, intseed);
-                    break;
-                case "queue":
-                    UpdateQueue(key, value, intseed);
-                    break;
+                UpdateLane(key, value, intseed);
             }
+            else
+            {
+                UpdateQueue(key, value, intseed);
+            }
+            #region 棄用
+            //string Type = WorkingQueue.message_type.ToString();
+            //switch (Type)
+            //{
+            //    case "lane":
 
+            //        break;
+            //    case "queue":
+
+            //        break;
+            //}
+            #endregion
         }
 
         private void UpdateQueue(string key, string value, string intseed)
         {
             dynamic root = JsonConvert.DeserializeObject<dynamic>(JsonConvert.SerializeObject(tree.JasonKeyValue["message_content"]));
-            string switchkey = this.LaneNodeView.SelectedNode.Text.ToString();
+            string switchkey = this.QueueNodeView.SelectedNode.Text.ToString();
             switch (switchkey)
             {
                 case "queue":
@@ -352,17 +453,15 @@ namespace Simulator
                 case "message_content":
                     root[key] = value;
                     break;
-
             }
             tree.JasonKeyValue["queue"] = root.queue;
             tree.JasonKeyValue["message_content"] = root;
-            messageAppendLog();
-            NowWorkingJason.message_content = root;
+            QueuemessageAppendLog();
+            WorkingQueue.message_content = root;
         }
 
         private void UpdateLane(string key, string value, string intseed)
         {
-
             dynamic root = JsonConvert.DeserializeObject<dynamic>(JsonConvert.SerializeObject(tree.JasonKeyValue["message_content"]));
             string switchkey = this.LaneNodeView.SelectedNode.Text.ToString();
             switch (switchkey)
@@ -400,7 +499,6 @@ namespace Simulator
                             break;
                     }
                     break;
-
             }
             tree.JasonKeyValue["lane"] = root.lane;
             tree.JasonKeyValue["message_content"] = root;
@@ -408,9 +506,9 @@ namespace Simulator
             tree.JasonKeyValue["com_devices"] = root.lane.device.com_devices;
             tree.JasonKeyValue["apps"] = root.lane.apps;
             tree.JasonKeyValue["device"] = root.lane.device;
-            messageAppendLog();
-            NowWorkingJason.message_content.lane = root.lane;
-            Lane = NowWorkingJason;
+            LanemessageAppendLog();
+            Lane.message_content.lane = root.lane;
+            //Lane = WorkingQueue;
             File.WriteAllText(Application.StartupPath + "/test.json", tree.JasonKeyValue["message_content"].ToString());
         }
 
@@ -419,8 +517,6 @@ namespace Simulator
             switch ((bool)ModeSelect.EditValue)
             {
                 case true://type realmode
-
-
                     break;
                 case false://type simulator
                     hubclient = new HubClient.HubClient(EditMessageAddress.EditValue.ToString(), "messagehub", new Dictionary<string, string> { { "Name", LaneCodeItem.EditValue.ToString() }, { "Type", "Lane" } });
@@ -428,7 +524,7 @@ namespace Simulator
                     hubclient.reciveMessage += Hubclient_reciveMessage;
                     hubclient.reciveHubError += Hubclient_reciveHubError;
                     hubclient.HubInit();
-                    hubclient.Change(LaneCodeItem.Caption, DataHanding.MessageEncoder.EncodingLaneMessage(NowWorkingJason, LaneCodeItem.EditValue.ToString(), editLane_Name.EditValue.ToString(), DataHanding.MessageEncoder.RecipientType.ALL));
+                    hubclient.Change(LaneCodeItem.Caption, DataHanding.MessageEncoder.EncodingLaneMessage(Lane, LaneCodeItem.EditValue.ToString(), editLane_Name.EditValue.ToString(), DataHanding.MessageEncoder.RecipientType.ALL));
                     break;
             }
 
@@ -458,21 +554,12 @@ namespace Simulator
         {
             if (hubclient != null)
             {
-                hubclient.Change(LaneCodeItem.EditValue.ToString(), DataHanding.MessageEncoder.EncodingLaneMessage(NowWorkingJason, LaneCodeItem.EditValue.ToString(), editLane_Name.EditValue.ToString(), DataHanding.MessageEncoder.RecipientType.ALL));
+                hubclient.Change(LaneCodeItem.EditValue.ToString(), DataHanding.MessageEncoder.EncodingLaneMessage(Lane, LaneCodeItem.EditValue.ToString(), editLane_Name.EditValue.ToString(), DataHanding.MessageEncoder.RecipientType.ALL));
             }
             else
             {
                 MessageBox.Show("无法推送，暂未与消息服务建立连接");
             }
-        }
-
-
-
-        private void barEditQueues_ItemClick(object sender, ItemClickEventArgs e)
-        {
-
-
-
         }
         public static Dictionary<string, dynamic> QueueDic = new Dictionary<string, dynamic>();
         /// <summary>
@@ -482,6 +569,7 @@ namespace Simulator
         /// <param name="e"></param>
         private void barButtonAddQueue_ItemClick(object sender, ItemClickEventArgs e)
         {
+            LanePanel.Visible = false;
             dynamic queue = JsonConvert.DeserializeObject<dynamic>(File.ReadAllText(Application.StartupPath + "/conf/queue.json"));
             queue = JsonConvert.DeserializeObject<dynamic>(DataHanding.MessageEncoder.EncodingQueueMessage(queue, LaneCodeItem.EditValue.ToString(), editLane_Name.EditValue.ToString(), DataHanding.MessageEncoder.QueueAction.create));
             if (hubclient != null)
@@ -491,54 +579,57 @@ namespace Simulator
             QueueDic.Add((string)queue.message_content.queue_code, queue);
             AppendToQueueMenu((string)queue.message_content.queue_code);
 
-
+            ActiveQueue();
         }
 
         private void barButtonRemoveQueue_ItemClick(object sender, ItemClickEventArgs e)
         {
             //comboBox1.SelectedItem.ToString();
 
-            string send = DataHanding.MessageEncoder.EncodingQueueMessage(NowWorkingJason, LaneCodeItem.EditValue.ToString(), editLane_Name.EditValue.ToString(), DataHanding.MessageEncoder.QueueAction.delete);
+            string send = DataHanding.MessageEncoder.EncodingQueueMessage(WorkingQueue, LaneCodeItem.EditValue.ToString(), editLane_Name.EditValue.ToString(), DataHanding.MessageEncoder.QueueAction.delete);
             if (hubclient != null)
             {
                 hubclient.Change(LaneCodeItem.EditValue.ToString(), send);
             }
             //comboBox1.Items.Remove(comboBox1.Items[comboBox1.SelectedIndex]);
-            RemoveFormQueueMenu(barEditQueues.Caption);
-            QueueDic.Remove((string)NowWorkingJason.message_content.queue_code);
-            if (barEditQueues.LinksPersistInfo.Count != 0)
+            //RemoveFormQueueMenu(barEditQueues.Caption);
+            QueueCombox.Items.Remove(QueueCombox.SelectedItem.ToString());
+            QueueDic.Remove((string)WorkingQueue.message_content.queue_code);
+            if (QueueCombox.Items.Count == 0)
             {
-
-                NowWorkingJason = QueueDic[barEditQueues.Caption];
+                QueueCombox.Text = "";
+                QueueFlowLayoutPanel2.Controls.Clear();
+                QueueRichTextBox.Text = "";
+                return;
             }
             else
             {
-                NowWorkingJason = Lane;
+                QueueCombox.SelectedItem = QueueCombox.Items[0];
+                WorkingQueue = QueueDic[QueueCombox.SelectedItem.ToString()];
+                ActiveQueue();
             }
         }
 
-        private void barButtonClearQueue_ItemClick(object sender, ItemClickEventArgs e)
-        {
-
-        }
-
-        private void barButtonActive_ItemClick(object sender, ItemClickEventArgs e)
+        private void ActiveQueue()
         {
             try
             {
-                
-                NowWorkingJason = QueueDic[barEditQueues.Caption];
+
+                WorkingQueue = QueueDic[QueueCombox.SelectedItem.ToString()];
                 //LaneNodeView.Nodes.Clear();
                 QueueNodeView.Nodes.Clear();
-                if (tree.GetRootFromJsonStr(0, NowWorkingJason.ToString(), JsonTree.JsonTree.Flag.OnlyObject))
+                QueueFlowLayoutPanel2.Controls.Clear();
+                if (tree.GetRootFromJsonStr(0, WorkingQueue.ToString(), JsonTree.JsonTree.Flag.OnlyObject))
                 {
                     QueueNodeView.Nodes.Add(tree.TreeNode);
                     QueueNodeView.SelectedNode = tree.TreeNode;
-                }
-                LanerichTextBox.Text = NowWorkingJason["message_content"].ToString();
 
+                }
+                
+                QueueRichTextBox.Text = WorkingQueue["message_content"].ToString();
                 LanePanel.Visible = false;
                 QueuePanel.Visible = true;
+                navigationBarItem2.Select();
             }
             catch (KeyNotFoundException ex)
             {
@@ -555,40 +646,34 @@ namespace Simulator
         {
             if (hubclient != null)
             {
-                string send = DataHanding.MessageEncoder.EncodingQueueMessage(NowWorkingJason, LaneCodeItem.EditValue.ToString(), editLane_Name.EditValue.ToString(), DataHanding.MessageEncoder.QueueAction.update);
+                string send = DataHanding.MessageEncoder.EncodingQueueMessage(WorkingQueue, LaneCodeItem.EditValue.ToString(), editLane_Name.EditValue.ToString(), DataHanding.MessageEncoder.QueueAction.update);
                 hubclient.Change(LaneCodeItem.EditValue.ToString(), send);
             }
         }
-
-        private void officeNavigationBar_ItemClick(object sender, DevExpress.XtraBars.Navigation.NavigationBarItemEventArgs e)
-        {
-
-        }
-
         private void officeNavigationBar_ItemClick_1(object sender, DevExpress.XtraBars.Navigation.NavigationBarItemEventArgs e)
         {
-            switch(e.Item.Text)
+            switch (e.Item.Text)
             {
                 case "Lane":
                     //QueuePanel.Visible = false;
                     LanePanel.Visible = true;
+                    tree.GetRootFromJsonStr(0, JsonConvert.SerializeObject(Lane), JsonTree.JsonTree.Flag.OnlyObject);
                     break;
                 case "Queue":
-                   // QueuePanel.Visible = true;
+                    // QueuePanel.Visible = true;
                     LanePanel.Visible = false;
+                    tree.GetRootFromJsonStr(0, JsonConvert.SerializeObject(WorkingQueue), JsonTree.JsonTree.Flag.OnlyObject);
                     break;
             }
         }
 
+        private void barButtonClearQueue_ItemClick(object sender, ItemClickEventArgs e)
+        {
+            if (hubclient != null)
+            {
 
-        //private void barSubItem1_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
-        //{
-
-        //}
-
-        //private void barHeaderItem2_ItemClick(object sender, ItemClickEventArgs e)
-        //{
-        //    barSubItem1.Caption = e.Item.Caption;
-        //}
+                hubclient.hub.Invoke("clear");
+            }
+        }
     }
 }
