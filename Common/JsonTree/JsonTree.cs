@@ -114,7 +114,7 @@ namespace JsonTree
                 JasonKeyValue.Clear();
 
                 JObject jobject = JObject.Parse(jsonstr);
-                var rootNode = new JsonTreeNode(NodeType.Object, "message");
+                var rootNode = new JsonTreeNode(NodeType.Object, "root");
                 //TreeView tw = new TreeView();
                 //tw.Nodes.Add(rootNode);
                 //tw.SelectedNode = rootNode;

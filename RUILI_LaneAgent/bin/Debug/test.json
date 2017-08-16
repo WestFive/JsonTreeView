@@ -15,7 +15,7 @@
       "ip_devices": [
         {
           "device_code": "truck_camera",
-          "device_name": "车牌识别",
+          "device_name": "车牌识别相机",
           "activated": true,
           "ip_address": "10.1.1.50",
           "status": "正常",
@@ -77,7 +77,7 @@
       {
         "app_name": "LaneAgent",
         "lane_server": "CN-XIAMEN-XHCT-LS1",
-        "status": "正常",
+        "status": "正",
         "update_time": "2017-01-01 10:00:00"
       },
       {

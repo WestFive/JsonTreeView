@@ -22,3 +22,11 @@ E:\车道模拟器\JsonTreeTest\JsonTree\bin\Debug\Newtonsoft.Json.xml
 E:\车道模拟器\JsonTreeTest\JsonTree\obj\Debug\JsonTree.csprojResolveAssemblyReference.cache
 E:\车道模拟器\JsonTreeTest\JsonTree\obj\Debug\JsonTree.dll
 E:\车道模拟器\JsonTreeTest\JsonTree\obj\Debug\JsonTree.pdb
+E:\车道模拟器\RUILI_LaneAgent\Common\JsonTree\bin\Debug\JsonTree.dll.config
+E:\车道模拟器\RUILI_LaneAgent\Common\JsonTree\bin\Debug\JsonTree.dll
+E:\车道模拟器\RUILI_LaneAgent\Common\JsonTree\bin\Debug\JsonTree.pdb
+E:\车道模拟器\RUILI_LaneAgent\Common\JsonTree\bin\Debug\HubClient.dll
+E:\车道模拟器\RUILI_LaneAgent\Common\JsonTree\bin\Debug\HubClient.pdb
+E:\车道模拟器\RUILI_LaneAgent\Common\JsonTree\obj\Debug\JsonTree.csprojResolveAssemblyReference.cache
+E:\车道模拟器\RUILI_LaneAgent\Common\JsonTree\obj\Debug\JsonTree.dll
+E:\车道模拟器\RUILI_LaneAgent\Common\JsonTree\obj\Debug\JsonTree.pdb
