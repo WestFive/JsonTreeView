@@ -107,6 +107,10 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Camera\Camera.csproj">
+      <Project>{bd9411ae-cde0-41d6-8854-2278a9dd90e7}</Project>
+      <Name>Camera</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Common\DataHanding\DataHanding.csproj">
       <Project>{8ee3259a-91d2-4108-8e6f-ee53e0093ea9}</Project>
       <Name>DataHanding</Name>
@@ -118,6 +122,10 @@
     <ProjectReference Include="..\Common\JsonTree\JsonTree.csproj">
       <Project>{E59B3001-8521-45E9-8F6D-B4258E56C1CC}</Project>
       <Name>JsonTree</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\PLC_DLL\PLC_DLL.csproj">
+      <Project>{3bd0f8ff-51b2-444f-9aab-800059af4ead}</Project>
+      <Name>PLC_DLL</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

@@ -52,11 +52,6 @@ E:\车道模拟器\JsonTreeTest\HubClient\obj\Debug\HubClient.pdb
 E:\车道模拟器\RUILI_LaneAgent\Common\HubClient\bin\Debug\HubClient.dll.config
 E:\车道模拟器\RUILI_LaneAgent\Common\HubClient\bin\Debug\HubClient.dll
 E:\车道模拟器\RUILI_LaneAgent\Common\HubClient\bin\Debug\HubClient.pdb
-E:\车道模拟器\RUILI_LaneAgent\Common\HubClient\bin\Debug\Microsoft.AspNet.SignalR.Client.xml
-E:\车道模拟器\RUILI_LaneAgent\Common\HubClient\bin\Debug\Microsoft.Owin.xml
-E:\车道模拟器\RUILI_LaneAgent\Common\HubClient\bin\Debug\Microsoft.Owin.Host.SystemWeb.xml
-E:\车道模拟器\RUILI_LaneAgent\Common\HubClient\bin\Debug\Microsoft.Owin.Security.xml
-E:\车道模拟器\RUILI_LaneAgent\Common\HubClient\bin\Debug\Newtonsoft.Json.xml
 E:\车道模拟器\RUILI_LaneAgent\Common\HubClient\obj\Debug\HubClient.csprojResolveAssemblyReference.cache
 E:\车道模拟器\RUILI_LaneAgent\Common\HubClient\obj\Debug\HubClient.dll
 E:\车道模拟器\RUILI_LaneAgent\Common\HubClient\obj\Debug\HubClient.pdb

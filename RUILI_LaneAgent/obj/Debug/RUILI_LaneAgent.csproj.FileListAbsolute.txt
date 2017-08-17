@@ -346,3 +346,9 @@ E:\车道模拟器\RUILI_LaneAgent\RUILI_LaneAgent\obj\Debug\RUILI_LaneAgent.csp
 E:\车道模拟器\RUILI_LaneAgent\RUILI_LaneAgent\obj\Debug\Simulator.exe.licenses
 E:\车道模拟器\RUILI_LaneAgent\RUILI_LaneAgent\obj\Debug\Simulator.exe
 E:\车道模拟器\RUILI_LaneAgent\RUILI_LaneAgent\obj\Debug\Simulator.pdb
+E:\车道模拟器\RUILI_LaneAgent\RUILI_LaneAgent\bin\Debug\PLC_DLL.dll
+E:\车道模拟器\RUILI_LaneAgent\RUILI_LaneAgent\bin\Debug\PLC_DLL.pdb
+E:\车道模拟器\RUILI_LaneAgent\RUILI_LaneAgent\bin\Debug\Camera.dll
+E:\车道模拟器\RUILI_LaneAgent\RUILI_LaneAgent\bin\Debug\NetSDKCS.dll
+E:\车道模拟器\RUILI_LaneAgent\RUILI_LaneAgent\bin\Debug\Camera.pdb
+E:\车道模拟器\RUILI_LaneAgent\RUILI_LaneAgent\bin\Debug\NetSDKCS.pdb

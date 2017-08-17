@@ -16,6 +16,7 @@ using Newtonsoft.Json.Linq;
 using DevExpress.XtraBars;
 using JsonTree;
 using HubClient;
+using System.IO.Ports;
 
 namespace Simulator
 {
@@ -215,27 +216,50 @@ namespace Simulator
         }
         private void NodeView_NodeMouseDoubleClick(object sender, TreeNodeMouseClickEventArgs e, RichTextBox richTextBox, FlowLayoutPanel panel)
         {
-            string builder = string.Empty;
-            int result = -1;
-            if (int.TryParse(e.Node.Text, out result))
-            {
-                object[] obj = JsonConvert.DeserializeObject<object[]>(JsonConvert.SerializeObject(tree.JasonKeyValue[e.Node.Parent.Text]));
 
-                builder = JsonConvert.SerializeObject(obj[result]);
-            }
-            else
+            dynamic root = JsonConvert.DeserializeObject<dynamic>(JsonConvert.SerializeObject(Lane));
+            string switchkey = this.LaneNodeView.SelectedNode.Text.ToString();
+            string fullPath = LaneNodeView.SelectedNode.FullPath;
+            List<string> counts = fullPath.Split("\\".ToArray()).ToList();
+            counts.Remove(counts[0]);
+            int no = 1;
+            dynamic temp = root;
+            for (int i = 0; i < counts.Count; i++)
             {
-                try
+            
+                if (Int32.TryParse(counts[i], out no))
                 {
-                    builder = tree.JasonKeyValue[e.Node.Text].ToString();
+                    temp = JsonConvert.DeserializeObject<dynamic[]>(JsonConvert.SerializeObject(temp))[no];
                 }
-                catch (KeyNotFoundException)
+                else
                 {
-                    builder = "KeyNotFound";
+                    temp = temp[counts[i]];
                 }
             }
+            string builder = JsonConvert.SerializeObject(temp);
+            LanemessageAppendLog(JsonConvert.SerializeObject(temp));
+
+            //string builder = string.Empty;
+            //int result = -1;
+            //if (int.TryParse(e.Node.Text, out result))
+            //{
+            //    object[] obj = JsonConvert.DeserializeObject<object[]>(JsonConvert.SerializeObject(tree.JasonKeyValue[e.Node.Parent.Text]));
+
+            //    builder = JsonConvert.SerializeObject(obj[result]);
+            //}
+            //else
+            //{
+            //    try
+            //    {
+            //        builder = Lane[e.Node.Text].ToString();
+            //    }
+            //    catch (KeyNotFoundException)
+            //    {
+            //        builder = "KeyNotFound";
+            //    }
+            //}
             richTextBox.Text = DataHanding.MessageEncoder.ConvertJsonString(builder);
-            Dictionary<LabelControl, TextEdit> dic = new Dictionary<LabelControl, TextEdit>();
+            Dictionary<LabelControl, Control> dic = new Dictionary<LabelControl, Control>();
             JToken jtok = JToken.FromObject(JsonConvert.DeserializeObject<object>(builder));
             Dictionary<string, object> keyvalue;
             switch (jtok.Type)
@@ -252,9 +276,21 @@ namespace Simulator
                     keyvalue = JsonConvert.DeserializeObject<Dictionary<string, object>>(JsonConvert.SerializeObject(jtok));
                     break;
             }
-            foreach (var item in keyvalue)
+            if (e.Node.Text == "method")
             {
-                dic.Add(new LabelControl { Text = item.Key }, new TextEdit { Text = item.Value.ToString(), Tag = item.Key, Name = result.ToString(), Width = 300 });
+                foreach (var item in keyvalue)
+                {
+                    dic.Add(new LabelControl { Text = item.Key }, new SimpleButton { Text = item.Value.ToString(), Tag = item.Key, Name = no.ToString(), Width = 310 });
+                    dic.LastOrDefault().Value.Click += Value_Click;
+                }
+            }
+            else
+            {
+                foreach (var item in keyvalue)
+                {
+                    dic.Add(new LabelControl { Text = item.Key }, new TextBox { Text = item.Value.ToString(), Tag = item.Key, Name = no.ToString(), Width = 310 });
+
+                }
             }
             switch (LanePanel.Visible)
             {
@@ -274,15 +310,62 @@ namespace Simulator
                 item.Value.TextChanged += Value_TextChanged;
                 if (NotAllow.Count(x => x == item.Key.Text) > 0)
                 {
-                    item.Value.ReadOnly = true;
+
+                    ((TextBox)item.Value).ReadOnly = true;
+
                 }
             }
         }
+
+        /// <summary>
+        /// ValueClick
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void Value_Click(object sender, EventArgs e)
+        {
+            Camera.CamerController cm = new Camera.CamerController();
+            switch (((SimpleButton)sender).Text)
+            {
+                case "PLCMethodInit":
+                    PLC_DLL.PLC.Init();
+                    PLC_DLL.PLC.SerialPort.DataReceived += SerialPort_DataReceived;
+                    break;
+                case "PLCMethodSend":
+                    break;
+                case "CameraMethodInit":                  
+                    cm.InitSDK();
+                    cm.Login("10.1.1.200", "37777", "admin", "admin");
+                    break;
+                case "CameraMethodMoveTo1":
+                    cm.ConvertTo("1");
+                    break;
+                case "CameraMethodMoveTo2":
+                    cm.ConvertTo("2");
+                    break;
+                case "SnopMethodSend":
+                    cm.GetImage();
+                    break;
+            }
+            //MessageBox.Show(((SimpleButton)sender).Text);
+        }
+
+        private void SerialPort_DataReceived(object sender, System.IO.Ports.SerialDataReceivedEventArgs e)
+        {
+            byte[] buffer = new byte[((SerialPort)sender).BytesToRead];
+            ((SerialPort)sender).Read(buffer, 0, buffer.Length);
+            //MessageBox.Show(System.Text.Encoding.Default.GetString(buffer));
+
+            UpdateLane("revice", System.Text.Encoding.Default.GetString(buffer), null);
+            buffer = null;
+
+        }
+
         private void Value_TextChanged(object sender, EventArgs e)
         {
-            string key = ((TextEdit)sender).Tag.ToString();
-            string value = ((TextEdit)sender).Text.ToString();
-            string intseed = ((TextEdit)sender).Name.ToString();
+            string key = ((TextBox)sender).Tag.ToString();
+            string value = ((TextBox)sender).Text.ToString();
+            string intseed = ((TextBox)sender).Name.ToString();
             if (LaneNodeView.Visible == true)
             {
                 UpdateLane(key, value, intseed);
@@ -294,43 +377,50 @@ namespace Simulator
         }
         private void UpdateQueue(string key, string value, string intseed)
         {
-            dynamic root = JsonConvert.DeserializeObject<dynamic>(JsonConvert.SerializeObject(WorkingQueue));
-            string switchkey = this.QueueNodeView.SelectedNode.Text.ToString();
-            string fullPath = QueueNodeView.SelectedNode.FullPath;
-            List<string> counts = fullPath.Split("\\".ToArray()).ToList();
-            counts.Remove(counts[0]);
-            dynamic temp = root;
-            for (int i = 0; i < counts.Count; i++)
+            Invoke(new MethodInvoker(() =>
             {
-                temp = temp[counts[i]];
-            }
-            temp[key] = value;
-            QueuemessageAppendLog(JsonConvert.SerializeObject(temp));
-            WorkingQueue = root;
-        }
-        private void UpdateLane(string key, string value, string intseed)
-        {
-            dynamic root = JsonConvert.DeserializeObject<dynamic>(JsonConvert.SerializeObject(Lane));
-            string switchkey = this.LaneNodeView.SelectedNode.Text.ToString();
-            string fullPath = LaneNodeView.SelectedNode.FullPath;
-            List<string> counts = fullPath.Split("\\".ToArray()).ToList();
-            counts.Remove(counts[0]);
-            dynamic temp = root;
-            for (int i = 0; i < counts.Count; i++)
-            {
-                int no = 1;
-                if (Int32.TryParse(counts[i], out no))
-                {
-                    temp = JsonConvert.DeserializeObject<dynamic[]>(JsonConvert.SerializeObject(temp))[no];
-                }
-                else
+                dynamic root = JsonConvert.DeserializeObject<dynamic>(JsonConvert.SerializeObject(WorkingQueue));
+                string switchkey = this.QueueNodeView.SelectedNode.Text.ToString();
+                string fullPath = QueueNodeView.SelectedNode.FullPath;
+                List<string> counts = fullPath.Split("\\".ToArray()).ToList();
+                counts.Remove(counts[0]);
+                dynamic temp = root;
+                for (int i = 0; i < counts.Count; i++)
                 {
                     temp = temp[counts[i]];
                 }
-            }
-            temp[key] = value;
-            LanemessageAppendLog(JsonConvert.SerializeObject(temp));
-            Lane = root;
+                temp[key] = value;
+                QueuemessageAppendLog(JsonConvert.SerializeObject(temp));
+                WorkingQueue = root;
+            }));
+
+        }
+        private void UpdateLane(string key, string value, string intseed)
+        {
+            Invoke(new MethodInvoker(() =>
+            {
+                dynamic root = JsonConvert.DeserializeObject<dynamic>(JsonConvert.SerializeObject(Lane));
+                string switchkey = this.LaneNodeView.SelectedNode.Text.ToString();
+                string fullPath = LaneNodeView.SelectedNode.FullPath;
+                List<string> counts = fullPath.Split("\\".ToArray()).ToList();
+                counts.Remove(counts[0]);
+                dynamic temp = root;
+                for (int i = 0; i < counts.Count; i++)
+                {
+                    int no = 1;
+                    if (Int32.TryParse(counts[i], out no))
+                    {
+                        temp = JsonConvert.DeserializeObject<dynamic[]>(JsonConvert.SerializeObject(temp))[no];
+                    }
+                    else
+                    {
+                        temp = temp[counts[i]];
+                    }
+                }
+                temp[key] = value;
+                LanemessageAppendLog(JsonConvert.SerializeObject(temp));
+                Lane = root;
+            }));
         }
         private void BtnConnect_CheckedChanged(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
         {
