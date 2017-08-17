@@ -291,6 +291,7 @@ namespace Simulator
                     dic.Add(new LabelControl { Text = item.Key }, new TextBox { Text = item.Value.ToString(), Tag = item.Key, Name = no.ToString(), Width = 310 });
 
                 }
+                
             }
             switch (LanePanel.Visible)
             {
