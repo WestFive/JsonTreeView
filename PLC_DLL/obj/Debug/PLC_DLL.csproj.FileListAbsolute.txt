@@ -1,7 +1,5 @@
 E:\车道模拟器\RUILI_LaneAgent\PLC_DLL\bin\Debug\PLC_DLL.dll
 E:\车道模拟器\RUILI_LaneAgent\PLC_DLL\bin\Debug\PLC_DLL.pdb
-E:\车道模拟器\RUILI_LaneAgent\PLC_DLL\bin\Debug\HardWare.dll
-E:\车道模拟器\RUILI_LaneAgent\PLC_DLL\bin\Debug\HardWare.pdb
 E:\车道模拟器\RUILI_LaneAgent\PLC_DLL\obj\Debug\PLC_DLL.csprojResolveAssemblyReference.cache
 E:\车道模拟器\RUILI_LaneAgent\PLC_DLL\obj\Debug\PLC_DLL.dll
 E:\车道模拟器\RUILI_LaneAgent\PLC_DLL\obj\Debug\PLC_DLL.pdb

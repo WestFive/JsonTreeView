@@ -31,6 +31,7 @@ namespace Simulator
         private static dynamic Lane;
         private static HubClient.HubClient hubclient;
         private static List<string> NotAllow = new List<string> { "lane", "message_content", "ip_devices", "com_devices", "apps", "device", "queue" };
+
         private void Form1_Load(object sender, EventArgs e)
         {
             string jasonstr = File.ReadAllText(Application.StartupPath + "/conf/lane.json");
@@ -40,14 +41,13 @@ namespace Simulator
             {
                 LaneNodeView.Nodes.Add(tree.TreeNode);
                 LaneNodeView.SelectedNode = tree.TreeNode;
+                
             }
             QueueFormInit();
             LaneNodeView.NodeMouseDoubleClick += LaneNodeView_NodeMouseDoubleClick;
             QueueNodeView.NodeMouseDoubleClick += QueueNodeView_NodeMouseDoubleClick;
             navigationBarItem1.Select();
             QueueCombox.SelectedValueChanged += QueueCombox_SelectedValueChanged;
-
-
         }
         private void QueueCombox_SelectedValueChanged(object sender, EventArgs e)
         {
@@ -226,7 +226,7 @@ namespace Simulator
             dynamic temp = root;
             for (int i = 0; i < counts.Count; i++)
             {
-            
+
                 if (Int32.TryParse(counts[i], out no))
                 {
                     temp = JsonConvert.DeserializeObject<dynamic[]>(JsonConvert.SerializeObject(temp))[no];
@@ -238,61 +238,68 @@ namespace Simulator
             }
             string builder = JsonConvert.SerializeObject(temp);
             LanemessageAppendLog(JsonConvert.SerializeObject(temp));
-
-            //string builder = string.Empty;
-            //int result = -1;
-            //if (int.TryParse(e.Node.Text, out result))
-            //{
-            //    object[] obj = JsonConvert.DeserializeObject<object[]>(JsonConvert.SerializeObject(tree.JasonKeyValue[e.Node.Parent.Text]));
-
-            //    builder = JsonConvert.SerializeObject(obj[result]);
-            //}
-            //else
-            //{
-            //    try
-            //    {
-            //        builder = Lane[e.Node.Text].ToString();
-            //    }
-            //    catch (KeyNotFoundException)
-            //    {
-            //        builder = "KeyNotFound";
-            //    }
-            //}
             richTextBox.Text = DataHanding.MessageEncoder.ConvertJsonString(builder);
             Dictionary<LabelControl, Control> dic = new Dictionary<LabelControl, Control>();
+            List<SimpleButton> methodButtons = new List<SimpleButton>();
             JToken jtok = JToken.FromObject(JsonConvert.DeserializeObject<object>(builder));
-            Dictionary<string, object> keyvalue;
+
+            Dictionary<string, dynamic> keyvalue = new Dictionary<string, object>();
+            Dictionary<string, dynamic> buttondic = new Dictionary<string, object>();
             switch (jtok.Type)
             {
                 case JTokenType.Array:
                     object[] obj = jtok.ToArray();
-                    keyvalue = new Dictionary<string, object>();
                     for (int i = 0; i < obj.Length; i++)
                     {
                         keyvalue.Add(e.Node.Text + i.ToString(), obj[i]);
                     }
                     break;
                 default:
-                    keyvalue = JsonConvert.DeserializeObject<Dictionary<string, object>>(JsonConvert.SerializeObject(jtok));
+                    if (jtok["property"] != null)
+                    {
+                        keyvalue = JsonConvert.DeserializeObject<Dictionary<string, object>>(JsonConvert.SerializeObject(jtok["property"]));
+                        if (jtok["method"] != null)
+                        {
+                            dynamic[] methods = JsonConvert.DeserializeObject<dynamic[]>(JsonConvert.SerializeObject(jtok["method"]));
+                            foreach (var item in methods)
+                            {
+                                buttondic.Add((string)item.method_name, item);
+                            }
+
+                           // buttondic = JsonConvert.DeserializeObject<Dictionary<string, dynamic>>(JsonConvert.SerializeObject(jtok["method"]));
+                        }
+                    }
+                    else
+                    {
+                        keyvalue = JsonConvert.DeserializeObject<Dictionary<string, object>>(JsonConvert.SerializeObject(jtok));
+                    }
                     break;
             }
-            if (e.Node.Text == "method")
-            {
-                foreach (var item in keyvalue)
-                {
-                    dic.Add(new LabelControl { Text = item.Key }, new SimpleButton { Text = item.Value.ToString(), Tag = item.Key, Name = no.ToString(), Width = 310 });
-                    dic.LastOrDefault().Value.Click += Value_Click;
-                }
-            }
-            else
-            {
+            //if (e.Node.Text == "method")
+            //{
+            //    foreach (var item in keyvalue)
+            //    {
+            //        dic.Add(new LabelControl { Text = item.Key }, new SimpleButton { Text = item.Value.ToString(), Tag = item.Key, Name = no.ToString(), Width = 310 });
+            //        dic.LastOrDefault().Value.Click += Value_Click;
+            //    }
+                
+            //}
+            //else
+            //{
                 foreach (var item in keyvalue)
                 {
                     dic.Add(new LabelControl { Text = item.Key }, new TextBox { Text = item.Value.ToString(), Tag = item.Key, Name = no.ToString(), Width = 310 });
+                }
+                if (buttondic.Count > 0)
+                {
+                    foreach (var item in buttondic)
+                    {
+                        methodButtons.Add( new SimpleButton { Text = item.Value.display_name.ToString(), Tag = item.Value, Name = no.ToString(), Width = 310 });
+                       
+                    }
 
                 }
-                
-            }
+            //}
             switch (LanePanel.Visible)
             {
                 case true:
@@ -311,10 +318,13 @@ namespace Simulator
                 item.Value.TextChanged += Value_TextChanged;
                 if (NotAllow.Count(x => x == item.Key.Text) > 0)
                 {
-
                     ((TextBox)item.Value).ReadOnly = true;
-
                 }
+            }
+            foreach (var item in methodButtons)
+            {
+                panel.Controls.Add(item);item.Show();
+                 item.Click += Value_Click;
             }
         }
 
@@ -325,6 +335,9 @@ namespace Simulator
         /// <param name="e"></param>
         private void Value_Click(object sender, EventArgs e)
         {
+
+            //"classCcrCamera" 
+
             Camera.CamerController cm = new Camera.CamerController();
             switch (((SimpleButton)sender).Text)
             {
@@ -333,8 +346,9 @@ namespace Simulator
                     PLC_DLL.PLC.SerialPort.DataReceived += SerialPort_DataReceived;
                     break;
                 case "PLCMethodSend":
+
                     break;
-                case "CameraMethodInit":                  
+                case "CameraMethodInit":
                     cm.InitSDK();
                     cm.Login("10.1.1.200", "37777", "admin", "admin");
                     break;
@@ -350,18 +364,17 @@ namespace Simulator
             }
             //MessageBox.Show(((SimpleButton)sender).Text);
         }
-
         private void SerialPort_DataReceived(object sender, System.IO.Ports.SerialDataReceivedEventArgs e)
         {
+
+
+
             byte[] buffer = new byte[((SerialPort)sender).BytesToRead];
             ((SerialPort)sender).Read(buffer, 0, buffer.Length);
             //MessageBox.Show(System.Text.Encoding.Default.GetString(buffer));
-
-            UpdateLane("revice", System.Text.Encoding.Default.GetString(buffer), null);
+            UpdateLane("revice", System.Text.Encoding.Default.GetString(buffer), "root\\message_content\\lane\\device\\com_devices\\PLC\\property");
             buffer = null;
-
         }
-
         private void Value_TextChanged(object sender, EventArgs e)
         {
             string key = ((TextBox)sender).Tag.ToString();
@@ -396,14 +409,44 @@ namespace Simulator
             }));
 
         }
-        private void UpdateLane(string key, string value, string intseed)
+        //private void UpdateLane(string key, string value)
+        //{
+        //    Invoke(new MethodInvoker(() =>
+        //    {
+        //        dynamic root = JsonConvert.DeserializeObject<dynamic>(JsonConvert.SerializeObject(Lane));
+        //        string switchkey = this.LaneNodeView.SelectedNode.Text.ToString();
+        //        string fullPath = LaneNodeView.SelectedNode.FullPath;
+        //        List<string> counts = fullPath.Split("\\".ToArray()).ToList();
+        //        counts.Remove(counts[0]);
+        //        dynamic temp = root;
+        //        for (int i = 0; i < counts.Count; i++)
+        //        {
+        //            int no = 1;
+        //            if (Int32.TryParse(counts[i], out no))
+        //            {
+        //                temp = JsonConvert.DeserializeObject<dynamic[]>(JsonConvert.SerializeObject(temp))[no];
+        //            }
+        //            else
+        //            {
+        //                temp = temp[counts[i]];
+        //            }
+        //        }
+        //        temp[key] = value;
+        //        LanemessageAppendLog(JsonConvert.SerializeObject(temp));
+        //        Lane = root;
+        //    }));
+        //}
+        private void UpdateLane(string key, string value, string FullPath = null)
         {
             Invoke(new MethodInvoker(() =>
             {
                 dynamic root = JsonConvert.DeserializeObject<dynamic>(JsonConvert.SerializeObject(Lane));
                 string switchkey = this.LaneNodeView.SelectedNode.Text.ToString();
-                string fullPath = LaneNodeView.SelectedNode.FullPath;
-                List<string> counts = fullPath.Split("\\".ToArray()).ToList();
+                if (FullPath == null)
+                {
+                    FullPath = LaneNodeView.SelectedNode.FullPath;
+                }
+                List<string> counts = FullPath.Split("\\".ToArray()).ToList();
                 counts.Remove(counts[0]);
                 dynamic temp = root;
                 for (int i = 0; i < counts.Count; i++)
@@ -423,6 +466,10 @@ namespace Simulator
                 Lane = root;
             }));
         }
+
+
+
+
         private void BtnConnect_CheckedChanged(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
         {
             switch ((bool)ModeSelect.EditValue)

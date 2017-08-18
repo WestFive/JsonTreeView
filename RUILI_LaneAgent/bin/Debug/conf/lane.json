@@ -1,87 +1,80 @@
 ﻿{
-    "message_type": "lane",
-    "sender_code": "CN-RUILI-JICP1-L02",
-    "sender_name": "L02",
-    "recipient_code": "ALL",
-    "recipient_name": "ALL",
-    "send_time": "2017-01-01 10:00:00",
-    "message_content": {
-        "lane": {
-            "lane_code": "CN-RUILI-JICP1-L02",
-            "lane_name": "车道2",
-            "country_code": "CN",
-            "city_code": "RUILI",
-            "terminal_code": "JIP1",
-            "direction": "In",
-            "enable": true,
-            "lane_type": "大型客车",
-            "led_display": "欢迎光临",
-            "current_vehicle_counts": "4",
-            "today_vehicle_counts": "120",
-            "device": {
-                "ip_devices": [{
-                        "device_code": "truck_camera",
-                        "device_name": "车牌识别相机",
-                        "activated": true,
-                        "ip_address": "10.1.1.50",
-                        "status": "正常",
-                        "update_time": "2017-01-01 10:00:00"
-                    },
-                    {
-                        "device_code": "serial device server",
-                        "device_name": "串口服务器",
-                        "activated": true,
-                        "ip_address": "10.1.1.51",
-                        "status": "正常",
-                        "update_time": "2017-01-01 10:00:00"
-                    },
-                    {
-                        "device_code": "led_screen",
-                        "device_name": "LED屏",
-                        "activated": true,
-                        "ip_address": "10.1.1.52",
-                        "status": "正常",
-                        "update_time": "2017-01-01 10:00:00"
-                    }
-                ],
-                "com_devices": {
-                    "PLC": {
-                        "property": {
-                            "revice": "无"
-                        },
-                        "method": {
-                            "Init": "PLCMethodInit",
-                            "Send": "PLCMethodSend"
-                        }
-                    },
-                    "Camera": {
-                        "property": {
-                            "revice": "无"
-                        },
-                        "method": {
-                            "Init": "CameraMethodInit",
-                            "Snop": "SnopMethodSend",
-                            "Move1":"CameraMethodMoveTo1",
-                            "Move2":"CameraMethodMoveTo2"
-
-                        }
-                    }
-                },
-                "apps": [{
-                        "app_name": "LaneAgent",
-                        "lane_server": "CN-XIAMEN-XHCT-LS1",
-                        "status": "正常",
-                        "update_time": "2017-01-01 10:00:00"
-                    },
-                    {
-                        "app_name": "OcrAgent",
-                        "lane_server": "CN-XIAMEN-XHCT-LS1",
-                        "status": "正常",
-                        "update_time": "2017-01-01 10:00:00"
-                    }
-                ],
-                "update_time": "2017-01-01 10:00:00"
+   "lane" : {
+      "lane_code" : "CN-RUILI-JICP1-LA01",
+      "lane_name" : "G01",
+      "country_code" : "CN",
+      "city_code" : "XIAMEN",
+      "terminal_code" : "SXCT",
+      "direction" : "In",
+      "has_truck" : true,
+      "lane_type" : "重车进闸",
+      "device" : {
+         "plr_camera" : {
+            "property" : {
+               "ip_address" : "10.1.1.1",
+               "name" : "G101车牌识别相机",
+               "status" : "正常",
+               "activated" : true,
+               "update_time" : "2017-01-01 10:00:00"
+            },
+            "method" : [
+               {
+                  "display_name" : "初始化",
+                  "class_name" : "classlprCamera",
+                  "method_name" : "init()"
+               },
+               {
+                  "display_name" : "车牌抓拍",
+                  "class_name" : "classlprCamera",
+                  "method_name" : "snapshot()"
+               }
+            ]
+         },
+         "ccr_cameras" : [
+            {
+               "property" : {
+                  "ip_address" : "10.1.1.2",
+                  "name" : "箱号相机（前）",
+                  "status" : "正常",
+                  "activated" : true,
+                  "update_time" : "2017-01-01 10:00:00"
+               },
+               "method" : [
+                  {
+                     "display_name" : "初始化",
+                     "class_name" : "classCcrCamera",
+                     "method_name" : "init()"
+                  },
+                  {
+                     "display_name" : "箱号抓拍",
+                     "class_name" : "classCcrCamera",
+                     "method_name" : "snapshot()"
+                  }
+               ]
+            },
+            {
+               "property" : {
+                  "ip_address" : "10.1.1.3",
+                  "name" : "箱号相机（后）",
+                  "status" : "正常",
+                  "activated" : true,
+                  "update_time" : "2017-01-01 10:00:00"
+               },
+               "method" : [
+                  {
+                     "display_name" : "初始化",
+                     "class_name" : "classCcrCamera",
+                     "method_name" : "init()"
+                  },
+                  {
+                     "display_name" : "箱号抓拍",
+                     "class_name" : "classCcrCamera",
+                     "method_name" : "snapshot()"
+                  }
+               ]
             }
-        }
-    }
+         ]
+      },
+      "update_time" : "2017-01-01 10:00:00"
+   }
 }

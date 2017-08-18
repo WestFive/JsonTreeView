@@ -7,7 +7,7 @@ using DevExpress.Skins;
 
 namespace Simulator
 {
-    static class Program
+   public  static class Program
     {
         /// <summary>
         /// The main entry point for the application.
@@ -22,5 +22,8 @@ namespace Simulator
             SkinManager.EnableFormSkins();
             Application.Run(new MainForm());
         }
+
+        public static dynamic Lane;
+     
     }
 }

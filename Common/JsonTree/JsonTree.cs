@@ -194,8 +194,10 @@ namespace JsonTree
 
             foreach (var item in jobject)
             {
-
-                AddNode(rootNode, item.Key, item.Value, flag);
+                if (item.Key != "property" && item.Key != "method")
+                {
+                    AddNode(rootNode, item.Key, item.Value, flag);
+                }
                 switch (flag)
                 {
                     case Flag.OnlyObject:
@@ -252,7 +254,6 @@ namespace JsonTree
             int i = 0;
             foreach (var childitem in item)
             {
-
 
                 AddNode(node, i++.ToString(), childitem, flag);
                 //JasonKeyValue.Add(seed, childitem);
